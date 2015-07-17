@@ -32,6 +32,9 @@ and open the template in the editor.
             <div class="logo"></div>
         </a>
         <div style="float:left;">
+            @if(Request::url() == action('WelcomeController@index'))
+
+            @else
             <div class="header-locator-form">
                 <!--<form action="http://restaurantlistings.com/dev/public/search" method="post">-->
                 {!! Form::open(array('name'=>'home_search','route'=>'search','novalidate'=>'')) !!}
@@ -39,15 +42,21 @@ and open the template in the editor.
                     {!! Form::text('restaurant_name', null, ['class'=>'typehead', 'placeholder'=>'Restaurant Name', 'id'=>'restaurant_name']) !!}
                     {!! Form::text('city_state', null, ['class'=>'typehead', 'placeholder'=>'City, State', 'id'=>'city_state']) !!}
                     <button type="submit">SEARCH NOW</button>
+                    <button type="submit" class="voice-btn"></button>
                 </div>
 
                 <div class="search-btn">
-
                 </div>
+
 
                 </form>
             </div>
+            @endif
+            @if(Request::url() == action('WelcomeController@index'))
+            <div class="main-nav" style="top:50px;">
+            @else
             <div class="main-nav">
+            @endif
                 <ul>
                     <li>
                         <a href="">Home</a>

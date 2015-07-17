@@ -46,6 +46,7 @@ and open the template in the editor.
                     {!! Form::text('restaurant_name', null, ['class'=>'typehead', 'placeholder'=>'Restaurant Name', 'id'=>'restaurant_name']) !!}
                     {!! Form::text('city_state', null, ['class'=>'typehead', 'placeholder'=>'City, State', 'id'=>'city_state']) !!}
                     <button type="submit">SEARCH NOW</button>
+                    <button type="submit" class="voice-btn"></button>
                 </div>
 
                 <div class="search-btn">

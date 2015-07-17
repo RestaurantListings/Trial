@@ -24,6 +24,7 @@
 
             <div class="search-btn">
                 <button type="submit">SEARCH NOW</button>
+                <button type="submit" class="voice-btn"></button>
             </div>
 
             </form>
