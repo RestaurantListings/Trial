@@ -1,0 +1,280 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 1, 2015, 11:20:57 AM
+    Author     : Abu Isaac
+*/
+body{margin:0px 0px;background-color:#F8F6F1;}
+ul{margin:0px 0px;padding:0px 0px;list-style-type:none;}
+.content-wrapper{width:100%;margin-left:auto;margin-right:auto;}
+.floatLeft{float:left;}
+.floatRight{float:right;}
+.center_with_border{border:1px solid #adadad;padding:0px 0px;}
+.white-background{background-color:#ffffff;}
+
+/* Header */
+header{width:100%; height:80px;background-image: url('../img/header-bg.png');box-shadow:0px 3px 3px rgb(90,6,6);position:relative;}
+.header-logo {float:left;width:250px;}
+.header-logo div{margin-top:10px;background-image:url('../img/logo.png');width:175px;height:55px;background-size:175px !important;}
+.header-locator-form{margin-top:13px;}
+.header-locator-form input{width:205px;height:30px;margin-left:10px;}
+.header-locator-form button{background-color: #e55b00;border: medium none;height: 30px;width: 125px;border-radius: 3px;color: #fff;font-weight:bold;margin-left:10px;}
+.header-locator-form button.voice-btn{background-image:url('../img/voice.png');background-color:transparent;background-size:30px 30px;width:30px;height:30px;vertical-align:top;}
+.main-nav{position:relative;/*height:20pxpadding-left:30px;width:75%;*/}
+.main-nav ul li{float:left;}
+.main-nav ul li a{color:#fff;font:'helvetica, arial, sans-serif';font-weight:bolder;font-size:15px;margin-left:15px;margin-right:15px;}
+.main-nav ul li a:hover{color: #C1C1C1;text-decoration: none;}
+.secondary-nav {margin-top:12px;float:right;}
+.secondary-nav ul li{float:left;}
+.secondary-nav ul li a div.header_fb_icon{background-image:url('../img/facebook.png');width:48px;height:48px;}
+.secondary-nav ul li a div.header_t_icon{background-image:url('../img/twitter.png');width:48px;height:48px;}
+.secondary-nav ul li a div.header_g_icon{background-image:url('../img/google.png');width:48px;height:48px;}
+
+
+/*Banner*/
+.home-banner{width:100%;height:540px;}
+.home-banner-image{background-image: url('../img/banner.jpg'); background-size: 101% 540px;height:540px;border-radius: 0px 0px 10px 10px;box-shadow:0px 3px 3px #4d4d4d;}
+.home-headline{font-family: Helvetica, sans-serif, Arial;font-weight:bold;color:#fff; text-align:center;padding-top:150px;text-shadow: 2px 2px #980800;}
+.home-headline h1{font:inherit;font-size:54px;}
+.home-headline h2{font:inherit;font-size:30px;margin-top:0px;line-height:21px;}
+.locator-form{width: 90%;margin-top:50px;padding:10px 20px;text-align: center;margin-right: auto;margin-left: auto;height: 100px;background-color: rgba(4, 4, 4, 0.6);border-radius: 5px;}
+.locator-form form div label{width:1px;height:1px;overflow:hidden;}
+.locator-form form div input[type=text]{float:left;width: 220px;height: 34px;padding: 8px 12px;font-size: 16px;line-height: 30px;border: 1px solid #CCC;
+                                        border-radius: 2px;outline: medium none;margin-right:6px;}
+.search-btn button{background-color: #E55B00;border: medium none;height: 34px;margin-top: 7px;color: #FFF;padding-left: 30px;padding-right: 30px;font-weight: bold;}
+.search-btn button.voice-btn{background-image:url('../img/voice.png');background-color:transparent;background-size:34px 34px;width:34px;height:34px;vertical-align:top;padding:0px;margin-left:20px;}
+#the-basics{height:40px;}
+.or-span{color:#fff;line-height:40px;margin-left:5px;margin-right:10px;float:left;}
+
+
+/* HOME  Category/Cuisine Section */
+.cuisine-section{text-align:center;padding-bottom:20px;}
+.cuisine-section h2{font-size:1.6em;}
+.cuisine-wrapper{margin-left:auto;margin-right:auto;background-color:#adadad;width:850px;}
+.home-cuisine-box{width:150px;height:150px;float:left;margin-right:20px;color:#fff;}
+.home-cuisine-box h3{font-weight: bold;margin-top: 57px;text-shadow: 3px 3px #000;}
+.pizza-cuisine{background-image: url('../img/pizza_cuisine.jpg');}
+.sushi-cuisine{background-image: url('../img/sushi_cuisine.jpg');}
+.indian-cuisine{background-image: url('../img/indian_cuisine.jpg');}
+.chineese-cuisine{background-image: url('../img/chineese_cuisine.jpg');}
+.thai-cuisine{background-image: url('../img/thai_cuisine.jpg');}
+
+/* HOME New Restaurant Section */
+.new-restaurants-section{text-align:center;background-color: #fff;padding-bottom:20px;}
+.new-restaurants-section h2{font-size:1.6em;padding-bottom:10px;}
+.new-restaurant-box{width:24%;height:320px;border:solid 1px #adadad;float:left;margin-left:1%;}
+.new-restaurant-box .nr-logo{width:100%;height:100px;overflow:hidden;}
+.new-restaurant-box .nr-info{width:100%;padding:10px 10px;}
+.nr-info h3{font-size:19px;margin-top:0px;color: #EA5E00;}
+.nr-info h4{font-size:14px;font-style:italic;font-weight:bold;margin-bottom:0px;}
+.nr-info p{margin-bottom:0px;font-size:0.9em;margin-top:0px;}
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+.order-btn{background-color: #809202;color: #fff;padding: 8px 10px;}
+.visit-btn{background-color: #B60B04;color: #fff;padding: 8px 20px;margin-right:20px;}
+
+/* Search Section */
+.search-content{text-align:center;}
+.search-listings{background-color:#fff;padding:20px 30px 30px 20px;}
+.search-listings h2{font-size:28px;margin-bottom:30px;}
+.search-listings-box{width:100%;height:110px;border-bottom:1px solid #acacac;padding-bottom:20px;margin-bottom:20px;}
+.sl-image, .sl-info, .sl-links{float:left;}
+.sl-image{width:20%;height:90px;overflow:hidden;}
+.sl-image img{width:90%;}
+.sl-info{width:60%;text-align:left;}
+.sl-info h3{margin-top:0px;font-size:18px;}
+.sl-info p{margin-bottom:0px;}
+.sl-links{width:20%;}
+.sl-view{background-color: #B60B04;color: #fff;padding: 3px 10px;margin-right:20px;display: block;
+    width: 70%;
+    max-width: 70%;
+    font-size: 17px;
+    line-height: 32px;}
+.sl-view:hover{color: #fff;
+    background-color: #720905;
+    text-decoration: none;}
+.sl-order{background-color: #809202;color: #fff;padding: 3px 10px;margin-top:15px;display: block;
+    width: 70%;
+    max-width: 70%;
+    font-size: 17px;
+    line-height: 32px;}
+.sl-order:hover{color: #fff;
+    background-color: #516c06;
+    text-decoration: none;}
+
+.sl-link{width:100px;}
+
+ /* Review, Dishes, Popular Section */
+ .recent-reviews{width:70%;float:left;padding-left:10px;}
+ .recent-reviews-list{margin-bottom:20px;text-align:left;}
+ .review-user-info img{width:50px;float:left;margin-right:15px;}
+ .review-author{color:#3B65A7;font-weight:bold;}
+ 
+ .popular-dishes{width:20%;float:left;}
+ 
+ .popular-restaurants{width:30%}
+ 
+ 
+ /* Footer */
+footer{height:100px;background-color:#464343;text-align:center;padding-top:40px;}
+footer p{color:#ffffff;}
+
+/* Restaurants Landing Page */
+.restaurants_header{width:100%;background-color:#EDEDED;}
+.restaurants_header .rating{direction:ltr;}
+.restaurants_info_row_one{min-height:145px;}
+.restaurants_info_row_two{min-height:210px;margin-bottom:20px;}
+.restaurants_images{height:202px;overflow:hidden;}
+.restaurants_images img{vertical-align:top;}
+/*.rest_info_column_two{padding:0px 0px;}
+.rl_scorecard{width: 100%;background: rgb(255, 255, 255) none repeat scroll 0% 0%;margin-top: 30px;}
+.rl_scorecard h4{text-align: center;margin-bottom: 0px;line-height: 30px;background-color: #ededed;font-size:14px;}
+.rl_scorecard h3{text-align: center;margin-top: 0px;font-size: 42px;color: rgb(120, 0, 0);}*/
+.rest_info_column_one h1{margin-bottom:3px;}
+.rest_info_column_one p{margin-bottom:0px;}
+.rest_info_column_two{}
+.restaurants_categories{color:#224104;font-weight:bold;}
+.rest_address_info{background-color:#ffffff;padding-bottom:10px;}
+.rest_address_info .restaurant_directions{margin-bottom:15px;}
+.rest_address_info p{padding:0px 15px;}
+.restaurant_quicklinks ul{margin-top:20px;margin-bottom:15px;height:25px;}
+.restaurant_quicklinks ul li{float:left;}
+.restaurant_quicklinks ul li a{ color:#ffffff;padding:10px 10px;margin-right:10px;border-radius:3px;background-color:#b60b04;line-height:30px;}
+.restaurant_quicklinks ul li a:hover{text-decoration:none;background-color:#b94a48;}
+.restaurant_quicklinks ul li p{margin-top: 7px;font-style: italic;font-size:12px;}
+.rest_address_info p{margin:0px 0px;}
+
+.rest_review_box{border-bottom:3px solid #FFE1E1;padding-bottom:15px;padding-top:15px;display:inline-block;}
+.rest_review_section{display:table-cell;}
+.rest_detailed_info_section{background-color:#dddddd;height:100%;display:table-cell;padding:30px 20px;}
+.review_detailed_info_section{width:100%;background-color:#ededed;height:auto;}
+.rest_review_user_info p{text-align:center;color:#646464;font-size:0.9em;font-weight:bold;}
+.rest_review_user_image{width:130px;margin:5px auto;}
+.review_author{color:#B60B04;font-weight:bold;}
+.review_author_highlight{font-weight:bold;color:#b60b04;}
+.full_review_text p{font-size:10pt;}
+.review_quicklinks{text-align:right;}
+.review_quicklinks p{font-size: 9pt;font-style: italic;font-weight: bold;color: rgb(203, 24, 24);}
+.review_quicklinks ul li{float:left;}
+.review_quicklinks ul li a{padding:8px 20px;border-radius:3px; margin:5px 10px;background-color:#3F7E00;color:#ffffff;}
+
+.open_close_box, .specialities_box, .other_info_box, .also_viewed_box{margin-bottom:20px;padding-bottom:15px;border-bottom:3px solid #ededed;}
+.also_visited_rest{width:100%;height:100%;display:inline-block;}
+.also_visited_rest_image{width:30%;}
+.also_visited_rest_info{width:69%;}
+.also_visited_rest_info p{margin-left:10px;font-size:10pt;}
+
+/*BASE*/
+@font-face{font-family:'roboto-regular';src:url("../fonts/Roboto-Regular.ttf");}
+@font-face{font-family:'trocchi-regular';src:url("../fonts/Trocchi-Regular.ttf");}
+@font-face{font-family:'lato-regular';src:url("../fonts/Lato-Regular.ttf");}
+body{background:#fff;margin:0px 0px;padding:0px 0px;}
+ul{list-style-type:none;padding:0px 0px;margin:0px 0px;}
+h1, h2, h3, h4, h5, h6{margin:0px 0px;padding:0px 0px;}
+h1{font-family: trocchi-regular;padding-top: 50px;font-size: 36px;color:#333333;font-weight:normal;}
+p{margin:0px 0px;padding:0px 0px;color:#333333;}
+a{text-decoration:none;font-size:16px;}
+.align-center{text-align:center;}
+.align-left{text-align:left;}
+
+
+.item-cuisine-type{background-color:#f0e5e4;padding:3px 9px;border-radius:12px;margin-top:5px;}
+.address-icon{background:url("../images/icons/address.png") no-repeat scroll 0% 0%;width:13px;height:18px;display:block;}
+.phone-icon{background:url("../images/icons/phone.png") no-repeat scroll 0% 0%;width:13px;height:18px;display:block;}
+.icon-comment{background:url("../images/icons/icon-comment.png") no-repeat scroll 0% 0%;width:15px;height:18px;display:block;margin-top:3px;margin-right:5px;float:left;}
+.indian{background:url("../images/cuisine/indian.png") no-repeat scroll 0% 0%;background-size:100%;}
+.thai{background:url("../images/cuisine/thai.png") no-repeat scroll 0% 0%;background-size:100%;}
+.chineese{background:url("../images/cuisine/chineese.png") no-repeat scroll 0% 0%;background-size:100%;}
+.pizza{background:url("../images/cuisine/pizza.png") no-repeat scroll 0% 0%;background-size:100%;}
+.sushi{background:url("../images/cuisine/sushi.png") no-repeat scroll 0% 0%;background-size:100%;}
+
+
+/*LAYOUT*/
+header{width:100%;height:80px;background-image: url("../images/header-bg.png");background-size:100% 81px;position: relative;box-shadow: 0px 2px 2px #2D0909;}
+.container{width:1000px;height:auto;display:block;position:relative;margin-right:auto;margin-left:auto;}
+#home-banner{width:100%;height:500px;display:block;overflow:hidden;}
+#home-banner .fullscreen-bg__video {width: 100%;height: 100;left: 0px;top: 80px;position: absolute;z-index: -1;}
+.text-search-btn{color:#ffffff;background-color:#b50a03;font-family:roboto-regular;font-size:22px !important;text-transform:uppercase;width:150px;height:52px;}
+.voice-search-btn{width:32px !important;background:url('../images/icons/voice.png') no-repeat 0% 0%;text-indent:-99999px;overflow:hidden;}
+#cuisine-section{width:100%;height:400px;display:block;background-color:#ffffff;}
+#recent-restaurant-section{width:100%;height:620px;background:url("../images/recent_rest_bg_pattern.png") repeat;}
+#recent-reviews-section{width:100%;height:600px;background:#ffffff;}
+footer{width:100%;height:250px;background:url("../images/footer-pattern.jpg") repeat;padding:50px 0px 30px;font-family:lato-regular;font-size:14px;color:#ffffff;}
+footer a{color:#ffffff;}
+footer h4{text-transform:uppercase;padding-bottom:18px;}
+/*THEME*/
+#header-logo{width:200px;height:70px;background:url("../images/logo.png") no-repeat scroll 0% 0%;background-size:100% auto;margin-top:5px;float:left;}
+#header-logo a{display: block;width: 100%;height: 100%;text-indent: -1000em;}
+#main-nav{float:right;color:#ffffff;margin-top:49px;}
+#main-nav ul li{float:left;padding: 0px 7px;}
+#main-nav ul li a{color:#ffffff;font-family:roboto-regular;font-size:15px;transition: color 0.3s;}
+#main-nav ul li a:hover{color:#3A0100;}
+#secondary-nav{float:right;margin-top:40px;}
+#secondary-nav ul{text-align:center;}
+#secondary-nav ul li.social-icon{padding-bottom:50px;}
+#secondary-nav ul ul li{float:left;padding:0px 4px;color:#ffffff;}
+.fb_icon{width:32px;height:32px;display:block;background:url("../images/icons/fb_logo.png") no-repeat scroll 0% 0%;}
+.t_icon{width:32px;height:32px;display:block;background:url("../images/icons/t_logo.png") no-repeat scroll 0% 0%;}
+.gp_icon{width:32px;height:32px;display:block;background:url("../images/icons/gp_logo.png") no-repeat scroll 0% 0%;}
+.sign-in-btn{color: #FFF;border: 2px solid #FFF;border-radius: 20px;font-size: 14px;line-height: 15px;padding: 4px 14px;font-family: roboto;}
+/*home banner*/
+.banner-content{width:100%;padding-top:50px;display:inline-block;position:absolute;}
+.banner-content h1{font-family:trocchi-regular;font-size:60px;color:#ffffff;font-weight:normal;}
+.banner-content h2{font-family:roboto-regular;font-size:24px;color:#ffffff;margin-top:10px;font-weight:normal;}
+.banner-search{margin-top:50px;display:block;}
+.banner-search input{height:44px;padding:4px 16px;line-height:22px;border-radius:3px;font-size:18px;border:none;margin:0px 10px 30px 10px;width:280px;}
+.banner-search input[type="submit"]{width:150px;height:52px;}
+
+.pattern{background: url("../images/pattern.png") repeat scroll;width: 100%;height: 510px;position: absolute;top: 80px;left: 0px;}
+/*favourite cuisine - homepage*/
+#cuisine-list{width:100%;height:220px;display:block;text-align:center;}
+#cuisine-list ul{display:inline-block;}
+#cuisine-list ul li{float:left;width:160px;padding:50px 18px;}
+#cuisine-list .cuisine-logo{width:100%;height:167px;display:block;}
+#cuisine-list ul li a  span.cuisine-name{font-family:roboto-regular;font-size:20px;color:#333333;font-weight:normal;}
+/*recent restaurants - homepage*/
+#recent-restaurant-list{width:100%;height:450px;display:block;}
+#recent-restaurant-list ul{display:inline-block;margin-top:30px;}
+#recent-restaurant-list ul li.list-item{float:left;width:230px;height:425px;display:block;margin:0px 7px;overflow:hidden;background-color:#ffffff;border-radius:5px;}
+#recent-restaurant-list ul li.list-item .item-banner{height:150px;overflow:hidden;}
+#recent-restaurant-list .list-item .item-details p{margin-top:10px;font-family:lato-regular;font-size:14px;}
+#recent-restaurant-list .list-item .item-details .item-title{font-family:trocchi-regular;font-size:16px;}
+#recent-restaurant-list .list-item .item-details .item-cuisine-type{background-color:#f0e5e4;padding:3px 9px;border-radius:12px;}
+#recent-restaurant-list .list-item .item-details .address-icon, #recent-restaurant-list .list-item .item-details .phone-icon{float:left;margin-left:15px;margin-top:2px;}
+#recent-restaurant-list .list-item .item-details .item-address, #recent-restaurant-list .list-item .item-details .item-phone{margin-left:40px;display:block;}
+#recent-restaurant-list .list-quicklinks ul li{float:left;display:block;width:115px;height:40px;margin:0px 0px;}
+.list-quicklinks ul li.list-visit-btn{color:#ffffff;background-color:#b50a03 !important;vertical-align: bottom;}
+.list-quicklinks ul li.list-order-btn{color:#ffffff;background-color:#809202 !important;vertical-align: bottom;}
+.list-quicklinks ul li.list-visit-btn a, .list-quicklinks ul li.list-order-btn a{line-height:40px;color:#ffffff;font-family:roboto-regular;}
+/*recent reviews - homepage*/
+#recent-reviews-section ul li.list-item{float:left;width:460px;height:auto;padding:20px 20px;}
+#recent-reviews-section .user-profile-pic{float:left;display:block;}
+#recent-reviews-list{width:1000px;height:400px;margin:20px auto;display:block;background-image:url('../images/center-star.png');background-repeat:no-repeat;background-position:430px 140px;}
+#recent-reviews-list .user-profile-pic{height:100%;}
+#recent-reviews-list .reviews-item{margin-left:130px;}
+.reviews-item .review-text{font-family:lato-regular;font-size:14px;text-align:left;margin-left:15px;line-height:18px;}
+.reviews-item .review-details{font-family:lato-regular;font-weight:bold;font-style:italic;color:#333333;font-size:13px;text-align:left;margin-top:15px;margin-left:15px;}
+/*footer*/
+.footer-quicklinks{float:left;width:160px;}
+.footer-quicklinks ul li a{font-size:14px;line-height:24px;}
+.footer-newsletter{float:right;width:430px;}
+.footer-newsletter input{width:200px;height:40px;border:none;border-radius:5px 0px 0px 5px;padding:0px 15px;color:#333333;font-family:lato-regular;font-size:16px;}
+.footer-newsletter .newsletter-btn{background-color:#b50a03;border-radius:0px 5px 5px 0px;color:#ffffff;margin-left:-3px;font-size:14px;}
+.copyright p{font-size:14px;line-height:24px;color:#ffffff;}
+
