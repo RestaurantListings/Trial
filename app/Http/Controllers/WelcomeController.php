@@ -13,7 +13,7 @@ class WelcomeController extends Controller {
 	|
 	*/
 
-	/**
+	/*
 	 * Create a new controller instance.
 	 *
 	 * @return void
@@ -30,9 +30,10 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-        $recent_restaurants = \App\Restaurants::orderby('id', 'desc')->take(4)->get();
+        $recent_restaurants = \App\Restaurants::orderbyraw("RAND()")->take(4)->get();
+        $recent_reviews = \App\Restaurant_Reviews::orderby('id', 'desc')->take(4)->get();
 
-        return view('home')->with('recent_restaurants', $recent_restaurants);
-	}
+        return view('home')->with(array('recent_restaurants' => $recent_restaurants, 'recent_reviews' => $recent_reviews));
+    }
 
 }

@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Abu Isaac
+ * Date: 9/14/15
+ * Time: 3:26 PM
+ */
+?>
+<!Doctype html>
 <html>
 <head>
     <title>Order Food Online| Food Delivery | Restaurant Listings| </title>
@@ -11,155 +14,91 @@ and open the template in the editor.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Americas Largest Restaurant Online Ordering Food Site. Millions of unbiased food reviews."/>
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon1.png') }}" type="image/png">
-    <!-- Bootstrap -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset ('assets/css/typehead.css') }}" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <title>Restaurant Listings</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}" media="all">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 </head>
 <body>
 <header>
-    <div class="container">
-        <a href="{{ action('WelcomeController@index') }}" class="header-logo">
-            <div class="logo"></div>
-        </a>
-        <div style="float:left;">
-            @if(Request::url() == action('WelcomeController@index'))
-
-            @else
-            <div class="header-locator-form">
-                <!--<form action="http://restaurantlistings.com/dev/public/search" method="post">-->
-                {!! Form::open(array('name'=>'home_search','route'=>'search','novalidate'=>'')) !!}
-                <div id="the-basics">
-                    {!! Form::text('restaurant_name', null, ['class'=>'typehead', 'placeholder'=>'Restaurant Name', 'id'=>'restaurant_name']) !!}
-                    {!! Form::text('city_state', null, ['class'=>'typehead', 'placeholder'=>'City, State', 'id'=>'city_state']) !!}
-                    <button type="submit">SEARCH NOW</button>
-                    <button type="submit" class="voice-btn"></button>
-                </div>
-
-                <div class="search-btn">
-                </div>
-
-
-                </form>
-            </div>
-            @endif
-            @if(Request::url() == action('WelcomeController@index'))
-            <div class="main-nav" style="top:50px;">
-            @else
-            <div class="main-nav">
-            @endif
-                <ul>
-                    <li>
-                        <a href="">Home</a>
-                    </li>
-                    <li>
-                        <a href="">About Us</a>
-                    </li>
-                    <li>
-                        <a href="">Invite Friends</a>
-                    </li>
-                    <li>
-                        <a href="">Write a Review</a>
-                    </li>
-                    <li>
-                        <a href="">Events</a>
-                    </li>
-                    <li>
-                        <a href="">Sign In</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="container" style="width:1000px;">
+        <div id="header-logo">
+            <a href="{{ action('WelcomeController@index') }}">Restaurant Listings</a>
         </div>
-
-        <div class="secondary-nav">
+        <div id="secondary-nav">
             <ul>
-                <li>
-                    <a href=""><div class="header_fb_icon"></div></a>
+                <li class="social-icon">
+                    <ul>
+                        <li style="margin-top:7px;"><a href="/" class="sign-in-btn">Sign In</a></li>
+                        <li><a href="/"><span class="fb_icon"></span></a></li>
+                        <li><a href="/"><span class="t_icon"></span></a></li>
+                        <li><a href="/"><span class="gp_icon"></span></a></li>
+
+                    </ul>
                 </li>
-                <li>
-                    <a href=""><div class="header_t_icon"></div></a>
-                </li>
-                <li>
-                    <a href=""><div class="header_g_icon"></div></a>
-                </li>
+
+            </ul>
+        </div>
+        <div id="main-nav">
+            <ul>
+                <li><a href="{{ action('WelcomeController@index') }}">Home</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">About Us</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Invite Friends</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Write a review</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Events</a></li>
             </ul>
         </div>
 
     </div>
 </header>
+@yield('banner')
+@yield('cuisine')
+@yield('recent_restaurant')
+@yield('content')
 
-@yield('banner');
-@yield('cuisine');
-@yield('recent_restaurant');
-@yield('content');
-
-
-<!-- Footer -->
 <footer>
-    <div class="container">
-        <p>Copyright © 2004–2015 Restaurant Listings. Restaurant Listings burst and related marks are registered trademarks of Restaurant Listings. </p>
+    <div class="container" style="height:170px;">
+        <div class="footer-quicklinks">
+            <h4>About</h4>
+            <ul>
+                <li><a href="/">About Us</a></li>
+                <li><a href="/">Why Us</a></li>
+                <li><a href="/">Terms of Service</a></li>
+                <li><a href="/">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-quicklinks">
+            <h4>Help</h4>
+            <ul>
+                <li><a href="/">FAQ</a></li>
+                <li><a href="/">Advertise</a></li>
+                <li><a href="/">Content Guidelines</a></li>
+                <li><a href="/">Business Support</a></li>
+            </ul>
+        </div>
+        <div class="footer-quicklinks">
+            <h4>More</h4>
+            <ul>
+                <li><a href="/">Careers</a></li>
+                <li><a href="/">Newsletter Subscription</a></li>
+                <li><a href="/">Contact Us</a></li>
+                <li><a href="/">Investors</a></li>
+            </ul>
+        </div>
+        <div class="footer-newsletter">
+            <h4>Free Newsletter</h4>
+            <form>
+                <input type="email" name="newsletter" placeholder="Enter Email" />
+                <input class="newsletter-btn" type="submit" value="SUBSCRIBE NEWSLETTER" />
+            </form>
+        </div>
+    </div>
+    <div class="container copyright">
+        <p>Copyright &copy; 2015 Restaurant Listings. Restaurant Listings burst and related marks are registered trademarks of Restaurant Listings.</p>
+        <p>By using this site, you agree to these Privacy Policy and Terms & Conditions.</p>
     </div>
 </footer>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="{{ asset ('assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset ('assets/js/typehead.bundle.js') }}"></script>
-<script>
-    var substringMatcher = function(strs) {
-        return function findMatches(q, cb) {
-            var matches, substringRegex;
-
-            // an array that will be populated with substring matches
-            matches = [];
-
-            // regex used to determine if a string contains the substring `q`
-            substrRegex = new RegExp(q, 'i');
-
-            // iterate through the pool of strings and for any string that
-            // contains the substring `q`, add it to the `matches` array
-            $.each(strs, function(i, str) {
-                if (substrRegex.test(str)) {
-                    matches.push(str);
-                }
-            });
-
-            cb(matches);
-        };
-    };
-
-    var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-        'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-        'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-        'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-        'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-        'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-        'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-        'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-        'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-    ];
-
-    $('#the-basics .typeahead').typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 1
-        },
-        {
-            name: 'states',
-            source: substringMatcher(states)
-        });
-
-</script>
-
 
 </body>
 </html>

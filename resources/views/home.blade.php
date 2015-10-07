@@ -1,161 +1,141 @@
 @extends('app')
 
 @section('banner')
-<!-- Banner Section - Begins -->
-<div class="home-banner">
-    <div class="container home-banner-image">
-        <div class="home-headline">
-            <!--<h1>Order from +300 cities in USA</h1>-->
-            <h1>IF THERE IS FOOD, WE WILL FIND IT</h1>
-            <h2>Find Your Favourite Restaurants and Favourite Dishes</h2>
-
-        </div>
-        <div class="locator-form">
-            <!--<form action="http://restaurantlistings.com/dev/public/search" method="post">-->
-            {!! Form::open(array('name'=>'home_search','route'=>'search','novalidate'=>'')) !!}
-            <div id="the-basics">
-                {!! Form::text('restaurant_name', null, ['class'=>'typehead', 'placeholder'=>'Restaurant Name', 'id'=>'restaurant_name']) !!}
-                <span class="or-span">OR</span>
-                {!! Form::text('state', null, ['class'=>'typehead', 'placeholder'=>'State of USA', 'id'=>'state']) !!}
-                {!! Form::text('city', null, ['class'=>'typehead', 'placeholder'=>'City', 'id'=>'city']) !!}
-                <span class="or-span">OR</span>
-                {!! Form::text('zip', null, ['class'=>'typehead', 'placeholder'=>'Zip Code', 'id'=>'zip']) !!}
-            </div>
-
-            <div class="search-btn">
-                <button type="submit">SEARCH NOW</button>
-                <button type="submit" class="voice-btn"></button>
-            </div>
-
-            </form>
-        </div>
+<div class="fullscreen-bg" id="home-banner">
+    <div class="pattern"></div>
+    <video loop muted autoplay poster="img/videoframe.jpg" class="fullscreen-bg__video">
+        <source src="assets/videos/hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="container align-center banner-content">
+        <h1>If there is food, we will find it!</h1>
+        <h2>Find Your Favourite Restaurants and Favourite dishes</h2>
+        {!! Form::open(array('name'=>'home_search','class'=>'banner-search','route'=>'search','novalidate'=>'')) !!}
+            <input type="text" name="keywords" placeholder="Restaurant Name or Cuisine or Keywords " />
+            <input type="text" name="location" placeholder="City, State or Zip" />
+            <input class="text-search-btn" type="submit" name="Submit" value="Search" />
+            <input class="voice-search-btn" type="submit" name="Voice" />
+        </form>
     </div>
 </div>
 @endsection
 
 @section('cuisine')
-<!-- Category/Cuisine Section -->
-<div class="cuisine-section">
-    <div class="container">
-        <h2>Choose From Your Favourite Cuisine</h2>
-        <div class="cuisine-wrapper">
-            <div class="home-cuisine-box pizza-cuisine">
-                <h3>Pizza</h3>
-            </div>
-            <div class="home-cuisine-box sushi-cuisine">
-                <h3>Sushi</h3>
-            </div>
-            <div class="home-cuisine-box indian-cuisine">
-                <h3>Indian</h3>
-            </div>
-            <div class="home-cuisine-box chineese-cuisine">
-                <h3>Chineese</h3>
-            </div>
-            <div class="home-cuisine-box thai-cuisine">
-                <h3>Thai</h3>
-            </div>
+<div id="cuisine-section">
+    <div class="container align-center">
+        <h1>Choose From Your Favourite Cuisine</h1>
+        <div id="cuisine-list">
+            <ul>
+                <li>
+                    <a href="/">
+                        <span class="cuisine-logo pizza"></span>
+                        <span class="cuisine-name">Pizza</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/">
+                        <span class="cuisine-logo sushi"></span>
+                        <span class="cuisine-name">Sushi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/">
+                        <span class="cuisine-logo indian"></span>
+                        <span class="cuisine-name">Indian</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/">
+                        <span class="cuisine-logo thai"></span>
+                        <span class="cuisine-name">Thai</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/">
+                        <span class="cuisine-logo chineese"></span>
+                        <span class="cuisine-name">Chineese</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
 @endsection
-
 @section('recent_restaurant')
-<!-- New Restaurants -->
-<div class="new-restaurants-section">
-    <div class="container">
-        <h2>Restaurants Listed Recently</h2>
-        <div class="content-wrapper">
-            @foreach($recent_restaurants as $r)
+<div id="recent-restaurant-section">
+    <div class="container align-center">
+        <h1>Restaurant Listed Recently</h1>
+        <div id="recent-restaurant-list">
+            <ul>
+                @foreach($recent_restaurants as $r)
+                <li class="list-item">
 
-            <div class="new-restaurant-box">
-                <div class="nr-logo">
-                    <img src="{{ $r->img_one }}" alt="Restaurant Name" width="100%" />
-                </div>
-                <div class="nr-info">
-                    <h3>{{ $r->name }}</h3>
-                    <h4>{{ $r->categories }}</h4>
-                    <div class="rating">
-                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        <p class="review"><span>111&nbsp;</span>Reviews</p>
+                    <div class="item-banner">
+                        <img src="assets/images/restaurants/rest_1.png" alt="" />
                     </div>
-                    <p>{{ $r->address_1.' '.$r->address_2}} <br/>{{$r->city->city.' '.$r->state->state.' '.$r->zip }} </p>
-                    <p>Phone number {{ $r->phone }}</p>
-                </div>
-                <div class="nr-quicklinks">
-                    <a href="../public/restaurants/{{ $r->permalink }}" class="visit-btn">VISIT</a>
-                    <a href="#" class="order-btn">ORDER</a>
-                </div>
-            </div>
-
-            @endforeach
-
+                    <div class="item-details">
+                        <p><span class="item-title">{{ $r->name }}</span></p>
+                        <p><span class="item-cuisine-type">{{ $r->categories }}</span></p>
+                        <p><span class="item-rating"><img src="assets/images/rating.png" alt="2 star" /></span></p>
+                        <p style="margin-bottom:15px;"><span class="item-review-count">{{ count($r->restaurant_reviews) }} Reviews</span></p>
+                        <p class="align-left"><span class="address-icon"></span><span class="item-address">{{ $r->address_1.' '.$r->address_2}} <br/>{{$r->city->city.' '.$r->state->short.' '.$r->zip }}</span></p>
+                        <p class="align-left"><span class="phone-icon"></span><span class="item-phone">{{ $r->phone }}</span></p>
+                    </div>
+                    <div class="list-quicklinks">
+                        <ul>
+                            <li class="list-visit-btn"><a href="../public/restaurants/{{ $r->permalink }}">Visit</a></li>
+                            <li class="list-order-btn"><a href="{{ action('WelcomeController@index') }}">Order</a></li>
+                        </ul>
+                    </div>
+                </li>
+                @endforeach
+             </ul>
         </div>
     </div>
 </div>
-<!--Review, Dishes, Popular Section -->
-<div class="popular-section">
-    <div class="container" style="background-color:#fff;">
+<div id="recent-reviews-section">
+    <div class="container align-center">
+        <h1>What Users Have To Say</h1>
+        <div id="recent-reviews-list">
+            <ul>
+                @foreach($recent_reviews as $rr)
+                <li class="list-item">
+                    <div class="user-profile-pic">
+                        <img src="{{ $rr->restaurant['img_one'] }}" alt="Author Name" />
+                    </div>
+                    <div class="reviews-item">
+                        <div class="review-text">
+                            <p>{{ shorter($rr->text, 300) }}</p>
 
-        <div class="recent-reviews">
-            <h3>Recent Reviews</h3>
-            <div class="recent-reviews-list">
-                <div class="review-user-info">
-                    <img src="assets/img/default_profile_image.png" alt="" />
-                    <p class="float:left;"><span class="review-author">Tommy</span> reviewed on <i>3/7/2015 5:54pm</i></p>
-                    <div class="rating">
-                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                        </div>
+                        <div class="review-details">
+                            <p>{{ $rr->user_name }} reviewed for {{ $rr->restaurant['name'] }}</p>
+                        </div>
                     </div>
-                </div>
-                <p>Well this waiter i got she is indian and she is like the best she is out going laughing with us and she was all over are drinks we did not even have tell her ee needed more drink and she was just the shit and excuse my franch but she is also good good looking too. her name is tessa and i been in here a lot and i might of been out of it but she is an angle and best waiter. if i wss u guys i would give her a raise and one more thing i bet she has one good looking guy because she is sex and hard worker. o my god is that her baby too? Okay god has or i mean u guess just created the most brautiful baby ever.</p>
-            </div>
-            <div class="recent-reviews-list">
-                <div class="review-user-info">
-                    <img src="assets/img/default_profile_image.png" alt="" />
-                    <p class="float:left;"><span class="review-author">Michele</span> reviewed on <i>3/7/2015 5:54pm</i></p>
-                    <div class="rating">
-                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                    </div>
-                </div>
-                <p>The Restaurant is good. The service is fair. </p>
-            </div>
-            <div class="recent-reviews-list">
-                <div class="review-user-info">
-                    <img src="assets/img/default_profile_image.png" alt="" />
-                    <p class="float:left;"><span class="review-author">Cris</span> reviewed on <i>3/7/2015 5:54pm</i></p>
-                    <div class="rating">
-                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                    </div>
-                </div>
-                <p>Second visit at this SmashBurger. Definitely a drop off in service. We arrived around 5 PM on a Sunday. There were four tables full, inside and out. We stepped up right away to order but the...</p>
-            </div>
-            <div class="recent-reviews-list">
-                <div class="review-user-info">
-                    <img src="assets/img/default_profile_image.png" alt="" />
-                    <p class="float:left;"><span class="review-author">Elizabeth</span> reviewed on <i>2015-03-26 03:44am</i></p>
-                    <div class="rating">
-                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                    </div>
-                </div>
-                <p>The Restaurant is good. The service is fair. </p>
-            </div>
-            <div class="recent-reviews-list">
-                <div class="review-user-info">
-                    <img src="assets/img/default_profile_image.png" alt="" />
-                    <p class="float:left;"><span class="review-author">John Doe</span> reviewed on <i>2015-03-19 10:04pm</i></p>
-                    <div class="rating">
-                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                    </div>
-                </div>
-                <p>good restuarent.... nice food.... </p>
-            </div>
-        </div>
-        <!--<div class="popular-dishes">
-
-        </div>-->
-        <div class="popular-restaurants">
-
+                </li>
+                @endforeach
+            </ul>
         </div>
     </div>
 </div>
+<?php
+function shorter($text, $chars_limit)
+{
+// Check if length is larger than the character limit
+if (strlen($text) > $chars_limit)
+{
+// If so, cut the string at the character limit
+$new_text = substr($text, 0, $chars_limit);
+// Trim off white space
+$new_text = trim($new_text);
+// Add at end of text ...
+return $new_text . "...";
+}
+// If not just return the text as is
+else
+{
+return $text;
+}
+}
+
+?>
 @endsection
-

@@ -2,99 +2,84 @@
 /**
  * Created by PhpStorm.
  * User: Abu Isaac
- * Date: 7/14/15
- * Time: 7:09 PM
+ * Date: 9/14/15
+ * Time: 3:26 PM
  */
 ?>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!Doctype html>
 <html>
 <head>
-    <title>@yield('page_title')</title>
+    <title>Order Food Online| Food Delivery | Restaurant Listings| </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@yield('page_description')"/>
+    <meta name="description" content="Americas Largest Restaurant Online Ordering Food Site. Millions of unbiased food reviews."/>
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon1.png') }}" type="image/png">
-    <!-- Bootstrap -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <title>Restaurant Listings</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}" media="all">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 </head>
 <body>
 <header>
-    <div class="container">
-        <a href="{{ action('WelcomeController@index') }}" class="header-logo">
-            <div class="logo"></div>
-        </a>
-        <div style="float:left;">
-            <div class="header-locator-form">
-                <!--<form action="http://restaurantlistings.com/dev/public/search" method="post">-->
-                {!! Form::open(array('name'=>'home_search','route'=>'search','novalidate'=>'')) !!}
-                <div id="the-basics">
-                    {!! Form::text('restaurant_name', null, ['class'=>'typehead', 'placeholder'=>'Restaurant Name', 'id'=>'restaurant_name']) !!}
-                    {!! Form::text('city_state', null, ['class'=>'typehead', 'placeholder'=>'City, State', 'id'=>'city_state']) !!}
-                    <button type="submit">SEARCH NOW</button>
-                    <button type="submit" class="voice-btn"></button>
-                </div>
-
-                <div class="search-btn">
-
-                </div>
-
-                </form>
-            </div>
-            <div class="main-nav">
-                <ul>
-                    <li>
-                        <a href="">Home</a>
-                    </li>
-                    <li>
-                        <a href="">About Us</a>
-                    </li>
-                    <li>
-                        <a href="">Invite Friends</a>
-                    </li>
-                    <li>
-                        <a href="">Write a Review</a>
-                    </li>
-                    <li>
-                        <a href="">Events</a>
-                    </li>
-                    <li>
-                        <a href="">Sign In</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="container" style="width:1000px;">
+        <div id="header-logo">
+            <a href="/">Restaurant Listings</a>
         </div>
-        <div class="secondary-nav">
+        <div id="secondary-nav">
             <ul>
-                <li>
-                    <a href=""><div class="header_fb_icon"></div></a>
+                <li class="social-icon">
+                    <ul>
+                        <li style="margin-top:7px;"><a href="/" class="sign-in-btn">Sign In</a></li>
+                        <li><a href="/"><span class="fb_icon"></span></a></li>
+                        <li><a href="/"><span class="t_icon"></span></a></li>
+                        <li><a href="/"><span class="gp_icon"></span></a></li>
+
+                    </ul>
                 </li>
-                <li>
-                    <a href=""><div class="header_t_icon"></div></a>
-                </li>
-                <li>
-                    <a href=""><div class="header_g_icon"></div></a>
-                </li>
+
+            </ul>
+        </div>
+        <div id="main-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/">About Us</a></li>
+                <li><a href="/">Invite Friends</a></li>
+                <li><a href="/">Write a review</a></li>
+                <li><a href="/">Events</a></li>
             </ul>
         </div>
 
     </div>
 </header>
 
+<div class="search-section">
+    <div class="container">
+        <div class="breadcrumb-container">
+            <ul class="breadcrumb-item">
+                <li class="breadcrub-list">
+                    <a href="/"><span>Arizona</span></a>
+                    <span class="seperator">></span>
+                </li>
+                <li class="breadcrub-list">
+                    <a href="/"><span>Phoenix</span></a>
+                    <span class="seperator">></span>
+                </li>
+                <li class="breadcrub-list">
+                    <a href="/"><span>Restaurants</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="basic-search-wrapper">
+            {!! Form::open(array('name'=>'home_search','class'=>'basic-search','route'=>'search','novalidate'=>'')) !!}
+            <input type="text" name="keywords" placeholder="Restaurant Name or Cuisine or Keywords " />
+            <input type="text" name="location" placeholder="City, State or Zip" />
+            <input class="text-search-btn" type="submit" name="Submit" value="Search" />
+            <input class="voice-search-btn" type="submit" name="Voice" />
+            </form>
+        </div>
+    </div>
+</div>
 <!-- Restaurant Header Content Begins -->
 <div class="restaurants_header">
     <div class="container" style="padding-left:0px;">
@@ -103,33 +88,64 @@ and open the template in the editor.
 </div>
 <!-- Restaurant Header Contents Ends -->
 
-
 <!-- Restaurant Review & Detail Info Section Begins -->
+
 <div class="review_detailed_info_section">
-    <div class="container center_with_border white-background">
+    <div class="container center_with_border white-background" style="display:flex;overflow:hidden;">
         @yield('scorecard_section')
         @yield('recent_review_section')
         <div class="rest_detailed_info_section col-md-3">
             @yield('working_hours_section')
             @yield('specialities_section')
             @yield('other_info_section')
-            @yield('also_viewed_restaurant_section')
+            <!--@yield('also_viewed_restaurant_section')-->
         </div>
     </div>
 </div>
 <!-- Restaurant Review & Detail Info Section Ends -->
 
-
-<!-- Footer -->
 <footer>
-    <div class="container">
-        <p>Copyright © 2004–2015 Restaurant Listings. Restaurant Listings burst and related marks are registered trademarks of Restaurant Listings. </p>
+    <div class="container" style="height:170px;">
+        <div class="footer-quicklinks">
+            <h4>About</h4>
+            <ul>
+                <li><a href="/">About Us</a></li>
+                <li><a href="/">Why Us</a></li>
+                <li><a href="/">Terms of Service</a></li>
+                <li><a href="/">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-quicklinks">
+            <h4>Help</h4>
+            <ul>
+                <li><a href="/">FAQ</a></li>
+                <li><a href="/">Advertise</a></li>
+                <li><a href="/">Content Guidelines</a></li>
+                <li><a href="/">Business Support</a></li>
+            </ul>
+        </div>
+        <div class="footer-quicklinks">
+            <h4>More</h4>
+            <ul>
+                <li><a href="/">Careers</a></li>
+                <li><a href="/">Newsletter Subscription</a></li>
+                <li><a href="/">Contact Us</a></li>
+                <li><a href="/">Investors</a></li>
+            </ul>
+        </div>
+        <div class="footer-newsletter">
+            <h4>Free Newsletter</h4>
+            <form>
+                <input type="email" name="newsletter" placeholder="Enter Email" />
+                <input class="newsletter-btn" type="submit" value="SUBSCRIBE NEWSLETTER" />
+            </form>
+        </div>
+    </div>
+    <div class="container copyright">
+        <p>Copyright &copy; 2015 Restaurant Listings. Restaurant Listings burst and related marks are registered trademarks of Restaurant Listings.</p>
+        <p>By using this site, you agree to these Privacy Policy and Terms & Conditions.</p>
     </div>
 </footer>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="{{ asset ('assets/js/bootstrap.min.js') }}"></script>
 
 </body>
 </html>
