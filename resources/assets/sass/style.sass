@@ -1,0 +1,209 @@
+/*BASE*/
+@font-face{font-family:'roboto-regular';src:url("../fonts/Roboto-Regular.ttf");}
+@font-face{font-family:'trocchi-regular';src:url("../fonts/Trocchi-Regular.ttf");}
+@font-face{font-family:'lato-regular';src:url("../fonts/Lato-Regular.ttf");}
+body{background:#fff;margin:0px 0px;padding:0px 0px;}
+ul{list-style-type:none;padding:0px 0px;margin:0px 0px;}
+h1, h2, h3, h4, h5, h6{margin:0px 0px;padding:0px 0px;}
+h1{font-family: trocchi-regular;padding-top: 50px;font-size: 36px;color:#333333;font-weight:normal;}
+h2{font-size:22px;}
+p{margin:0px 0px;padding:0px 0px;color:#333333;}
+a{text-decoration:none;font-size:16px;}
+input[type="text"]{color:#6f6f6f;font-weight:normal;}
+address{margin-bottom:5px;}
+.align-center{text-align:center;}
+.align-left{text-align:left;}
+.align-right{text-align:right;}
+.floatLeft{float:left;}
+
+
+.item-cuisine-type{background-color:#f0e5e4;padding:3px 9px;border-radius:12px;margin-top:5px;}
+.address-icon{background:url("../images/icons/address.png") no-repeat scroll 0% 0%;width:13px;height:18px;display:block;}
+.phone-icon{background:url("../images/icons/phone.png") no-repeat scroll 0% 0%;width:13px;height:18px;display:block;}
+.icon-comment{background:url("../images/icons/icon-comment.png") no-repeat scroll 0% 0%;width:15px;height:18px;display:block;margin-top:3px;margin-right:5px;float:left;}
+.indian{background:url("../images/cuisine/indian.png") no-repeat scroll 0% 0%;background-size:100%;}
+.thai{background:url("../images/cuisine/thai.png") no-repeat scroll 0% 0%;background-size:100%;}
+.chineese{background:url("../images/cuisine/chineese.png") no-repeat scroll 0% 0%;background-size:100%;}
+.pizza{background:url("../images/cuisine/pizza.png") no-repeat scroll 0% 0%;background-size:100%;}
+.sushi{background:url("../images/cuisine/sushi.png") no-repeat scroll 0% 0%;background-size:100%;}
+
+
+/*LAYOUT*/
+header{width:100%;height:80px;display:inline-block;background-image: url("../images/header-bg.jpg");background-size:100% 81px;position: relative;box-shadow: 0px 2px 2px #2D0909;}
+.container{width:1000px;height:auto;display:block;position:relative;margin-right:auto;margin-left:auto;}
+#home-banner{width:100%;height:500px;display:block;overflow:hidden;}
+#home-banner .fullscreen-bg__video {width: 100%;height: 100;left: 0px;top: 80px;position: absolute;z-index: -1;}
+.text-search-btn{color:#ffffff;background-color:#b50a03;font-family:roboto-regular;font-size:22px !important;text-transform:uppercase;width:150px;height:52px;}
+.voice-search-btn{width:32px !important;background:url('../images/icons/voice.png') no-repeat 0% 0%;text-indent:-99999px;overflow:hidden;}
+#start_button{background-position: 1px 21px;line-height: 60px;border: none;}
+#cuisine-section{width:100%;height:400px;display:block;background-color:#ffffff;}
+#recent-restaurant-section{width:100%;height:620px;background:url("../images/recent_rest_bg_pattern.png") repeat;}
+#recent-reviews-section{width:100%;height:600px;background:#ffffff;}
+footer{width:100%;height:250px;background:url("../images/footer-pattern.jpg") repeat;padding:50px 0px 30px;font-family:lato-regular;font-size:14px;color:#ffffff;}
+footer a{color:#ffffff;}
+footer h4{text-transform:uppercase;padding-bottom:18px;}
+.search-section{width:100%;height:45px;background-color:#720D0A;margin-top:-4px;}
+.breadcrumb-container ul li{float:left;color:#ffffff;font-family:lato-regular;font-size:14px;line-height:45px;}
+.breadcrumb-container ul li a{color:#ffffff;font:inherit;margin-right:10px;margin-left:10px;}
+.search-section .basic-search-wrapper{float:right;margin-top:7px;}
+.search-section .basic-search-wrapper input[type="text"]{height:29px;padding:0px 10px;vertical-align:top;margin-left:10px;}
+.search-section .basic-search-wrapper input[type="submit"]{height:32px;border:none;margin-left:10px;border-radius:5px;font-size:16px !important;}
+.search-section .basic-search-wrapper input.text-search-btn{width:100px;}
+.search-section .basic-search-wrapper input.voice-search-btn{background-size:auto 32px;vertical-align:top;}
+.search-listing-header{width:100%;height:70px;background:#f1f1f1;color:#333333;}
+.search-listing-header .search-listing-heading{float:left;}
+.search-listing-header .filters{float:right;}
+.filter-well{display:inline-block;float:right;width:100%;min-height: 20px;padding: 11px;background-color: #F5F5F5;border: 1px solid #E3E3E3;border-radius: 0px 0px 4px 4px;box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset;}
+.filter-set{float:left;margin-left:10px;margin-right:10px;}
+.filter-set h4{line-height: 35px;font-family: lato-regular;font-size:14px;vertical-align:top;font-weight:700;}
+.filter-set ul li{font-family: lato-regular;font-size: 12px;}
+.filter-set ul li label{font-weight:normal;}
+.filter-set-btn{bottom: 10px;position: absolute;float: left;right: 30px;}
+.content-wrapper{width:100%;height:auto;display:flex;}
+.column-70{width:70%;height:auto;display:table-cell;float:left;padding:15px 0px;}
+.column-30{width:30%;height:auto;display:table-cell;float:left;}
+.search-results-item{padding-bottom: 20px;padding-top: 20px;margin-right:25px;border-bottom: 1px solid #B50A03;}
+.results-item-details{display: block;height: auto;overflow: hidden;}
+.results-item-logo, .results-item-info{float:left;color:#333333;}
+.results-item-logo{width:150px;overflow:hidden;height:100px;}
+.results-item-info{width:250px;padding-left:10px;}
+.results-item-info h3{font-family:trocchi-regular;font-size:16px;color:#720D0A;white-space:nowrap;}
+.results-item-info h3 a{color:#720D0A;}
+.results-item-info span{font-size:14px;}
+
+.results-item-info .address-icon, .results-item-info .phone-icon{float:left;margin-top:4px;display:table-cell;margin-right:5px;}
+.results-item-info-two{float:right;color:#333333;text-align:right;}
+.result-item-reviews p{font-size:14px;margin-top:7px;font-family:lato-regular;}
+.listing-map-wrapper{width:300px;height:280px;display:block;margin-top:20px;}
+.listing-map-wrapper #map{height:280px;}
+.request_order_btn{color: #FFF;padding:4px;margin-right: 10px;border-radius: 3px;background-color: #B60B04;line-height: 30px;border:none;margin-top:-4px;}
+
+/*MODULES*/
+
+
+/*STATE*/
+.btn-default-active{background-color:#C43B35;color:#fff;border:none;}
+
+
+/*THEME*/
+#header-logo{width:200px;height:70px;background:url("../images/logo.png") no-repeat scroll 0% 0%;background-size:100% auto;margin-top:5px;float:left;}
+#header-logo a{display: block;width: 100%;height: 100%;text-indent: -1000em;}
+#main-nav{float:right;color:#ffffff;margin-top:49px;}
+#main-nav ul li{float:left;padding: 0px 7px;}
+#main-nav ul li a{color:#ffffff;font-family:roboto-regular;font-size:15px;transition: color 0.3s;}
+#main-nav ul li a:hover{color:#3A0100;}
+#secondary-nav{float:right;margin-top:40px;}
+#secondary-nav ul{text-align:center;}
+#secondary-nav ul li.social-icon{padding-bottom:50px;}
+#secondary-nav ul ul li{float:left;padding:0px 4px;color:#ffffff;}
+.fb_icon{width:32px;height:32px;display:block;background:url("../images/icons/fb_logo.png") no-repeat scroll 0% 0%;}
+.t_icon{width:32px;height:32px;display:block;background:url("../images/icons/t_logo.png") no-repeat scroll 0% 0%;}
+.gp_icon{width:32px;height:32px;display:block;background:url("../images/icons/gp_logo.png") no-repeat scroll 0% 0%;}
+.sign-in-btn{color: #FFF;border: 2px solid #FFF;border-radius: 20px;font-size: 14px;line-height: 15px;padding: 4px 14px;font-family: roboto;}
+/*home banner*/
+.banner-content{width:100%;padding-top:50px;display:inline-block;position:absolute;}
+.banner-content h1{font-family:trocchi-regular;font-size:60px;color:#ffffff;font-weight:normal;}
+.banner-content h2{font-family:roboto-regular;font-size:24px;color:#ffffff;margin-top:10px;font-weight:normal;}
+.banner-search{margin-top:50px;display:block;}
+.banner-search input{height:44px;padding:4px 16px;line-height:22px;border-radius:3px;font-size:18px;border:none;margin:0px 10px 30px 10px;width:280px;}
+.banner-search input[type="submit"]{width:150px;height:52px;}
+#info{background-color: rgb(181, 10, 3);border-radius: 20px;display: inline;padding: 5px 10px;}
+#info p{color:#ffffff !important;}
+
+.pattern{/*background: url("../images/pattern.png") repeat scroll*/;width: 100%;height: 510px;position: absolute;top: 80px;left: 0px;}
+/*favourite cuisine - homepage*/
+#cuisine-list{width:100%;height:220px;display:block;text-align:center;}
+#cuisine-list ul{display:inline-block;}
+#cuisine-list ul li{float:left;width:160px;padding:50px 18px;}
+#cuisine-list .cuisine-logo{width:100%;height:167px;display:block;}
+#cuisine-list ul li a  span.cuisine-name{font-family:roboto-regular;font-size:20px;color:#333333;font-weight:normal;}
+/*recent restaurants - homepage*/
+#recent-restaurant-list{width:100%;height:450px;display:block;}
+#recent-restaurant-list ul{display:inline-block;margin-top:30px;}
+#recent-restaurant-list ul li.list-item{float:left;width:230px;height:425px;display:block;margin:0px 7px;overflow:hidden;background-color:#ffffff;border-radius:5px;position:relative;}
+#recent-restaurant-list ul li.list-item .item-banner{height:150px;overflow:hidden;}
+#recent-restaurant-list .list-item .item-details p{margin-top:10px;font-family:lato-regular;font-size:14px;}
+#recent-restaurant-list .list-item .item-details .item-title{font-family:trocchi-regular;font-size:16px;}
+#recent-restaurant-list .list-item .item-details .item-cuisine-type{background-color:#f0e5e4;padding:3px 9px;border-radius:12px;}
+#recent-restaurant-list .list-item .item-details .address-icon, #recent-restaurant-list .list-item .item-details .phone-icon{float:left;margin-left:15px;margin-top:2px;}
+#recent-restaurant-list .list-item .item-details .item-address, #recent-restaurant-list .list-item .item-details .item-phone{margin-left:40px;display:block;}
+#recent-restaurant-list .list-quicklinks{position:absolute;bottom:0px;border-radius:0px 0px 5px 5px;}
+#recent-restaurant-list .list-quicklinks ul li{float:left;display:block;width:115px;height:40px;margin:0px 0px;}
+.list-quicklinks ul li.list-visit-btn{color:#ffffff;background-color:#b50a03 !important;vertical-align: bottom;}
+.list-quicklinks ul li.list-order-btn{color:#ffffff;background-color:#809202 !important;vertical-align: bottom;}
+.list-quicklinks ul li.list-visit-btn a, .list-quicklinks ul li.list-order-btn a{line-height:40px;color:#ffffff;font-family:roboto-regular;}
+/*recent reviews - homepage*/
+#recent-reviews-section ul li.list-item{float:left;width:460px;height:160px;padding:20px 20px;}
+#recent-reviews-section .user-profile-pic{float:left;display:block;}
+#recent-reviews-list{width:1000px;height:400px;margin:20px auto;display:block;background-image:url('../images/center-star.png');background-repeat:no-repeat;background-position:430px 140px;}
+#recent-reviews-list .user-profile-pic{height:100%;overflow:hidden;width:115px;}
+#recent-reviews-list .user-profile-pic img{width:115px;height:115px;border-radius:50%;}
+#recent-reviews-list .reviews-item{margin-left:130px;}
+.reviews-item .review-text{font-family:lato-regular;font-size:14px;text-align:left;margin-left:15px;line-height:18px;}
+.reviews-item .review-details{font-family:lato-regular;font-weight:bold;font-style:italic;color:#333333;font-size:13px;text-align:left;margin-top:15px;margin-left:15px;}
+/*footer*/
+.footer-quicklinks{float:left;width:160px;}
+.footer-quicklinks ul li a{font-size:14px;line-height:24px;}
+.footer-newsletter{float:right;width:430px;}
+.footer-newsletter input{width:200px;height:40px;border:none;border-radius:5px 0px 0px 5px;padding:0px 15px;color:#333333;font-family:lato-regular;font-size:16px;}
+.footer-newsletter .newsletter-btn{background-color:#b50a03;border-radius:0px 5px 5px 0px;color:#ffffff;margin-left:-3px;font-size:14px;}
+.copyright p{font-size:14px;line-height:24px;color:#ffffff;}
+/*Search Listing*/
+.search-listing-heading h2{line-height:70px;font-family:trocchi-regular;}
+.filters ul.filters-list{margin-top:16px;}
+.filters ul.filters-list li{float:left;margin:0px 6px;}
+.filters ul.filters-list li a{font-family:lato-regular;color:#333333;}
+.pagination{margin-top:20px;margin-bottom:5px;}
+.pagination li{float: left;margin-left: 5px;margin-right: 5px;}
+.pagination li.active {    color: #ffffff;    background: #B50A03;    border-radius: 10px;    font-size: 14px;    line-height: 15px;    padding: 3px;}
+.pagination li a{color: rgb(114, 13, 10);    text-decoration: none;    font-size: 14px;    font-family: lato-regular;}
+.pagination li.active span{font-size: 14px;    font-family: lato-regular;}
+
+
+/* Restaurants Landing Page */
+.restaurants_header{width:100%;background-color:#EDEDED;}
+.restaurants_header .rating{direction:ltr;}
+.restaurants_info_row_one{min-height:145px;margin:15px 0px 10px 0px;display:inline-block;width:100%;}
+.restaurants_info_row_two{min-height:60px;padding-bottom:20px;}
+.restaurants_images{height:202px;overflow:hidden;}
+.restaurants_images img{vertical-align:top;}
+
+.rest_info_column_one h1{margin-bottom:3px;padding-top:10px;}
+.rest_info_column_one p{margin-bottom:0px;font-family:roboto-regular;}
+
+.restaurants_categories{color:#224104;font-weight:bold;}
+.rest_address_info{background-color:#ffffff;}
+.rest_address_info p{padding:0px 15px;}
+.restaurant_quicklinks ul{margin-top:20px;margin-bottom:15px;height:25px;}
+.restaurant_quicklinks ul li{float:left;}
+.restaurant_quicklinks ul li a{ color:#ffffff;padding:10px 10px;margin-right:10px;border-radius:3px;background-color:#b60b04;line-height:30px;}
+.restaurant_quicklinks ul li a:hover{text-decoration:none;background-color:#b94a48;}
+.restaurant_quicklinks ul li p{margin-top: 7px;font-style: italic;font-size:12px;}
+.rest_address_info p{margin:0px 0px;}
+
+.rest_review_box{border-bottom:3px solid #FFE1E1;padding-bottom:15px;padding-top:15px;display:inline-block;}
+.rest_review_section{display:table-cell;}
+.rest_review_section h2{font-family:trocchi-regular;margin-left:15px;color:#444444;}
+.rest_detailed_info_section{background-color:#fbfbfb;height:100%;display:table-cell;padding:30px 20px;}
+.review_detailed_info_section{width:100%;background-color:#ededed;height:auto;}
+.rest_review_user_info p{text-align:center;color:#646464;font-size:0.9em;font-family:roboto-regular;}
+.rest_review_user_image{width:130px;margin:5px auto;}
+.review_author{color:#B60B04;font-weight:bold;}
+.review_author_highlight{font-weight:bold;color:#b60b04;}
+.full_review_text p{font-size:10pt;font-family:lato-regular;line-height:20px;}
+.review_quicklinks{text-align:right;}
+.review_quicklinks p{font-size: 9pt;font-style: italic;font-weight: bold;color: rgb(203, 24, 24);}
+.review_quicklinks ul li{float:left;}
+.review_quicklinks ul li a{padding:8px 20px;border-radius:3px; margin:5px 10px;background-color:#3F7E00;color:#ffffff;}
+
+.open_close_box, .specialities_box, .other_info_box, .also_viewed_box{margin-bottom:20px;padding-bottom:15px;border-bottom:3px solid #ededed;}
+.also_visited_rest{width:100%;height:100%;display:inline-block;}
+.also_visited_rest_image{width:30%;}
+.also_visited_rest_info{width:69%;}
+.also_visited_rest_info p{margin-left:10px;font-size:10pt;}
+
+.col-md-3{width:21%;float:left;}
+.col-md-4{width:33%;float:left;}
+.col-md-6{width:50%;float:left;}
+.col-md-8{width:66%;float:left;}
+.col-md-9{width:75%;float:left;}
