@@ -10,6 +10,15 @@ class Restaurants extends Model {
     protected $table = 'restaurants';
 
     /*
+     * One to One Relationship
+     * A Restaurant has one restaurants_info
+     */
+    public function restaurants_info()
+    {
+        return $this->hasOne('App\Restaurants_info');
+    }
+
+    /*
      * Many to Many Relationship
      * A Restaurant belongs to many Categories
      */
@@ -51,7 +60,7 @@ class Restaurants extends Model {
      */
     public function restaurant_reviews()
     {
-        return $this->hasMany('App\Restaurants_Reviews');
+        return $this->hasMany('App\Restaurants_Reviews')->where('spin_status', '=', '1');
     }
 
 
@@ -61,6 +70,14 @@ class Restaurants extends Model {
    }
 
     public static function getSearchDetail($user_config) {
+        switch($user_config['scenario']){
+            case 'scenario_one':
+                $city = $user_config['l_city'];
+                $state = $user_config['l_state'];
+                $location['city'] = \App\City::where('city', 'LIKE', $city)->get();
+                $location[''] = \App\State::where('short', 'LIKE', $state)->get();
+                dd($city_id);
+        }
         $location = explode(', ', $user_config['location']);
         $city_id = \App\City::where('city', 'LIKE', $location[0])->get();
         return($city_id->attributes);

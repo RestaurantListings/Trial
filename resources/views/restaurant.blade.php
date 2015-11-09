@@ -12,66 +12,112 @@
 
     @foreach($data['restaurant'] as $r)
         <div class="restaurants_info_row_one">
-            <div class="rest_info_column_one col-md-6">
+            <div class="rest_info_column_one col-md-8">
                 <h1 itemprop="name">{{ $r->name }}</h1>
-                <p><strong>
-                        {{ $r->address_1.', '.$r->address_2}}<br>
-                        {{ $r->city->city.', '.$r->state->state.', '.$r->zip }}
-                    </strong>
-                </p>
-                <p>{{ $r->phone }} {{ $r->website }}</p>
+                <div class="col-md-6 address-info">
+                    <p><strong>
+                            {{ $r->address_1.', '.$r->address_2}}<br>
+                            {{ $r->city->city.', '.$r->state->short.', '.$r->zip }}
+                        </strong>
+                    </p>
+                    <p>{{ $r->phone }} &nbsp;&nbsp;<a href="{{ $r->website }}">Website</a></p>
+                </div>
+                <div class="col-md-6 align-right">
+                    <div class="clearfix" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating" style="margin-bottom:25px;">
+                        <div class="rating-large" style="margin-rightt:10px;">
+                            <img src="../assets/images/rating.png" alt="4" />
+                            <meta itemprop="ratingValue" content="4">
+                        </div>
+                        <span class="review-count rating-qualifier" style="float:right;margin-right:10px;">
+                            <span itemprop="reviewCount" style="font-family:roboto-regular;font-weight:normal;">123 reviews</span>
+                        </span>
+                        <br/>
+                        <span class="item-cuisine-type floatRight">{{ $r->categories }}</span>
+                    </div>
+
+
+                </div>
+
             </div>
 
-            <div class="rest_info_column_three col-md-6">
-                <div class="restaurant_quicklinks">
-                    <ul class="restaurant_quicklinks_main">
-                        <li>
-                            <a href="#">Write A Review</a>
-                        </li>
-                        <li>
-                            <a href="#">Upload Images</a>
-                        </li>
-                        <li>
-                            <a href="#">Invite</a>
-                        </li>
-                        <li>
-                            <a href="#">Share</a>
-                        </li>
-                    </ul>
-                    <ul class="restaurant_quicklinks_sec">
-                        <li>
-                            <a href="#">Request Online Ordering</a>
-                        </li>
-                        <li>
-                            <p><strong>10</strong> People Requested Online Ordering</p>
-                        </li>
-                    </ul>
+            <div class="rest_info_column_three col-md-4">
+                <div class="rest_info_column_one col-md-12" style="padding-left:0px;">
+                    <div class="rest_address_info">
+                        <div class="restaurant_directions">
+                            <img alt="Map" src="https://maps.googleapis.com/maps/api/staticmap?center={{$r->latitude}},{{$r->longitude}}&zoom=14&size=280x135&key=AIzaSyBacStrf5mzwW6qrjvEcFq3pIVWH-bEvy0" height="135" width="100%">
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
         </div>
         <div class="restaurants_info_row_two">
-            <div class="rest_info_column_one col-md-4" style="padding-left:0px;">
-                <div class="rest_address_info">
-                    <div class="restaurant_directions">
-                        <img alt="Map" src="http://maps.google.com/maps/api/staticmap?scale=2&amp;center=33.490310%2C-111.926450&amp;language=en&amp;zoom=15&amp;markers=scale%3A2%7Cshadow%3Afalse%7Cicon%3Ahttp%3A%2F%2Fyelp-images.s3.amazonaws.com%2Fassets%2Fmap-markers%2Fannotation_64x86.png%7C33.490310%2C-111.926450&amp;client=gme-yelp&amp;sensor=false&amp;size=286x135&amp;signature=UqHUGvCA_PyMwxJNTPJssFuPs1E=" height="135" width="100%">
-                    </div>
-                    <div class="clearfix" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating" style="margin-bottom:25px;">
-                        <div class="rating-large floatLeft" style="margin-left:10px;">
-                            <!--<i class="star-img stars_3_half" title="3.5 star rating">
-                                <img alt="3.5 star rating" class="offscreen" src="" height="303" width="84">
-                            </i>-->
-                            <img src="../assets/images/rating.png" alt="4" />
-                            <meta itemprop="ratingValue" content="4">
-                        </div>
-                            <span class="review-count rating-qualifier" style="float:right;margin-right:10px;">
-                                <span itemprop="reviewCount" style="font-family:roboto-regular;font-weight:normal;">123 reviews</span>
-                            </span>
-                    </div>
-                    <br/>
-                    &nbsp;&nbsp;<span class="item-cuisine-type">{{ $r->categories }}</span>
+            <div class="restaurant_quicklinks">
+                <ul class="restaurant_quicklinks_main">
+                    <li>
+                        <a href="#" class="btn-rl-default">Write An Anonymous Review</a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="#">Upload Images</a>
+                    </li>
+                    <li>
+                        <a href="#">Invite</a>
+                    </li>
+                    <li>
+                        <a href="#">Share</a>
+                    </li>
+                    -->
+                    <li>
+                        {!! Form::open(array('name'=>'home_search','class'=>'basic-search','novalidate'=>'')) !!}
+                        </form>
+                        <button class="request_order_btn btn-rl-default" type="button" onclick="request_online_order(<?php echo $r->id; ?>);">Request Online Ordering</button>
+                    </li>
+                    <li>
 
+                        <p><strong>{{ $r->request_order }}</strong> People Requested</p>
+
+                    </li>
+                </ul>
+
+                <!-- Online Order Request Modal Begins-->
+                <div class="modal fade" id="onlineOrderRequestModal" tabindex="-1" role="dialog" aria-labelledby="onlineOrderRequestModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            {!! Form::open(array('name'=>'request_online_ordering','class'=>'request','route'=>'request_online_ordering','method'=>'post','novalidate'=>'')) !!}
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Online Ordering - Request Form </h4>
+                            </div>
+                            <div class="modal-body">
+
+                                    <div class="form-group">
+                                        <label for="guest_first_name">First Name</label>
+                                        <input type="text" class="form-control" name="guest_first_name" value="" placeholder="First Name" />
+                                        <label for="guest_last_name">Last Name</label>
+                                        <input type="text" class="form-control" name="guest_last_name" value="" placeholder="Last Name" />
+                                        <label for="guest_email">Email Address</label>
+                                        <input type="email" class="form-control" name="guest_email" value="" placeholder="Email Address" required />
+                                        <input type="hidden" name="r_t" value="1" />
+                                        <input type="hidden" name="rlink" value="{{ $r->permalink }}" />
+                                        <input type="hidden" name="r_id" value="{{ $r->id }}" />
+                                        </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Alert Me!</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+                <!-- Online Ordering Request Modal Ends-->
+
             </div>
+
+            <!--
             <div class="rest_info_column_two col-md-8">
                 <div class="restaurants_images">
                     <img src="{{ $r->img_one }}" width="30%" />
@@ -79,6 +125,7 @@
                     <img src="{{ $r->img_three }}" width="30%" />
                 </div>
             </div>
+            -->
         </div>
     @endforeach
 @endsection
@@ -86,10 +133,54 @@
 
 
 @section('recent_review_section')
-<div class="rest_review_section col-md-9" style="background-color:#ffffff;">
-    <div style="width:95%;">
-        <img src="../assets/img/graph.jpg" alt="" width="100%" />
+<div class="rest_review_section col-md-8" style="background-color:#ffffff;">
+    <br>
+    <h2>Healthy Food suggestions</h2>
+    <p style="color:#2ECC71;padding-left:15px;"><em>Sorry, we don't have best healthy food suggestion for this restaurants.</em></p>
+
+    <div class="col-md-12">
+
+        <!-- Button trigger Healthy Food Alert Modal -->
+        <button type="button" class="btn btn-sm btn-rl-default" data-toggle="modal" data-target="#healthyFoodAlertModal">
+            Alert Me When Available
+        </button>
+
+        <!-- Healthy Food Alert Modal Ends-->
+        <div class="modal fade" id="healthyFoodAlertModal" tabindex="-1" role="dialog" aria-labelledby="healthyFoodAlertModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    {!! Form::open(array('name'=>'request_online_ordering','class'=>'request','route'=>'request_online_ordering','method'=>'post','novalidate'=>'')) !!}
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Healthy Food Available Alert - Request Form </h4>
+                    </div>
+                    <div class="modal-body">
+
+                            <div class="form-group">
+                                <label for="guest_first_name">First Name</label>
+                                <input type="text" class="form-control" name="guest_first_name" value="" placeholder="First Name" />
+                                <label for="guest_last_name">Last Name</label>
+                                <input type="text" class="form-control" name="guest_last_name" value="" placeholder="Last Name" />
+                                <label for="guest_email">Email Address</label>
+                                <input type="email" class="form-control" name="guest_email" value="" placeholder="Email Address" required />
+                                <input type="hidden" name="r_t" value="2" />
+                                <input type="hidden" name="rlink" value="{{ $r->permalink }}" />
+                                <input type="hidden" name="r_id" value="{{ $r->id }}" />
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">Alert Me!</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Healthy Food Alert Modal Ends-->
+
     </div>
+    <br>
+    <br>
     <h2>Recent Reviews about {{ $data['restaurant'][0]['name']}}</h2>
     @foreach($data['restaurant'] as $rr)
         @if(count($rr->restaurant_reviews)==0)
@@ -99,24 +190,8 @@
 
 
                 <div class="rest_review_box">
-                    <div class="rest_review_user_info col-md-3">
-                        <!--<div class="rest_review_user_image">
-                            <img src="http://s3-media3.fl.yelpcdn.com/photo/uFUXBBKt_GBznUgrRR0STQ/60s.jpg" width="100%" />
-                        </div>-->
-                        <p>
-                            <span class="review_author">{{ $reviews->user_name }}</span>
-                            <br/>
-                            <span class="review_author_loc">{{ $reviews->user_location }}</span>
-                            <br/>
-                            <!--Reviewed <span class="review_author_highlight">45</span> Restaurants
-                            <br/>
-                            <span class="review_author_highlight">1234</span> Reviews
-                            <br/>
-                            <span class="review_author_highlight">4</span> Followers-->
-                        </p>
 
-                    </div>
-                    <div class="rest_review_info col-md-9">
+                    <div class="rest_review_info col-md-12" style="padding-left:20px;padding-right:20px;">
                         <div class="clearfix" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
                             <div class="rating-large floatLeft">
                                 <!--<i class="star-img stars_3_half" title="{{ $rr->rating }} star rating">
@@ -202,20 +277,35 @@
 @endsection
 
 @section('working_hours_section')
-<div class="open_close_box">
-    <h4>Opening - Close Hours +</h4>
-    <p><strong>Today 10.00 Am to 10.00 Pm</strong></p>
-</div>
+    @foreach($data['restaurant'] as $r)
+        <div class="open_close_box">
+            <h4>Opening - Close Hours</h4>
+            <!--<p><strong>Today 10.00 Am to 10.00 Pm</strong></p>-->
+            <?php
+            if($r->restaurants_info->hours != NULL){
+                $hours = str_replace('||', '<br>',$r->restaurants_info->hours);
+                $hours = str_replace('-->', ': ',$hours);
+                $hours = str_replace(',Open now', '',$hours);
+                echo $hours;
+            }else{
+                echo '<p style="color:#adadad;">Sorry, Store hours have not been updated. If you are the owner of this restaurants. Please update the store hours.</p>';
+            }
+            ?>
+        </div>
+    @endforeach
 @endsection
 @section('specialities_section')
 <div class="specialities_box">
     <h4>Specialities</h4>
-    <ul>
-        <li>Online Ordering</li>
-        <li>Accepts Credit Cards</li>
-        <li>Take Reservations</li>
-        <li>Delivery</li>
-    </ul>
+    <?php
+    if($r->restaurants_info->more_info != NULL){
+        $more_info = str_replace('-->', ':', $r->restaurants_info->more_info);
+        $more_info = str_replace('|', '<br>', $more_info);
+        echo $more_info;
+    }else{
+        echo '<p style="color:#adadad;">Sorry, no additional information is available to display.</p>';
+    }
+    ?>
 </div>
 @endsection
 @section('other_info_section')
@@ -321,5 +411,6 @@
 
     </div>
 </div>
+
 @endsection
 

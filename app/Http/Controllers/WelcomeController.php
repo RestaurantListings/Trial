@@ -1,4 +1,9 @@
-<?php namespace App\Http\Controllers;
+<?php
+namespace App\Http\Controllers;
+use DB;
+use Jenssegers\Agent\Agent;
+use GeoIP;
+
 
 class WelcomeController extends Controller {
 
@@ -21,6 +26,7 @@ class WelcomeController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('guest');
+
 	}
 
 	/**
@@ -30,10 +36,26 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-        $recent_restaurants = \App\Restaurants::orderbyraw("RAND()")->take(4)->get();
-        $recent_reviews = \App\Restaurant_Reviews::orderby('id', 'desc')->take(4)->get();
+        DB::connection()->enableQueryLog();
+        $data['location'] = GeoIP::getLocation();
+        $l_city = $data['location']['city'];
+        $l_state = $data['location']['state'];
+        $agent = new Agent();
 
-        return view('home')->with(array('recent_restaurants' => $recent_restaurants, 'recent_reviews' => $recent_reviews));
+
+
+        $data['recent_restaurants'] = \App\Restaurants::take(4)->get();
+
+
+        $data['recent_reviews'] = \App\Restaurant_Reviews::where('source', 'LIKE', '%GOOGLE%')->orderby('id', 'desc')->take(4)->get();
+
+        if($agent->isMobile()){
+            return view('mobile_home')->with($data);
+        }else{
+            return view('home')->with($data);
+        }
+
+
     }
 
 }

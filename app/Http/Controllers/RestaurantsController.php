@@ -6,8 +6,11 @@
  * Time: 8:23 PM
  */
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Request;
+use App\Http\Requests;
+use Input;
 
-class HomeController extends Controller {
+class RestaurantsController extends Controller {
 
     /*
     |--------------------------------------------------------------------------
@@ -38,6 +41,14 @@ class HomeController extends Controller {
     public function index()
     {
         return view('home');
+    }
+
+    function request_online_order(){
+        if(Request::ajax()) {
+            $data = Input::all();
+            \App\Restaurants::where('id', '=', $data['id'])->increment('request_order');
+
+        }
     }
 
 }

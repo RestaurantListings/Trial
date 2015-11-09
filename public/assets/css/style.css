@@ -6,11 +6,15 @@ body{background:#fff;margin:0px 0px;padding:0px 0px;}
 ul{list-style-type:none;padding:0px 0px;margin:0px 0px;}
 h1, h2, h3, h4, h5, h6{margin:0px 0px;padding:0px 0px;}
 h1{font-family: trocchi-regular;padding-top: 50px;font-size: 36px;color:#333333;font-weight:normal;}
+h2{font-size:22px;}
 p{margin:0px 0px;padding:0px 0px;color:#333333;}
 a{text-decoration:none;font-size:16px;}
+input[type="text"]{color:#6f6f6f;font-weight:normal;}
+address{margin-bottom:5px;}
 .align-center{text-align:center;}
 .align-left{text-align:left;}
-.floatLeft{float:left;}
+.align-right{text-align:right;}
+.floatLeft{float:left !important;}
 
 
 .item-cuisine-type{background-color:#f0e5e4;padding:3px 9px;border-radius:12px;margin-top:5px;}
@@ -25,22 +29,32 @@ a{text-decoration:none;font-size:16px;}
 
 
 /*LAYOUT*/
-header{width:100%;height:80px;background-image: url("../images/header-bg.png");background-size:100% 81px;position: relative;box-shadow: 0px 2px 2px #2D0909;}
+header{width:100%;height:80px;display:inline-block;background-image: url("../images/header-bg.jpg");background-size:100% 81px;position: relative;box-shadow: 0px 2px 2px #2D0909;}
 .container{width:1000px;height:auto;display:block;position:relative;margin-right:auto;margin-left:auto;}
 #home-banner{width:100%;height:500px;display:block;overflow:hidden;}
 #home-banner .fullscreen-bg__video {width: 100%;height: 100;left: 0px;top: 80px;position: absolute;z-index: -1;}
+#banner-search{width:80%;margin-left:auto;margin-right:auto;margin-bottom:10px;}
+#basic-keywords-icon, #basic-location-icon{border: 0px none;border-radius: 0px;background-color: #fff;}
+#basic-keywords-icon{border-left:1px solid #dfdfdf;}
+#basic-location-icon{border-radius:3px 0px 0px 3px;}
+#banner-search input{margin-left:0px;margin-right:0px;}
+#banner-search .text-search-btn{float:left;background-color:#b50a03;font-family:roboto-regular;font-size:22px !important;text-transform:uppercase;}
+#banner-search input, #basic-keywords-icon, #basic-location-icon{opacity:0.9;}
+#keywords, #location{padding-left:0px;}
+
 .text-search-btn{color:#ffffff;background-color:#b50a03;font-family:roboto-regular;font-size:22px !important;text-transform:uppercase;width:150px;height:52px;}
 .voice-search-btn{width:32px !important;background:url('../images/icons/voice.png') no-repeat 0% 0%;text-indent:-99999px;overflow:hidden;}
+#start_button{background-position: 1px 21px;line-height: 60px;border: none;}
 #cuisine-section{width:100%;height:400px;display:block;background-color:#ffffff;}
 #recent-restaurant-section{width:100%;height:620px;background:url("../images/recent_rest_bg_pattern.png") repeat;}
 #recent-reviews-section{width:100%;height:600px;background:#ffffff;}
-footer{width:100%;height:250px;background:url("../images/footer-pattern.jpg") repeat;padding:50px 0px 30px;font-family:lato-regular;font-size:14px;color:#ffffff;}
+footer{width:100%;height:270px;background:url("../images/footer-pattern.jpg") repeat;padding:50px 0px 30px;font-family:lato-regular;font-size:14px;color:#ffffff;}
 footer a{color:#ffffff;}
 footer h4{text-transform:uppercase;padding-bottom:18px;}
-.search-section{width:100%;height:45px;background-color:#720D0A;}
+.search-section{width:100%;height:45px;background-color:#720D0A;margin-top:-4px;}
 .breadcrumb-container ul li{float:left;color:#ffffff;font-family:lato-regular;font-size:14px;line-height:45px;}
 .breadcrumb-container ul li a{color:#ffffff;font:inherit;margin-right:10px;margin-left:10px;}
-.search-section .basic-search-wrapper{float:right;margin-top:-3px;}
+.search-section .basic-search-wrapper{float:right;margin-top:7px;}
 .search-section .basic-search-wrapper input[type="text"]{height:29px;padding:0px 10px;vertical-align:top;margin-left:10px;}
 .search-section .basic-search-wrapper input[type="submit"]{height:32px;border:none;margin-left:10px;border-radius:5px;font-size:16px !important;}
 .search-section .basic-search-wrapper input.text-search-btn{width:100px;}
@@ -48,6 +62,12 @@ footer h4{text-transform:uppercase;padding-bottom:18px;}
 .search-listing-header{width:100%;height:70px;background:#f1f1f1;color:#333333;}
 .search-listing-header .search-listing-heading{float:left;}
 .search-listing-header .filters{float:right;}
+.filter-well{display:inline-block;float:right;width:100%;min-height: 20px;padding: 11px;background-color: #F5F5F5;border: 1px solid #E3E3E3;border-radius: 0px 0px 4px 4px;box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset;}
+.filter-set{float:left;margin-left:10px;margin-right:10px;}
+.filter-set h4{line-height: 35px;font-family: lato-regular;font-size:14px;vertical-align:top;font-weight:700;}
+.filter-set ul li{font-family: lato-regular;font-size: 12px;}
+.filter-set ul li label{font-weight:normal;}
+.filter-set-btn{bottom: 10px;position: absolute;float: left;right: 30px;}
 .content-wrapper{width:100%;height:auto;display:flex;}
 .column-70{width:70%;height:auto;display:table:cell;float:left;padding:15px 0px;}
 .column-30{width:30%;height:auto;display:table:cell;float:left;}
@@ -65,12 +85,13 @@ footer h4{text-transform:uppercase;padding-bottom:18px;}
 .result-item-reviews p{font-size:14px;margin-top:7px;font-family:lato-regular;}
 .listing-map-wrapper{width:300px;height:280px;display:block;margin-top:20px;}
 .listing-map-wrapper #map{height:280px;}
-
+.request_order_btn{color: #FFF;padding:4px;margin-right: 10px;border-radius: 3px;background-color: #B60B04;line-height: 30px;border:none;margin-top:-4px;}
 
 /*MODULES*/
 
 
 /*STATE*/
+.btn-default-active{background-color:#C43B35;color:#fff;border:none;}
 
 
 /*THEME*/
@@ -93,10 +114,14 @@ footer h4{text-transform:uppercase;padding-bottom:18px;}
 .banner-content h1{font-family:trocchi-regular;font-size:60px;color:#ffffff;font-weight:normal;}
 .banner-content h2{font-family:roboto-regular;font-size:24px;color:#ffffff;margin-top:10px;font-weight:normal;}
 .banner-search{margin-top:50px;display:block;}
-.banner-search input{height:44px;padding:4px 16px;line-height:22px;border-radius:3px;font-size:18px;border:none;margin:0px 10px 30px 10px;width:280px;}
-.banner-search input[type="submit"]{width:150px;height:52px;}
+.banner-search input{height:44px;padding:4px 16px;line-height:22px;border-radius:0px;font-size:16px;border:none;width:280px;background-color:#fff;}
+.banner-search input[type="submit"]{width:150px;height:44px;border-radius:0px 3px 3px 0px;}
+#info{background-color: rgb(181, 10, 3);border-radius: 20px;display: inline;padding: 5px 10px;}
+#info p{color:#ffffff !important;}
+.btn-rl-default{color:#FFF;border-radius: 3px;background-color: #B60B04;border: none;}
+.btn-rl-default:hover{background-color:#890200;color:#dddddd;}
 
-.pattern{background: url("../images/pattern.ng") repeat scroll;width: 100%;height: 510px;position: absolute;top: 80px;left: 0px;}
+.pattern{/*background: url("../images/pattern.png") repeat scroll*/;width: 100%;height: 510px;position: absolute;top: 80px;left: 0px;}
 /*favourite cuisine - homepage*/
 #cuisine-list{width:100%;height:220px;display:block;text-align:center;}
 #cuisine-list ul{display:inline-block;}
@@ -106,7 +131,7 @@ footer h4{text-transform:uppercase;padding-bottom:18px;}
 /*recent restaurants - homepage*/
 #recent-restaurant-list{width:100%;height:450px;display:block;}
 #recent-restaurant-list ul{display:inline-block;margin-top:30px;}
-#recent-restaurant-list ul li.list-item{float:left;width:230px;height:425px;display:block;margin:0px 7px;overflow:hidden;background-color:#ffffff;border-radius:5px;position:relative;}
+#recent-restaurant-list ul li.list-item{float:left;width:230px;height:425px;display:block;margin:0px 5px;overflow:hidden;background-color:#ffffff;border-radius:5px;position:relative;}
 #recent-restaurant-list ul li.list-item .item-banner{height:150px;overflow:hidden;}
 #recent-restaurant-list .list-item .item-details p{margin-top:10px;font-family:lato-regular;font-size:14px;}
 #recent-restaurant-list .list-item .item-details .item-title{font-family:trocchi-regular;font-size:16px;}
@@ -133,18 +158,39 @@ footer h4{text-transform:uppercase;padding-bottom:18px;}
 .footer-newsletter{float:right;width:430px;}
 .footer-newsletter input{width:200px;height:40px;border:none;border-radius:5px 0px 0px 5px;padding:0px 15px;color:#333333;font-family:lato-regular;font-size:16px;}
 .footer-newsletter .newsletter-btn{background-color:#b50a03;border-radius:0px 5px 5px 0px;color:#ffffff;margin-left:-3px;font-size:14px;}
-.copyright p{font-size:14px;line-height:24px;color:#ffffff;}
+.copyright p{font-size:14px;line-height:24px;color:#ffffff;text-align:center;}
 /*Search Listing*/
 .search-listing-heading h2{line-height:70px;font-family:trocchi-regular;}
 .filters ul.filters-list{margin-top:16px;}
-.filters ul.filters-list li{float:left;background:#ffffff;border:1px solid #cccccc; border-radius:4px;padding:7px 10px;margin:0px 6px;}
+.filters ul.filters-list li{float:left;margin:0px 6px;}
 .filters ul.filters-list li a{font-family:lato-regular;color:#333333;}
+.pagination{margin-top:20px;margin-bottom:5px;}
+.pagination li {
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.pagination li.active {
+    color: #ffffff;
+    background: #B50A03;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 15px;
+    padding: 3px;
+}
+.pagination li a{color: rgb(114, 13, 10);
+    text-decoration: none;
+    font-size: 14px;
+    font-family: lato-regular;}
+.pagination li.active span{font-size: 14px;
+    font-family: lato-regular;}
+
 
 /* Restaurants Landing Page */
 .restaurants_header{width:100%;background-color:#EDEDED;}
 .restaurants_header .rating{direction:ltr;}
-.restaurants_info_row_one{min-height:145px;}
-.restaurants_info_row_two{min-height:240px;padding-bottom:20px;}
+.restaurants_info_row_one{min-height:145px;margin:15px 0px 10px 0px;display:inline-block;width:100%;}
+.restaurants_info_row_two{min-height:60px;padding-bottom:20px;}
 .restaurants_images{height:202px;overflow:hidden;}
 .restaurants_images img{vertical-align:top;}
 /*.rest_info_column_two{padding:0px 0px;}
@@ -153,10 +199,10 @@ footer h4{text-transform:uppercase;padding-bottom:18px;}
 .rl_scorecard h3{text-align: center;margin-top: 0px;font-size: 42px;color: rgb(120, 0, 0);}*/
 .rest_info_column_one h1{margin-bottom:3px;padding-top:10px;}
 .rest_info_column_one p{margin-bottom:0px;font-family:roboto-regular;}
-.rest_info_column_two{}
+.rest_info_column_one .address_info{paddinf-left:0px;}
+
 .restaurants_categories{color:#224104;font-weight:bold;}
-.rest_address_info{background-color:#ffffff;padding-bottom:10px;}
-.rest_address_info .restaurant_directions{margin-bottom:15px;}
+.rest_address_info{background-color:#ffffff;}
 .rest_address_info p{padding:0px 15px;}
 .restaurant_quicklinks ul{margin-top:20px;margin-bottom:15px;height:25px;}
 .restaurant_quicklinks ul li{float:left;}
@@ -167,8 +213,8 @@ footer h4{text-transform:uppercase;padding-bottom:18px;}
 
 .rest_review_box{border-bottom:3px solid #FFE1E1;padding-bottom:15px;padding-top:15px;display:inline-block;}
 .rest_review_section{display:table-cell;}
-.rest_review_section h2{font-family:trocchi-regular;margin-left:15px;color:#444444;}
-.rest_detailed_info_section{background-color:#dddddd;height:100%;display:table-cell;padding:30px 20px;}
+.rest_review_section h2{font-family:trocchi-regular;margin:10px 15px;color:#444444;}
+.rest_detailed_info_section{background-color:#fbfbfb;height:100%;display:table-cell;padding:30px 20px;}
 .review_detailed_info_section{width:100%;background-color:#ededed;height:auto;}
 .rest_review_user_info p{text-align:center;color:#646464;font-size:0.9em;font-family:roboto-regular;}
 .rest_review_user_image{width:130px;margin:5px auto;}

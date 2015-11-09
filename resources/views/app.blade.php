@@ -5,6 +5,7 @@
  * Date: 9/14/15
  * Time: 3:26 PM
  */
+if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
 ?>
 <!Doctype html>
 <html>
@@ -13,11 +14,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Americas Largest Restaurant Online Ordering Food Site. Millions of unbiased food reviews."/>
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins)-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon1.png') }}" type="image/png">
     <title>Restaurant Listings</title>
+    <link type="text/css" rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}" media="all">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 
 </head>
 <body>
@@ -30,7 +36,7 @@
             <ul>
                 <li class="social-icon">
                     <ul>
-                        <li style="margin-top:7px;"><a href="/" class="sign-in-btn">Sign In</a></li>
+                        <!--<li style="margin-top:7px;"><a href="/" class="sign-in-btn">Sign In</a></li>-->
                         <li><a href="/"><span class="fb_icon"></span></a></li>
                         <li><a href="/"><span class="t_icon"></span></a></li>
                         <li><a href="/"><span class="gp_icon"></span></a></li>
@@ -44,9 +50,9 @@
             <ul>
                 <li><a href="{{ action('WelcomeController@index') }}">Home</a></li>
                 <li><a href="{{ action('WelcomeController@index') }}">About Us</a></li>
-                <li><a href="{{ action('WelcomeController@index') }}">Invite Friends</a></li>
-                <li><a href="{{ action('WelcomeController@index') }}">Write a review</a></li>
-                <li><a href="{{ action('WelcomeController@index') }}">Events</a></li>
+                <!--<li><a href="{{ action('WelcomeController@index') }}">Invite Friends</a></li>-->
+                <li><a href="{{ action('WelcomeController@index') }}">Write an anonymous review</a></li>
+                <!--<li><a href="{{ action('WelcomeController@index') }}">Events</a></li>-->
             </ul>
         </div>
 
@@ -62,36 +68,38 @@
         <div class="footer-quicklinks">
             <h4>About</h4>
             <ul>
-                <li><a href="/">About Us</a></li>
-                <li><a href="/">Why Us</a></li>
-                <li><a href="/">Terms of Service</a></li>
-                <li><a href="/">Privacy Policy</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">About Us</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Why Us</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Terms of Service</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Privacy Policy</a></li>
             </ul>
         </div>
         <div class="footer-quicklinks">
             <h4>Help</h4>
             <ul>
-                <li><a href="/">FAQ</a></li>
-                <li><a href="/">Advertise</a></li>
-                <li><a href="/">Content Guidelines</a></li>
-                <li><a href="/">Business Support</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">FAQ</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Advertise</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Content Guidelines</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Business Support</a></li>
             </ul>
         </div>
         <div class="footer-quicklinks">
             <h4>More</h4>
             <ul>
-                <li><a href="/">Careers</a></li>
-                <li><a href="/">Newsletter Subscription</a></li>
-                <li><a href="/">Contact Us</a></li>
-                <li><a href="/">Investors</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Careers</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Newsletter Subscription</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Contact Us</a></li>
+                <li><a href="{{ action('WelcomeController@index') }}">Investors</a></li>
             </ul>
         </div>
         <div class="footer-newsletter">
+            <!--
             <h4>Free Newsletter</h4>
             <form>
                 <input type="email" name="newsletter" placeholder="Enter Email" />
                 <input class="newsletter-btn" type="submit" value="SUBSCRIBE NEWSLETTER" />
             </form>
+            -->
         </div>
     </div>
     <div class="container copyright">
@@ -99,6 +107,12 @@
         <p>By using this site, you agree to these Privacy Policy and Terms & Conditions.</p>
     </div>
 </footer>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ asset('mobile_assets/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/filter_functions.js') }}"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
 
 </body>
 </html>
