@@ -26,8 +26,8 @@
         <div class="modal-body">
 
             <div class="filter-well">
-                <ul class="filters-list align-center">
-                    <!--
+                <!--<ul class="filters-list align-center">
+
                                         <li class="filters-list-item">
                                             <label for="open_now">
                                                 <button class="btn btn-default search_filter" type="button" id="open_now" onclick="filter_option('open_now');">
@@ -41,7 +41,7 @@
                                             <button class="btn btn-default search_filter" type="button" id="nearest" onclick="filter_option('nearest');">Nearest</button>
                                             <input type="checkbox" class="hidden" name="nearest" value="1" <?php if(Input::has('nearest')){ echo 'checked';} ?>/>
                                         </li>
-                                        -->
+
                     <li class="filters-list-item">
                         <div class="btn-group" role="group" aria-label="...">
                             <button class="btn btn-default search_filter" type="button" id="price_1" onclick="filter_option('price_1');">$</button>
@@ -108,13 +108,38 @@
                             </label>
                         </li>
                         <li>    <label class="category radio-check">
+                                <input name="category[]" value="Breakfast" type="checkbox" {{in_array('Breakfast', $category) ? 'checked' : ''}}>
+                                <span>Breakfast</span>
+                            </label>
+                        </li>
+                        <li>    <label class="category radio-check">
+                                <input name="category[]" value="Chinese" type="checkbox" {{in_array('Chinese', $category) ? 'checked' : ''}}>
+                                <span>Chinese</span>
+                            </label>
+                        </li>
+                        <li>    <label class="category radio-check">
+                                <input name="category[]" value="Greek" type="checkbox" {{in_array('Greek', $category) ? 'checked' : ''}}>
+                                <span>Greek</span>
+                            </label>
+                        </li>
+                        <li>    <label class="category radio-check">
+                                <input name="category[]" value="Indian" type="checkbox" {{in_array('Indian', $category) ? 'checked' : ''}}>
+                                <span>Indian</span>
+                            </label>
+                        </li>
+                        <li>    <label class="category radio-check">
+                                <input name="category[]" value="Italian" type="checkbox" {{in_array('Italian', $category) ? 'checked' : ''}}>
+                                <span>Italian</span>
+                            </label>
+                        </li>
+                        <li>    <label class="category radio-check">
                                 <input name="category[]" value="Mexican" type="checkbox" {{in_array('Mexican', $category) ? 'checked' : ''}}>
                                 <span>Mexican</span>
                             </label>
                         </li>
                         <li>    <label class="category radio-check">
-                                <input name="category[]" value="Chineese" type="checkbox" {{in_array('Chineese', $category) ? 'checked' : ''}}>
-                                <span>Chineese</span>
+                                <input name="category[]" value="Pizza" type="checkbox" {{in_array('Pizza', $category) ? 'checked' : ''}}>
+                                <span>Pizza</span>
                             </label>
                         </li>
                         <li>    <label class="category radio-check">
@@ -122,99 +147,84 @@
                                 <span>Sushi</span>
                             </label>
                         </li>
-                    </ul>
-                </div>
-                <div class="filter-set">
-                    <h4>Orders</h4>
-                    <?php $ordering = Input::has('ordering') ? Input::get('ordering') : [] ?>
-                    <ul class="main">
-                        <!--<li>
-                            <label class="place radio-check">
-                                <input name="place" value="online" type="checkbox">
-                                <span>Online Ordering</span>
+                        <li>    <label class="category radio-check">
+                                <input name="category[]" value="Thai" type="checkbox" {{in_array('Thai', $category) ? 'checked' : ''}}>
+                                <span>Thai</span>
                             </label>
                         </li>
-                        <li>    <label class="place radio-check">
-                                <input name="place" value="PickUp" type="checkbox">
-                                <span>Pickup</span>
-                            </label>
-                        </li>-->
-                        <li>    <label class="ordering radio-check">
-                                <input name="ordering[]" value="Delivery  --> Yes" type="checkbox" {{in_array('Delivery  --> Yes', $ordering) ? 'checked' : ''}}>
-                                <span>Delivery</span>
-                            </label>
-                        </li><!--
-                        <li>    <label class="place radio-check">
-                                <input name="place" value="Take Reservation" type="checkbox">
-                                <span>Take Reservation</span>
-                            </label>
-                        </li>-->
-                    </ul>
-                </div>
-                <div class="filter-set">
-                    <h4>Healthy Food</h4>
-                    <?php $healthy = Input::has('healthy') ? Input::get('healthy') : [] ?>
-                    <ul class="main">
                         <li>
-                            <label class="healthy radio-check">
-                                <input name="healthy[]" value="Diabetics" type="checkbox" {{in_array('Diabetics', $healthy) ? 'checked' : ''}}>
-                                <span>Diabetics</span>
-                            </label>
-                        </li>
-                        <li>    <label class="healthy radio-check">
-                                <input name="healthy[]" value="Cholesterol" type="checkbox" {{in_array('Cholesterol', $healthy) ? 'checked' : ''}}>
-                                <span>Cholesterol</span>
-                            </label>
-                        </li>
-                        <li>    <label class="healthy radio-check">
-                                <input name="healthy[]" value="Weight Loss" type="checkbox" {{in_array('Weight Loss', $healthy) ? 'checked' : ''}}>
-                                <span>Weight Loss</span>
-                            </label>
-                        </li>
-                        <li>    <label class="healthy radio-check">
-                                <input name="healthy[]" value="Blood Pressure" type="checkbox" {{in_array('Blood Pressure', $healthy) ? 'checked' : ''}}>
-                                <span>Blood Pressure</span>
-                            </label>
-                        </li>
-                        <li>    <label class="healthy radio-check">
-                                <input name="healthy[]" value="Gluten Free" type="checkbox" {{in_array('Gluten Free', $healthy) ? 'checked' : ''}}>
-                                <span>Gluten Free</span>
-                            </label>
+                            <a href="#" data-toggle="modal" data-target="#cuisineModal">More Cuisines</a>
                         </li>
                     </ul>
                 </div>
-                <div class="filter-set">
+                <hr/>
+                <!-- Cuisine Modal Begins-->
+                <div class="modal fade" id="cuisineModal" tabindex="-1" role="dialog" aria-labelledby="cuisineModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">All Cuisine Type </h4>
+                            </div>
+                            <div class="modal-body more-cuisine-filter">
+                                <div id="the-basics">
+                                    <input class="typeahead" type="text" id="typehead-cuisine" placeholder="Cuisine Type">
+                                    <span class="btn-rl-default" onclick="return goToCuisine();">Go</span>
+                                </div>
+                                <ul class="main" id="suggestive-cuisine">
+                                    @foreach($cuisine as $c)
+                                    <li class="col-md-6">
+                                        <label class="category radio-check">
+                                            <a style="color:#000;" href="{{ url('category/'.$c->name) }}"><span>{{ $c->name }}</span></a>
+                                        </label>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <!--
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>-->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cuisine Modal Ends-->
+
+                <!--<div class="filter-set">
                     <h4>Features</h4>
                     <?php $features = Input::has('features') ? Input::get('features') : [] ?>
                     <ul class="main">
                         <li>
                             <label class="features radio-check">
-                                <input name="features[]" value="Accepts Credit Cards  --> Yes" type="checkbox" {{in_array('Accepts Credit Cards  --> Yes', $features) ? 'checked' : ''}}>
+                                <input name="features[]" value="Accepts Credit Cards  -- Yes" type="checkbox" {{in_array('Accepts Credit Cards  -- Yes', $features) ? 'checked' : ''}}>
                                 <span>Accept Credit Cards</span>
                             </label>
                         </li>
                         <li>    <label class="features radio-check">
-                                <input name="features[]" value="Wi-Fi  --> Yes" type="checkbox" {{in_array('Wi-Fi  --> Yes', $features) ? 'checked' : ''}}>
+                                <input name="features[]" value="Wi-Fi  -- Yes" type="checkbox" {{in_array('Wi-Fi  -- Yes', $features) ? 'checked' : ''}}>
                                 <span>Has Wifi</span>
                             </label>
                         </li>
                         <li>    <label class="features radio-check">
-                                <input name="features[]" value="Waiter Service  --> Yes" type="checkbox" {{in_array('Waiter Service  --> Yes', $features) ? 'checked' : ''}}>
+                                <input name="features[]" value="Waiter Service  -- Yes" type="checkbox" {{in_array('Waiter Service  -- Yes', $features) ? 'checked' : ''}}>
                                 <span>Has Waiter Service</span>
                             </label>
                         </li>
                         <li>    <label class="features radio-check">
-                                <input name="features[]" value="Good for Kids  --> Yes" type="checkbox" {{in_array('Good for Kids  --> Yes', $features) ? 'checked' : ''}}>
+                                <input name="features[]" value="Good for Kids  -- Yes" type="checkbox" {{in_array('Good for Kids  -- Yes', $features) ? 'checked' : ''}}>
                                 <span>Good For Kids</span>
                             </label>
                         </li>
                         <li>    <label class="features radio-check">
-                                <input name="features[]" value="Good for Groups  --> Yes" type="checkbox" {{in_array('Good for Groups  --> Yes', $features) ? 'checked' : ''}}>
+                                <input name="features[]" value="Good for Groups  -- Yes" type="checkbox" {{in_array('Good for Groups  -- Yes', $features) ? 'checked' : ''}}>
                                 <span>Good For Groups</span>
                             </label>
                         </li>
                     </ul>
-                </div>
+                </div>-->
 
             </div>
         </div>
@@ -239,14 +249,15 @@
                         <img src="{{ asset('mobile_assets/images/restaurants/rest_1.png') }}" alt="Restaurant Name">
                     </div>-->
                     <div class="results-item-info">
-                        <h3><a href="../public/restaurants/{{ $r->permalink }}">{{ str_replace('???', '\'', $r->name) }}</a></h3>
-                        <p><span class="item-cuisine-type">{{ $r->categories }}</span></p>
+                        <h3><a href="{{ url('restaurants/'.$r->permalink) }}">{{ str_replace('???', '\'', $r->name) }}</a></h3>
+
                         <!--<p><span class="item-rating"><img src="assets/images/rating.png" alt="2 star"></span></p>-->
-                        <p><span class="item-cuisine-type">Be the first to rate this.</span></p>
+
                         <address>
                             <span class="address-icon"></span><span class="item-address">{{ $r->address_1.' '.$r->address_2}} <br/>{{$r->city.', '.$r->short.' '.$r->zip }}</span>
                         </address>
                         <span class="phone-number"><span class="phone-icon"></span><span class="item-phone">{{ $r->phone }}</span></span>
+                        <p><span class="item-cuisine-type">{{ $r->categories }}</span></p>
                     </div>
                 </div>
             @endforeach

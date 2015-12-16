@@ -10,12 +10,12 @@
         <h1>If there is food, we will find it!</h1>
         <h2>Find Your Favourite Restaurants and Favourite dishes</h2>
         {!! Form::open(array('name'=>'home_search','class'=>'banner-search','id'=>'banner-search','route'=>'search','method'=>'get','novalidate'=>'', 'onSubmit'=>'return startButton(event);')) !!}
-            <div class="input-group col-md-3 floatLeft">
-                <span class="input-group-addon" id="basic-location-icon"><span class="glyphicon glyphicon-globe"></span></span>
+            <div class="input-group col-md-4 input-group-location floatLeft">
+                <span class="input-group-addon" id="basic-location-icon"><span class="location-arrow"></span></span>
                 <input type="text" class="form-control" aria-describedby="basic-location-icon" id="locations" name="location" placeholder="City, State or Zip" value="{{ $location['city'].', '.$location['state'] }}" />
-
+                <input type="hidden" id="current_location" value="" name="current_location" />
             </div>
-            <div class="input-group col-md-7 floatLeft">
+            <div class="input-group col-md-6 floatLeft">
                 <span class="input-group-addon" id="basic-keywords-icon"><span class="glyphicon glyphicon-search"></span></span>
                 <input type="text" name="keywords" class="form-control" aria-describedby="basic-keywords-icon" id="keywords" placeholder="Restaurant Name or Cuisine or Keywords " />
             </div>
@@ -55,37 +55,71 @@
 @section('cuisine')
 <div id="cuisine-section">
     <div class="container align-center">
-        <h1>Choose From Your Favourite Cuisine</h1>
+        <h1>Popular Cuisines</h1>
         <div id="cuisine-list">
             <ul>
                 <li>
-                    <a href="{{ url('category/pizza') }}">
+                    <a href="#" class="cuisine-icon" id="american">
+                        <span class="cuisine-logo american"></span>
+                        <span class="cuisine-name">American</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="cuisine-icon" id="breakfast">
+                        <span class="cuisine-logo breakfast"></span>
+                        <span class="cuisine-name">Breakfast</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="cuisine-icon" id="chinese">
+                        <span class="cuisine-logo chinese"></span>
+                        <span class="cuisine-name">Chinese</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="cuisine-icon" id="greek">
+                        <span class="cuisine-logo greek"></span>
+                        <span class="cuisine-name">Greek</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="cuisine-icon" id="indian">
+                        <span class="cuisine-logo indian"></span>
+                        <span class="cuisine-name">Indian</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="cuisine-list">
+            <ul>
+                <li>
+                    <a href="#" class="cuisine-icon" id="italian">
+                        <span class="cuisine-logo italian"></span>
+                        <span class="cuisine-name">Italian</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="cuisine-icon" id="mexican">
+                        <span class="cuisine-logo mexican"></span>
+                        <span class="cuisine-name">Mexican</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="cuisine-icon" id="pizza">
                         <span class="cuisine-logo pizza"></span>
                         <span class="cuisine-name">Pizza</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{  url('category/Sushi') }}">
+                    <a href="#" class="cuisine-icon" id="sushi">
                         <span class="cuisine-logo sushi"></span>
                         <span class="cuisine-name">Sushi</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('category/indian') }}">
-                        <span class="cuisine-logo indian"></span>
-                        <span class="cuisine-name">Indian</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('category/thai') }}">
+                    <a href="#" class="cuisine-icon" id="thai">
                         <span class="cuisine-logo thai"></span>
                         <span class="cuisine-name">Thai</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('category/chinese') }}">
-                        <span class="cuisine-logo chinese"></span>
-                        <span class="cuisine-name">Chinese</span>
                     </a>
                 </li>
             </ul>
@@ -96,27 +130,29 @@
 @section('recent_restaurant')
 <div id="recent-restaurant-section">
     <div class="container align-center">
-        <h1>Restaurant Listed Recently</h1>
+        <br>
+        <h4>Dieting or following a special diet can be downright hard, especially if your diet includes foods you don't enjoy.  The good news is that there are thousands of diet foods that are healthy, taste great, and can help you stick to your health goals.  That's why we have special suggestions for YOU wether you have high cholesterol, diabetes, high blood pressure or say you just want to look good in swimsuit Resturant Listings will give you options and suggestions for your food goals.</h4>
         <div id="recent-restaurant-list">
             <ul>
                 @foreach($recent_restaurants as $r)
                 <li class="list-item">
-
-                    <div class="item-banner">
-                        <img src="assets/images/restaurants/rest_1.png" alt="" />
-                    </div>
                     <div class="item-details">
-                        <p><span class="item-title">{{ $r->name }}</span></p>
-                        <p><span class="item-cuisine-type">{{ $r->categories }}</span></p>
-                        <p><span class="item-rating"><img src="assets/images/rating.png" alt="2 star" /></span></p>
-                        <p style="margin-bottom:15px;"><span class="item-review-count">{{ count($r->restaurant_reviews) }} Reviews</span></p>
-                        <p class="align-left"><span class="address-icon"></span><span class="item-address">{{ $r->address_1.' '.$r->address_2}} <br/>{{$r->city->city.' '.$r->state->short.' '.$r->zip }}</span></p>
-                        <p class="align-left"><span class="phone-icon"></span><span class="item-phone">{{ $r->phone }}</span></p>
+                        <div class="restaurant-name">
+                            <p><span class="item-title"><a href="{{url('restaurants/'.$r->permalink)}}">{{ $r->name }}</a></span></p>
+                        </div>
+                        <div class="restaurant-address">
+                            <p class="align-left"><span class="address-icon"></span><span class="item-address">{{ $r->address_1.' '.$r->address_2}} <br/>{{$r->city->city.', '.$r->state->short.', '.$r->zip }}</span></p>
+                        </div>
+                        <div class="restaurant-phone">
+                            <p class="align-left"><span class="phone-icon"></span><span class="item-phone">{{ $r->phone }}</span></p>
+                        </div>
                     </div>
                     <div class="list-quicklinks">
                         <ul>
-                            <li class="list-visit-btn"><a href="{{ url($r->permalink) }}">Visit</a></li>
-                            <li class="list-order-btn"><a href="{{ url($r->permalink) }}">Request Order</a></li>
+                            <li class="healthy-icon"><a href="{{ url('/') }}"><span class="cholesterol"></span></a></li>
+                            <li class="healthy-icon"><a href="{{ url('/') }}"><span class="blood-pressure"></span></a></li>
+                            <li class="healthy-icon"><a href="{{ url('/') }}"><span class="diabetic"></span></a></li>
+                            <li class="healthy-icon"><a href="{{ url('/') }}"><span class="weight-loss"></span></a></li>
                         </ul>
                     </div>
                 </li>
@@ -131,17 +167,40 @@
         <div id="recent-reviews-list">
             <ul>
                 @foreach($recent_reviews as $rr)
-                <li class="list-item">
-                    <div class="user-profile-pic">
-                        <img src="{{ $rr->restaurant['img_one'] }}" alt="Author Name" />
-                    </div>
-                    <div class="reviews-item">
-                        <div class="review-text">
-                            <p>{{ shorter($rr->text, 300) }}</p>
+                <?php
+                    $address = $rr->address_1.', '.$rr->address_2.', '.$rr->city.', '.$rr->state.', '.$rr->zip;
+                    switch($rr->rating){
+                            case 0:
+                                $rating = 'emoone';
+                                break;
+                            case 1:
+                                $rating = 'emoone';
+                                break;
+                            case 2:
+                                $rating = 'emotwo';
+                                break;
+                            case 3:
+                                $rating = 'emothree';
+                                break;
+                            case 4:
+                                $rating = 'emofour';
+                                break;
+                            case 5:
+                                $rating = 'emofive';
+                                break;
 
-                        </div>
+                        }
+                ?>
+                <li class="list-item">
+                    <div class="reviews-item">
                         <div class="review-details">
-                            <p>{{ $rr->user_name }} reviewed for {{ $rr->restaurant['name'] }}</p>
+                            <p class="address">{{ $rr->name }}</p>
+
+                            <p>{{ str_replace(', , ', ', ', $address) }}</p>
+                        </div>
+                        <span class="floatLeft emotions {{$rating}} active-emotion"></span>
+                        <div class="review-text">
+                            <p>{{ shorter($rr->text, 175) }}</p>
                         </div>
                     </div>
                 </li>
