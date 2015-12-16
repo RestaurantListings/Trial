@@ -91,6 +91,7 @@
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$loc[0].', '.$loc[1].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$loc[0].', '.$loc[1].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $loc[0].', '.$loc[1].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
+                 session(["search_city"=>$loc[0], "search_state"=>$loc[1], "search_zip"=>""]);
                  break;
              case 'default_city':
                  $data['restaurants'] = \App\Restaurants::join('city', 'city.id', '=', 'restaurants.city_id')
@@ -107,6 +108,7 @@
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
+                 session(["search_city"=>$data['location'], "search_state"=>"", "search_zip"=>""]);
                  break;
              case 'default_zip':
                  //Get restaurants matching the keywords and the location
@@ -125,6 +127,7 @@
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$user_config['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$user_config['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $user_config['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
+                 session(["search_city"=>"", "search_state"=>"", "search_zip"=>$user_config['location']]);
                  break;
 
              case 'filter':
@@ -142,7 +145,7 @@
                          $category = Input::has('category') ? Input::get('category') : NULL;
                          if(isset($category)){
                              foreach($category as $c){
-                                 $query->where('restaurants.categories', 'LIKE', '%'.$c.'%');
+                                 $query->orWhere('restaurants.categories', 'LIKE', '%'.$c.'%');
                              }
                          }
                          $ordering = Input::has('ordering') ? Input::get('ordering') : NULL;
@@ -185,6 +188,7 @@
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$loc[0].', '.$loc[1].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$loc[0].', '.$loc[1].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $loc[0].', '.$loc[1].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
+                 session(["search_city"=>$loc[0], "search_state"=>$loc[1], "search_zip"=>""]);
                  break;
              case 'filter_city':
                  $data['restaurants'] = \App\Restaurants::join('city', 'city.id', '=', 'restaurants.city_id')
@@ -200,7 +204,7 @@
                          $reservation = Input::has('reservation') ? 'Takes Reservations  --> Yes' : NULL;
                          if(isset($category)){
                              foreach($category as $c){
-                                 $query->where('restaurants.categories', 'LIKE', '%'.$c.'%');
+                                 $query->orWhere('restaurants.categories', 'LIKE', '%'.$c.'%');
                              }
                          }
                          if(isset($reservation)){
@@ -227,6 +231,7 @@
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
+                 session(["search_city"=>$data['location'], "search_state"=>"", "search_zip"=>""]);
                  break;
              case 'filter_zip':
                  $data['restaurants'] = \App\Restaurants::join('city', 'city.id', '=', 'restaurants.city_id')
@@ -244,7 +249,7 @@
 
                          if(isset($category)){
                              foreach($category as $c){
-                                 $query->where('restaurants.categories', 'LIKE', '%'.$c.'%');
+                                 $query->orWhere('restaurants.categories', 'LIKE', '%'.$c.'%');
                              }
                          }
                          if(isset($reservation)){
@@ -272,12 +277,13 @@
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$user_config['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$user_config['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $user_config['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
+                 session(["search_city"=>"", "search_state"=>"", "search_zip"=>$user_config['location']]);
                  break;
 
          }
-
+         $data['cuisine'] = DB::table('categories')->get();
          foreach($data['restaurants'] as $r){
-             if($r->hours != ''){
+         /*    if($r->hours !!= ''){
                  $hours = explode('||', $r->hours);
 
                  foreach($hours as $h)
@@ -308,8 +314,10 @@
                  }
              }else{
                  $r->opened = 'no';
-             }
+             }*/
+             $r->opened = 'yes';
          }
+
          $agent = new Agent();
          $agent = $agent->isMobile();
          //dd($data);
@@ -325,7 +333,7 @@
          DB::connection()->enableQueryLog();
          $user_config=array('keywords'=>\Input::get('keywords'),'location'=>\Input::get('location'));
          if(!is_numeric($user_config['location'])){
-             if(strpos($user_config['location'], ",") === false){
+             if((strpos($user_config['location'], ",") === false) && ($user_config['location'] != 'Current Location')){
                  $data['location'] = $user_config['location'];
 
                  //Get the filter options matching the location
@@ -347,6 +355,8 @@
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
+
+                 session(["search_city"=>$data['location'], "search_state"=>"", "search_zip"=>""]);
 
              }else{
                  $loc = explode(', ', $user_config['location']);
@@ -375,37 +385,44 @@
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
-
+                 session(["search_city"=>$loc[0], "search_state"=>$loc[1], "search_zip"=>""]);
              }
 
          }else{
-             //Assign zip code to the data
-             $data['location'] = $user_config['location'];
 
-             //Get the filter options matching the location
-             $data['filter_options']['city'] = DB::table('city')->take(5)->get();
+                 //Assign zip code to the data
+                 $data['location'] = $user_config['location'];
 
-             //Get restaurants matching the keywords and the location
-             $data['restaurants'] = DB::table('restaurants')
-                 ->join('city', 'city.id', '=', 'restaurants.city_id')
-                 ->join('state', 'state.id', '=', 'restaurants.state_id')
-                 ->join('restaurants_info', 'restaurants_info.restaurants_id', '=', 'restaurants.id')
-                 ->where(function($query) use($user_config){
-                     $query->where('restaurants.name', 'LIKE', '%'.$user_config['keywords'].'%')
-                         ->orWhere('restaurants.categories', 'LIKE', '%'.$user_config['keywords'].'%');
+                 //Get the filter options matching the location
+                 $data['filter_options']['city'] = DB::table('city')->take(5)->get();
 
-                 })
-                 ->where('restaurants.zip', 'LIKE', $user_config['location'])
-                 ->orderBy('restaurants.rank', 'desc')
-                 ->orderBy('restaurants.categories', 'asc')
-                 ->paginate(10);
-             $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
-             $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
-             $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
+                 //Get restaurants matching the keywords and the location
+                 $data['restaurants'] = DB::table('restaurants')
+                     ->join('city', 'city.id', '=', 'restaurants.city_id')
+                     ->join('state', 'state.id', '=', 'restaurants.state_id')
+                     ->join('restaurants_info', 'restaurants_info.restaurants_id', '=', 'restaurants.id')
+                     ->where(function($query) use($user_config){
+                         $query->where('restaurants.name', 'LIKE', '%'.$user_config['keywords'].'%')
+                             ->orWhere('restaurants.categories', 'LIKE', '%'.$user_config['keywords'].'%');
+
+                     })
+                     ->where('restaurants.zip', 'LIKE', $user_config['location'])
+                     ->orderBy('restaurants.rank', 'desc')
+                     ->orderBy('restaurants.categories', 'asc')
+                     ->paginate(10);
+                 $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
+                 $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
+                 $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
+                 session(["search_city"=>"", "search_state"=>"", "search_zip"=>$user_config['location']]);
+
 
          }
+
+
+         $data['cuisine'] = DB::table('categories')->get();
          //dd($data);
          foreach($data['restaurants'] as $r){
+             /*
              if($r->hours != ''){
                  $hours = explode('||', $r->hours);
                  foreach($hours as $h)
@@ -438,12 +455,13 @@
                  }
              }else{
                  $r->opened = 'no';
-             }
+             }*/
+             $r->opened = 'yes';
          }
 
          $agent = new Agent();
          $agent = $agent->isMobile();
-         // dd(DB::getQueryLog());
+          //dd(DB::getQueryLog());
          if($agent != false){
              return \View::make('mobile_search')->with($data);
          }else{
@@ -452,7 +470,7 @@
      }
 
      public function autocomplete(){
-         dd('sadas');
+
          $data = \Input::get();
          echo '<script>alert("'.var_dump($data).'")</script>';
      }

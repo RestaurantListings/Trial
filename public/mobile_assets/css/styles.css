@@ -1,0 +1,264 @@
+
+@font-face{font-family:'roboto-regular';src:url("../fonts/Roboto-Regular.ttf");}
+@font-face{font-family:'trocchi-regular';src:url("../fonts/Trocchi-Regular.ttf");}
+@font-face{font-family:'lato-regular';src:url("../fonts/Lato-Regular.ttf");}
+
+ul{list-style-type:none;margin:0px 0px;padding:0px 0px;}
+h1, h2, h3, h4, h5, h6, p{margin:0px 0px;padding:0px 0px;}
+.alignCenter{text-align:center;}
+.floatLeft{float:left;}
+.form-control{box-shadow:none;}
+.btn-rl-default{color:#FFF;border-radius: 3px;background-color: #B60B04;border: none;padding:3px 5px;}
+.btn-rl-default:hover{background-color:#890200;color:#dddddd;}
+.full-width-btn{width:100%;height:40px;text-align:center;line-height: 35px;font-weight: bold;}
+a:hover{text-transform:none;text-decoration:none;}
+
+.emotions{background-repeat: no-repeat;width:80px;text-align:center;height:60px;display:block;background-size:auto 60px;-webkit-filter: grayscale(100%);filter: grayscale(100%);}
+.write_review_form .emotions{width:20%;}
+.emotions:hover{-webkit-filter: grayscale(0%);filter: grayscale(0%);cursor:pointer;}
+.emotions input{width:100%;height:100%;opacity:0;}
+.active-emotion{-webkit-filter: grayscale(0%) !important;filter: grayscale(0%) !important;}
+.emoone{background-image:url("../images/icons/emoone.png");}
+.emotwo{background-image:url("../images/icons/emotwo.png");}
+.emothree{background-image:url("../images/icons/emothree.png");}
+.emofour{background-image:url("../images/icons/emofour.png");}
+.emofive{background-image:url("../images/icons/emofive.png");}
+
+.location-arrow{background-image:url("../images/icons/location-arrow.png");width: 16px;height: 22px;display: block;background-size:20px;}
+.location-arrow-search{background-image:url("../images/icons/location-arrow.png");width: 20px;height: 22px;display: block;background-size: 23px;}
+#basic-keywords-icon{border-left:1px solid #dfdfdf;color:#fff;background-color:#B50A03;border:0px;}
+#basic-location-icon{border-radius:3px 0px 0px 3px;color:#fff;background-color:#B50A03;border:0px;}
+
+.maneuver{background-image:url('http://maps.gstatic.com/mapfiles/api-3/images/maneuvers.png');background-repeat:no-repeat;width: 20px;height: 16px;display: flex;float: left;margin-top: 2px;}
+.maneuver-turn-right{background-position: 0px -484px;}
+.maneuver-turn-slight-right{background-position: 0px -52px;}
+.maneuver-turn-left{background-position: 0px -415px;}
+.maneuver-uturn-right{background-position: 0px -35px;}
+.maneuver-turn-slight-left{background-position: 0px -377px;}
+.maneuver-roundabout-left{background-position: 0px -196px;}
+
+.container{width:95%;height:auto;display:block;position:relative;margin-right:auto;margin-left:auto;}
+.navbar-default{height:50px;background:url('../images/header-bg.png') no-repeat 100% 100%;}
+.navbar-brand{padding:0px;float:none; width:100%;margin-left:auto;margin-right:auto;}
+.navbar-brand img{height:50px;margin-left: auto;margin-right: auto;}
+#responsive-nav-btn{float:left;border:0px;}
+#responsive-nav-btn .icon-bar{background-color:#fff;color:#000;}
+#responsive-nav-btn:hover{background-color:#fff;}
+#header-nav ul{background-color:#B50A03;}
+#header-nav ul li:hover{background-color:#CA4C47;}
+#header-nav ul li a{color:#fff;}
+#header-nav .navbar-nav > .active > a{background-color:#CA4C47;}
+#header-nav ul.navbar-nav {margin: 0.5px -15px;}
+header{width:100%;height:50px;background:url('../images/header-bg.png') no-repeat 100% 100%;display:block;overflow:hidden;}
+header div{float:left;text-align:center;}
+header .header-search, header .header-more {width:25%;}
+header .header-search a{padding: 3px 12px;background-color: #s960c09;line-height: 50px;color: #ffffff;font-size:12px;text-decoration: none;border: 1px solid #fff;}
+header .header-more a{padding: 3px 12px;background-color: #s960c09;line-height: 50px;color: #ffffff;font-size:12px;text-decoration: none;border: 1px solid #fff;}
+header .header-logo{width:50%;}
+.header-logo a img{height:50px;}
+
+
+#banner-search form{width:80%;margin:30px 30px;}
+#banner-search form label{font-family:trocchi-regular;}
+.container #banner-search form input{margin:10px 0px;width:94%;background-color:#cccccc;border:2px solid #4d4d4d;border-radius:5px;width:90%;height:35px;padding:0px 5px;}
+.banner-search .input-group{opacity: 0.9;background-color:#fff;}
+.banner-search .input-group-location, .banner-search .input-group-keywords{border-radius:4px;border:1px solid #dfdfdf;}
+
+.banner-search .input-group input[type="text"]{width:85%;}
+.banner-search input{height:44px;padding:4px 16px;line-height:22px;border-radius:0px;font-size:16px;border:none;width:280px;background-color:#fff;}
+#my-location img{margin-top:5px;}
+
+.container #banner-search input[type="submit"]{width:120px;border:none;border-radius:2px;}
+.container #banner-search form .text-search-btn{color:#ffffff;background-color:#b50a03;font-family:roboto-regular;font-size:15px !important;text-transform:uppercase;width:120px;height:30px; margin-right:20px;}
+.container #banner-search form .voice-search-btn{width:32px !important;background:url('../images/icons/voice.png') no-repeat 0% 0%;background-color:none;text-indent:-99999px;overflow:hidden;background-size:17px 28px;}
+#info{background-color: rgb(181, 10, 3);border-radius: 20px;display: inline;padding: 5px 10px;}
+#info p{color:#ffffff !important;}
+
+.recent-restaurants{background-color:#eeeeee;}
+.healthy-text h5{font-family:trocchi-regular;line-height:24px;padding:20px 15px;}
+
+#recent-restaurant-list ul .list-item{border-bottom:1px solid #B50A03;padding-bottom:10px;margin-top:10px;overflow:hidden; }
+#recent-restaurant-list ul .list-item a{text-decoration:none;color:#000;}
+#recent-restaurant-list ul .list-item .item-banner{width: 30%;float: left;display: table-cell;overflow: hidden;margin-right: 10px;}
+#recent-restaurant-list ul .list-item .item-details{display:table-cell;}
+#recent-restaurant-list ul .list-item .item-title{font-family:trocchi-regular;font-size:16px;}
+#recent-restaurant-list ul .list-item .item-details .address-icon, #recent-restaurant-list ul .list-item .item-details .phone-icon{float:left;margin-right:5px;}
+.cuisine-section{width:95%;margin:0px 10px;display:block;text-align:center;}
+.cuisine-section h3{margin-bottom:15px;}
+.cuisine-section ul{display:inline-block;padding:0px 0px;width:95%}
+.cuisine-section ul li{float:left;width:50%;margin-bottom:15px;}
+.cuisine-section ul li img{border-radius:5px;}
+.cuisine-section ul li div a span.cuisine-name{color:#2f2f2f;}
+.cuisine-section .cuisine-logo{width:100%;height:167px;display:block;}
+.indian{background:url("../images/cuisine/indian.png") no-repeat scroll 0% 0%;background-size:100%;}
+.thai{background:url("../images/cuisine/thai.png") no-repeat scroll 0% 0%;background-size:100%;}
+.chineese{background:url("../images/cuisine/chineese.png") no-repeat scroll 0% 0%;background-size:100%;}
+.pizza{background:url("../images/cuisine/pizza.png") no-repeat scroll 0% 0%;background-size:100%;}
+.sushi{background:url("../images/cuisine/sushi.png") no-repeat scroll 0% 0%;background-size:100%;}
+.seafood{background:url("../images/cuisine/seafood.png") no-repeat scroll 0% 0%;background-size:100%;}
+.mexican{background:url("../images/cuisine/mexican.png") no-repeat scroll 0% 0%;background-size:100%;}
+.italian{background:url("../images/cuisine/italian.png") no-repeat scroll 0% 0%;background-size:100%;}
+.greek{background:url("../images/cuisine/greek.png") no-repeat scroll 0% 0%;background-size:100%;}
+.breakfast{background:url("../images/cuisine/breakfast.png") no-repeat scroll 0% 0%;background-size:100%;}
+.american{background:url("../images/cuisine/american.png") no-repeat scroll 0% 0%;background-size:100%;}
+.cholesterol{background:url("../images/icons/cholesterol.png") no-repeat scroll 0% 0%;background-size:100%;width:30px;height:30px;display:block;}
+.blood-pressure{background:url("../images/icons/blood_pressure.png") no-repeat scroll 0% 0%;background-size:100%;width:30px;height:30px;display:block;}
+.diabetic{background:url("../images/icons/diabetic.png") no-repeat scroll 0% 0%;background-size:100%;width:30px;height:30px;display:block;}
+.weight-loss{background:url("../images/icons/weight_loss.png") no-repeat scroll 0% 0%;background-size:100%;width:30px;height:30px;display:block;}
+
+
+
+
+footer{width:100%;background-color:#5e5a59;margin-top:20px;padding:10px 0px;}
+footer .copyright{font-size:12px;color:#fff;text-align:justify;}
+
+
+.search-listing-section h1{font-size:14px;font-family:trocchi-regular;font-weight:normal;text-align:center;margin:15px 0px;}
+.search-results-item{width:100%;float:left;margin:10px 5px 0px 5px;border-bottom: 1px solid #B50A03;padding-bottom:15px;display:inline-block;}
+.search-results-item:hover{background-color:#dfdfdf;}
+.results-item-details{display: block;height: auto;overflow: hidden;}
+.results-item-logo, .results-item-info{float:left;color:#333333;}
+.results-item-logo{width:30%;overflow:hidden;height:150px;}
+.results-item-info{width:90%;padding-left:10px;font-family:lato-regular;}
+.results-item-info address{font-style:normal;margin-bottom:0px;}
+.results-item-info h3{font-family:trocchi-regular;font-size:16px;color:#720D0A;}
+.results-item-info h3 a{color:#000;text-decoration:none;font-weight:normal;}
+.results-item-info span{font-size:14px;display:table-cell;}
+/*.item-cuisine-type{background-color:#f0e5e4;padding:3px 9px;border-radius:12px;margin-top:5px;}*/
+.address-icon{background:url("../images/icons/address.png") no-repeat scroll 0% 0%;width:13px;height:18px;display:block;}
+.phone-icon{background:url("../images/icons/phone.png") no-repeat scroll 0% 0%;width:13px;height:18px;display:block;}
+span.item-phone{width:170px;}
+.results-item-info .address-icon, .results-item-info .phone-icon{float:left;margin-top:2px;display:table-cell;margin-right:5px;}
+.result-item-reviews p{font-size:14px;margin-top:7px;font-family:lato-regular;}
+.listing-map-wrapper{width:100%;height:100vh;display:block;}
+.listing-map-wrapper #map{height:100%;}
+
+
+.restaurant_basic_info h1{font-family:trocchi-regular;font-size:18px;color:#000;}
+.rest_info_column_one h2, .restaurant_review_section h2{font-family:trocchi-regular;font-size:18px;color:#000;margin-bottom:15px;}
+.rest_review_box{border-bottom:1px solid #dfdfdf;margin-bottom:10px;min-height:70px;}
+.more-cuisine-filter{height:300px;overflow: scroll;}
+
+.healthy-icons{height:60px;width:240px;text-align:center;margin:0px auto;}
+.healthy-icons ul li{float:left;width:50px;margin-right:10px;}
+.healthy-icons ul li a span{width:45px;height:45px;}
+.directions-form-container{position: relative;
+background-color: #fff;
+z-index: 1;
+margin: 0px auto;
+width: 100%;
+padding: 7px;
+border-radius: 5px;overflow-y:auto;max-height:300px;}
+.directions-form-container .form-group{margin-bottom:0px;}
+.directions-form-container label{float:left;}
+.directions-form-container a{color:#fff;font-weight:bold;}
+.directions-form-container input[type="submit"]{margin-top:10px;}
+.directions-form-container #route hr{margin:3px;}
+.pagination{margin-top:10px;margin-bottom:5px;}
+.pagination li {
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.pagination li.active {
+    color: #ffffff;
+    background: #B50A03;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 15px;
+    padding: 3px;
+}
+.pagination li a{color: rgb(114, 13, 10);
+    text-decoration: none;
+    font-size: 14px;
+    font-family: lato-regular;}
+.pagination li.active span{font-size: 14px;
+    font-family: lato-regular;}
+
+/*STATES*/
+.btn-default-active{background-color:#C43B35;color:#fff;border:none;}
+
+/*MODAL*/
+#searchModal input {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 15px;
+}
+footer .btn-default{background-color:#5E5A59;border:none;color:#fff;}
+footer .footer-voice-btn{padding-left:0px;padding-right:0px;}
+footer .footer-links h6{color:#fff;text-transform:uppercase;margin-top:10px;font-size:12px;font-weight:bold;}
+footer .footer-links a{color:#fdfdfd;line-height:24px;}
+footer .footer-links a:hover{color:#adadad;}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar-header .navbar-brand{margin-left:0px !important;}
+    #header-nav ul{background-color:inherit !important;}
+    #header-nav ul.navbar-nav{margin:0px 0px !important;height:48px !important;overflow:hidden;}
+    .banner-search-input {width:90%;height:35px;}
+    .text-search-btn{color:#ffffff;background-color:#b50a03 !important;font-family:roboto-regular;font-size:15px !important;text-transform:uppercase;width:120px !important;height:34px !important; border:none !important;border-radius:3px !important;margin-top:10px !important;margin-bottom:20px !important;margin-right:20px !important;}
+    .cuisine-section ul li{width:25%;}
+    #recent-restaurant-list ul .list-item{padding:10px 10px;width:23%;float:left;min-height:180px;margin: 0px 5px 15px 5px;overflow:hidden;background-color:#ffffff;border-radius:5px;position:relative;}
+    #recent-restaurant-list ul .list-item .restaurant-name{height:45px;overflow:hidden;}
+    #recent-restaurant-list ul .list-item .restaurant-address{height:60px;overflow:hidden;}
+    #recent-restaurant-list ul .list-item .restaurant-quicklinks{margin-top:10px;}
+    .restaurant-quicklinks ul li{width:25%;float:left;}
+    .restaurant-quicklinks ul li span{width:35px;height:35px;}
+    .recent-restaurants{padding-bottom:10px;margin-bottom:15px;}
+    .recent-restaurants .container{padding:0px 0px;}
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    .cuisine-section ul li{width:33%;}
+    .banner-search-input {width:90%;height:35px;}
+    .text-search-btn{color:#ffffff;background-color:#b50a03 !important;font-family:roboto-regular;font-size:15px !important;text-transform:uppercase;width:120px !important;height:34px !important; border:none !important;border-radius:3px !important;margin-top:10px !important;margin-bottom:20px !important;margin-right:20px !important;}
+    .search-results-item{width:420px;display:flex;margin-left:auto;margin-right:auto;float:none;}
+    .cuisine-section ul li{width:25%;}
+    .cuisine-section ul li div{width:100%;text-align:center;}
+    .cuisine-section ul li div a span.cuisine-logo{margin:0px 10px;width:80%;height:120px;}
+    .results-item-logo{width:50%;}
+    .results-item-info{width:100;}
+    #recent-restaurant-list ul .list-item{padding:10px 10px;width:45%;float:left;min-height:180px;margin: 0px 5px 15px 5px;overflow:hidden;background-color:#ffffff;border-radius:5px;position:relative;}
+    #recent-restaurant-list ul .list-item .restaurant-name{height:45px;overflow:hidden;}
+    #recent-restaurant-list ul .list-item .restaurant-address{height:60px;overflow:hidden;}
+    #recent-restaurant-list ul .list-item .restaurant-quicklinks{margin-top:10px;}
+    .restaurant-quicklinks ul li{width:25%;float:left;}
+    .restaurant-quicklinks ul li span{width:40px;height:40px;}
+    .recent-restaurants{padding-bottom:10px;margin-bottom:15px;}
+    .recent-restaurants .container{padding:0px 0px;}
+
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    .emoone, .emotwo, .emothree, .emofour, .emofive{background-size:100%;}
+    header{height:50px;}
+    .banner-search-input {width:90%;height:35px;}
+    .text-search-btn{color:#ffffff;background-color:#b50a03 !important;font-family:roboto-regular;font-size:15px !important;text-transform:uppercase;width:120px !important;height:34px !important; border:none !important;border-radius:3px !important;margin-top:10px;margin-bottom:20px;margin-right:20px;}
+    .cuisine-section ul li{width:33%;}
+    .cuisine-section ul li div{width:100%;text-align:center;}
+    .cuisine-section ul li div a span.cuisine-logo{margin:0px 10px;width:80%;height:100px;}
+    .search-results-item{width:100%;}
+    .results-item-info{width:100;}
+    #recent-restaurant-list ul .list-item{padding:10px 10px;}
+    #recent-restaurant-list ul .list-item .restaurant-name{height:45px;overflow:hidden;}
+    #recent-restaurant-list ul .list-item .restaurant-address{height:80px;overflow:hidden;}
+    #recent-restaurant-list ul .list-item .restaurant-quicklinks{margin-top:10px;}
+    .restaurant-quicklinks ul li{width:25%;float:left;}
+    .recent-restaurants{padding-bottom:10px;margin-bottom:15px;}
+    .recent-restaurants .container{padding:0px 0px;}
+    .voice-search-btn{width:32px !important;background:url('../images/icons/voice.png') no-repeat 0% 0%;background-color:none;display:none;text-indent:-99999px;overflow:hidden;background-size:17px 28px;}
+
+}

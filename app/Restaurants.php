@@ -60,7 +60,7 @@ class Restaurants extends Model {
      */
     public function restaurant_reviews()
     {
-        return $this->hasMany('App\Restaurants_Reviews')->where('spin_status', '=', '1');
+        return $this->hasMany('App\Restaurants_Reviews')->where('spin_status', '=', '1')->orderBy('id', 'desc');
     }
 
 

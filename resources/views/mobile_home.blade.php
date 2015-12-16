@@ -1,0 +1,327 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Abu Isaac
+ * Date: 10/16/15
+ * Time: 2:32 PM
+ */
+?>
+@extends('mobile_app')
+
+@section('home_banner')
+<div class="container banner-search">
+    <div class="row">
+        {!! Form::open(array('name'=>'home_search','class'=>'banner-search','route'=>'search','method'=>'get','novalidate'=>'', 'onSubmit'=>'return startButton(event);')) !!}
+
+        <!--<input type="text" name="location" class="banner-search-input" value="{{ $location['city'].', '.$location['state'] }}" /><br/>
+        <input type="text" name="keywords" class="banner-search-input" /><br/>-->
+        <div class="input-group col-md-12 input-group-location floatLeft">
+            <span class="input-group-addon" id="basic-location-icon"><span class="location-arrow"></span></span>
+            <input type="text" class="form-control" aria-describedby="basic-location-icon" id="locations" name="location" placeholder="City, State or Zip" value="{{ $location['city'].', '.$location['state'] }}" />
+            <input type="hidden" id="current_location" value="" name="current_location" />
+
+        </div>
+        <br>
+        <div class="input-group col-md-12 input-group-keywords floatLeft">
+            <span class="input-group-addon" id="basic-keywords-icon"><span class="glyphicon glyphicon-search"></span></span>
+            <input type="text" name="keywords" class="form-control" aria-describedby="basic-keywords-icon" id="keywords" placeholder="Restaurant Name or Cuisine or Keywords " />
+        </div>
+        <div style="width:180px;margin:0px auto;text-align:center;">
+            <input class="text-search-btn" type="submit" name="Submit" value="Search" onclick="search_type='Search'" />
+            <button id="start_button" class="voice-search-btn" type="submit" name="Voice" onclick="search_type='Voice'" style="display:none;" >
+                <img id="start_img" src="mic.gif" alt="Start">
+            </button>
+        </div>
+        </form>
+    </div>
+</div>
+@endsection
+
+@section('home_cuisine')
+<div class="container cuisine-section">
+    <div class="row">
+        <h3>Popular Cuisines</h3>
+        <ul>
+            <li>
+                <div>
+                    <a href="#" class="cuisine-icon" id="american">
+                        <span class="cuisine-logo american"></span>
+                        <span class="cuisine-name">American</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <a href="#" class="cuisine-icon" id="breakfast">
+                        <span class="cuisine-logo breakfast"></span>
+                        <span class="cuisine-name">Breakfast</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <a href="#" class="cuisine-icon" id="chinese">
+                        <span class="cuisine-logo chineese"></span>
+                        <span class="cuisine-name">Chinese</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <a href="#" class="cuisine-icon" id="greek">
+                        <span class="cuisine-logo greek"></span>
+                        <span class="cuisine-name">Greek</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <a href="#" class="cuisine-icon" id="indian">
+                        <span class="cuisine-logo indian"></span>
+                        <span class="cuisine-name">Indian</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <a href="#" class="cuisine-icon" id="italian">
+                        <span class="cuisine-logo italian"></span>
+                        <span class="cuisine-name">Italian</span>
+                    </a>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <a href="#" class="cuisine-icon" id="mexican">
+                        <span class="cuisine-logo mexican"></span>
+                        <span class="cuisine-name">Mexican</span>
+                    </a>
+                </div>
+            </li>
+
+
+            <li>
+                <div>
+                    <a href="#" class="cuisine-icon" id="pizza">
+                        <span class="cuisine-logo pizza"></span>
+                        <span class="cuisine-name">Pizza</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <a href="#" class="cuisine-icon" id="sushi">
+                        <span class="cuisine-logo sushi"></span>
+                        <span class="cuisine-name">Sushi</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container-fluid recent-restaurants">
+    <div class="row healthy-text">
+        <h5>Dieting or following a special diet can be downright hard, especially if your diet includes foods you don't enjoy.  The good news is that there are thousands of diet foods that are healthy, taste great, and can help you stick to your health goals.  That's why we have special suggestions for YOU wether you have high cholesterol, diabetes, high blood pressure or say you just want to look good in swimsuit Resturant Listings will give you options and suggestions for your food goals.</h5>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div id="recent-restaurant-list">
+                <ul>
+                    @foreach($recent_restaurants as $r)
+                    <li class="list-item">
+                        <div class="item-details">
+                            <div class="restaurant-name">
+                                <p><a href="{{url('restaurants/'.$r->permalink)}}"><span class="item-title">{{ $r->name }}</span></a></p>
+                            </div>
+                            <div class="restaurant-address">
+                                <p class="align-left"><span class="address-icon"></span><span class="item-address">{{ $r->address_1.' '.$r->address_2}}, {{$r->city->city.', '.$r->state->short.', '.$r->zip }}</span></p>
+                            </div>
+                            <div class="restaurant-phone">
+                                <p class="align-left"><span class="phone-icon"></span><span class="item-phone">{{ $r->phone }}</span></p>
+                            </div>
+                            <div class="restaurant-quicklinks">
+                                <ul>
+                                    <li class="healthy-icon"><a href="{{ url('/') }}"><span class="cholesterol"></span></a></li>
+                                    <li class="healthy-icon"><a href="{{ url('/') }}"><span class="blood-pressure"></span></a></li>
+                                    <li class="healthy-icon"><a href="{{ url('/') }}"><span class="diabetic"></span></a></li>
+                                    <li class="healthy-icon"><a href="{{ url('/') }}"><span class="weight-loss"></span></a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </li>
+                    @endforeach
+                </ul>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var search_type;
+    var create_email = false;
+    var final_transcript = '';
+    var recognizing = false;
+    var ignore_onend;
+    var start_timestamp;
+    if (!('webkitSpeechRecognition' in window)) {
+        upgrade();
+    } else {
+        //start_button.style.display = 'inline-block';
+        var recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = true;
+        recognition.onstart = function() {
+            recognizing = true;
+            showInfo('info_speak_now');
+            start_img.src = 'mic-animate.gif';
+        };
+        recognition.onerror = function(event) {
+            if (event.error == 'no-speech') {
+                start_img.src = 'mic.gif';
+                showInfo('info_no_speech');
+                ignore_onend = true;
+            }
+            if (event.error == 'audio-capture') {
+                start_img.src = 'mic.gif';
+                showInfo('info_no_microphone');
+                ignore_onend = true;
+            }
+            if (event.error == 'not-allowed') {
+                if (event.timeStamp - start_timestamp < 100) {
+                    showInfo('info_blocked');
+                } else {
+                    showInfo('info_denied');
+                }
+                ignore_onend = true;
+            }
+        };
+        recognition.onend = function() {
+            recognizing = false;
+            if (ignore_onend) {
+                return;
+            }
+            start_img.src = 'mic.gif';
+            if (!final_transcript) {
+                showInfo('info_start');
+                return;
+            }
+            showInfo('');
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+                var range = document.createRange();
+                range.selectNode(document.getElementById('final_span'));
+                window.getSelection().addRange(range);
+            }
+            if (create_email) {
+                create_email = false;
+                createEmail();
+            }
+            alert(final_transcript);
+        };
+        recognition.onresult = function(event) {
+            if (event.results.length > 0) {
+                document.getElementById('keywords').value = event.results[0][0].transcript;
+
+                keywords.form.submit();
+            }
+
+
+        };
+    }
+    function upgrade() {
+        start_button.style.visibility = 'hidden';
+        showInfo('info_upgrade');
+    }
+    var two_line = /\n\n/g;
+    var one_line = /\n/g;
+    function linebreak(s) {
+        return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+    }
+    var first_char = /\S/;
+    function capitalize(s) {
+        return s.replace(first_char, function(m) { return m.toUpperCase(); });
+    }
+    function createEmail() {
+        var n = final_transcript.indexOf('\n');
+        if (n < 0 || n >= 80) {
+            n = 40 + final_transcript.substring(40).indexOf(' ');
+        }
+        var subject = encodeURI(final_transcript.substring(0, n));
+        var body = encodeURI(final_transcript.substring(n + 1));
+        window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+    }
+    function copyButton() {
+        if (recognizing) {
+            recognizing = false;
+            recognition.stop();
+        }
+        //copy_button.style.display = 'none';
+        //copy_info.style.display = 'inline-block';
+        showInfo('');
+    }
+    function emailButton() {
+        if (recognizing) {
+            create_email = true;
+            recognizing = false;
+            recognition.stop();
+        } else {
+            createEmail();
+        }
+        email_button.style.display = 'none';
+        email_info.style.display = 'inline-block';
+        showInfo('');
+    }
+    function startButton(event) {
+        if(search_type == 'Search'){
+            return true;
+        }
+        if (recognizing) {
+            recognition.stop();
+            return;
+        }
+        final_transcript = ''
+        var select_dialect = 'en-US';
+        recognition.lang = select_dialect;
+        recognition.start();
+        ignore_onend = false;
+        //final_span.innerHTML = '';
+        //interim_span.innerHTML = '';
+        //start_img.src = 'mic-slash.gif';
+        showInfo('info_allow');
+        showButtons('none');
+        start_timestamp = event.timeStamp;
+        return false;
+
+    }
+    function showInfo(s) {
+        /*if (s) {
+            for (var child = info.firstChild; child; child = child.nextSibling) {
+                if (child.style) {
+                    child.style.display = child.id == s ? 'inline' : 'none';
+                }
+            }
+            info.style.visibility = 'visible';
+        } else {
+            info.style.visibility = 'hidden';
+        }*/
+    }
+    var current_style;
+    function showButtons(style) {
+        if (style == current_style) {
+            return;
+        }
+        current_style = style;
+        //copy_button.style.display = style;
+        //email_button.style.display = style;
+        //copy_info.style.display = 'none';
+        //email_info.style.display = 'none';
+    }
+
+</script>
+
+@endsection
+

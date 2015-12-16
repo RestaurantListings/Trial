@@ -13,6 +13,27 @@
 {!! Form::open(array('name'=>'home_search','class'=>'basic-search','route'=>'search','novalidate'=>'')) !!}
 <div class="search-section">
     <div class="container">
+        <div class="basic-search-wrapper col-md-12">
+            <div id="basic-search">
+            <div class="input-group col-md-4 floatLeft">
+                <span class="input-group-addon" id="basic-location-icon"><span class="location-arrow-search"></span></span>
+                <input type="text" class="form-control" aria-describedby="basic-location-icon" id="locations" name="location" placeholder="City, State or Zip" value="{{ $location }}" />
+
+            </div>
+            <div class="input-group col-md-6 floatLeft">
+                <span class="input-group-addon" id="basic-keywords-icon"><span class="glyphicon glyphicon-search"></span></span>
+                <input type="text" name="keywords" class="form-control" aria-describedby="basic-keywords-icon" id="keywords" placeholder="Restaurant Name or Cuisine or Keywords" value="{{ Input::get('keywords') }}" />
+            </div>
+            <input class="text-search-btn" type="submit" name="Submit" value="Search" onclick="search_type='Search'" style="vertical-align:top;" />
+            <button id="start_button" class="voice-search-btn" type="submit" name="Voice" onclick="search_type='Voice'" style="margin-left:10px;background-size:20px 32px;background-position:0 0;line-height:0px;" >
+                <img id="start_img" src="mic.gif" alt="Start" style="height:32px;">
+            </button>
+                </div>
+        </div>
+    </div>
+</div>
+<div class="breadcrumb-section">
+    <div class="container">
         <div class="breadcrumb-container">
             <ul class="breadcrumb-item">
                 @if(!isset($search_state))
@@ -35,19 +56,8 @@
                 </li>
             </ul>
         </div>
-        <div class="basic-search-wrapper">
-
-                <input type="text" name="keywords" placeholder="Restaurant Name or Cuisine or Keywords" value="{{ Input::get('keywords') }}" />
-                <input type="text" name="location" placeholder="City, State or Zip" value="{{ $location }}" />
-                <input class="text-search-btn" type="submit" name="Submit" value="Search" onclick="search_type='Search'" style="vertical-align:top;" />
-                <button id="start_button" class="voice-search-btn" type="submit" name="Voice" onclick="search_type='Voice'" style="margin-left:10px;background-size:20px 32px;background-position:0 0;line-height:0px;" >
-                    <img id="start_img" src="mic.gif" alt="Start" style="height:32px;">
-                </button>
-
-        </div>
     </div>
 </div>
-
 <div class="search-listing-header">
     <div class="container">
         <div class="search-listing-heading">
@@ -152,13 +162,39 @@
                             </label>
                         </li>
                         <li>    <label class="category radio-check">
+                                <input name="category[]" value="Breakfast" type="checkbox" {{in_array('Breakfast', $category) ? 'checked' : ''}}>
+                                <span>Breakfast</span>
+                            </label>
+                        </li>
+                        <li>    <label class="category radio-check">
+                                <input name="category[]" value="Chinese" type="checkbox" {{in_array('Chinese', $category) ? 'checked' : ''}}>
+                                <span>Chinese</span>
+                            </label>
+                        </li>
+                        <li>    <label class="category radio-check">
+                                <input name="category[]" value="Greek" type="checkbox" {{in_array('Greek', $category) ? 'checked' : ''}}>
+                                <span>Greek</span>
+                            </label>
+                        </li>
+                        <li>    <label class="category radio-check">
+                                <input name="category[]" value="Indian" type="checkbox" {{in_array('Indian', $category) ? 'checked' : ''}}>
+                                <span>Indian</span>
+                            </label>
+                        </li>
+                        <li>    <label class="category radio-check">
+                                <input name="category[]" value="Italian" type="checkbox" {{in_array('Italian', $category) ? 'checked' : ''}}>
+                                <span>Italian</span>
+                            </label>
+                        </li>
+                        <li>    <label class="category radio-check">
                                 <input name="category[]" value="Mexican" type="checkbox" {{in_array('Mexican', $category) ? 'checked' : ''}}>
                                 <span>Mexican</span>
                             </label>
                         </li>
-                        <li>    <label class="category radio-check">
-                                <input name="category[]" value="Chineese" type="checkbox" {{in_array('Chineese', $category) ? 'checked' : ''}}>
-                                <span>Chineese</span>
+                        <li>
+                            <label class="category radio-check">
+                                <input name="category[]" value="Pizza" type="checkbox" {{in_array('Pizza', $category) ? 'checked' : ''}}>
+                                <span>Pizza</span>
                             </label>
                         </li>
                         <li>    <label class="category radio-check">
@@ -166,13 +202,67 @@
                                 <span>Sushi</span>
                             </label>
                         </li>
+
+                        <li>    <label class="category radio-check">
+                                <input name="category[]" value="Thai" type="checkbox" {{in_array('Thai', $category) ? 'checked' : ''}}>
+                                <span>Thai</span>
+                            </label>
+                        </li>
+                        <li style="float:none;">
+                            <a href="#" data-toggle="modal" data-target="#cuisineModal">More Cuisines</a>
+                        </li>
+
                     </ul>
                 </div>
+                <!-- Cuisine Modal Begins-->
+                <div class="modal fade" id="cuisineModal" tabindex="-1" role="dialog" aria-labelledby="cuisineModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            {!! Form::open(array('name'=>'request_online_ordering','class'=>'request','route'=>'request_online_ordering','method'=>'post','novalidate'=>'')) !!}
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">All Cuisine Type </h4>
+                            </div>
+                            <div class="modal-body more-cuisine-filter">
+                                <div id="the-basics">
+                                    <input class="typeahead" id="typehead-cuisine" type="text" placeholder="Cuisine Type">
+                                    <span class="btn-rl-default" onclick="return goToCuisine();">Go</span>
+                                </div>
+                                <ul class="main" id="suggestive-cuisine">
+                                    @foreach($cuisine as $c)
+                                    <li class="col-md-6">
+                                        <label class="category radio-check">
+                                            <a style="color:#000;" href="{{ url('category/'.$c->name) }}"><span>{{ $c->name }}</span></a>
+                                        </label>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                <!--<ul class="main">
+                                @foreach($cuisine as $c)
+                                        <li class="col-md-6">
+                                            <label class="category radio-check">
+                                                <input name="category[]" value="{{ $c->name }}" type="checkbox" {{in_array("'.$c->name.'", $category) ? 'checked' : ''}}>
+                                                <span>{{ $c->name }}</span>
+                                            </label>
+                                        </li>
+                                @endforeach
+                                </ul>-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cuisine Modal Ends-->
+                <!--
                 <div class="filter-set">
                     <h4>Orders</h4>
                     <?php $ordering = Input::has('ordering') ? Input::get('ordering') : [] ?>
                     <ul class="main">
-                        <!--<li>
+                        <li>
                             <label class="place radio-check">
                                 <input name="place" value="online" type="checkbox">
                                 <span>Online Ordering</span>
@@ -182,19 +272,21 @@
                                 <input name="place" value="PickUp" type="checkbox">
                                 <span>Pickup</span>
                             </label>
-                        </li>-->
+                        </li>
                         <li>    <label class="ordering radio-check">
-                                <input name="ordering[]" value="Delivery  --> Yes" type="checkbox" {{in_array('Delivery  --> Yes', $ordering) ? 'checked' : ''}}>
+                                <input name="ordering[]" value="Delivery  -/-> Yes" type="checkbox" {{in_array('Delivery  -/-> Yes', $ordering) ? 'checked' : ''}}>
                                 <span>Delivery</span>
                             </label>
-                        </li><!--
+                        </li>
                         <li>    <label class="place radio-check">
                                 <input name="place" value="Take Reservation" type="checkbox">
                                 <span>Take Reservation</span>
                             </label>
-                        </li>-->
+                        </li>
                     </ul>
                 </div>
+                -->
+                <!--
                 <div class="filter-set">
                     <h4>Healthy Food</h4>
                     <?php $healthy = Input::has('healthy') ? Input::get('healthy') : [] ?>
@@ -227,38 +319,39 @@
                         </li>
                     </ul>
                 </div>
+
                 <div class="filter-set">
                     <h4>Features</h4>
                     <?php $features = Input::has('features') ? Input::get('features') : [] ?>
                     <ul class="main">
                         <li>
                             <label class="features radio-check">
-                                <input name="features[]" value="Accepts Credit Cards  --> Yes" type="checkbox" {{in_array('Accepts Credit Cards  --> Yes', $features) ? 'checked' : ''}}>
+                                <input name="features[]" value="Accepts Credit Cards  -- Yes" type="checkbox" {{in_array('Accepts Credit Cards  -- Yes', $features) ? 'checked' : ''}}>
                                 <span>Accept Credit Cards</span>
                             </label>
                         </li>
                         <li>    <label class="features radio-check">
-                                <input name="features[]" value="Wi-Fi  --> Yes" type="checkbox" {{in_array('Wi-Fi  --> Yes', $features) ? 'checked' : ''}}>
+                                <input name="features[]" value="Wi-Fi  -- Yes" type="checkbox" {{in_array('Wi-Fi  -- Yes', $features) ? 'checked' : ''}}>
                                 <span>Has Wifi</span>
                             </label>
                         </li>
                         <li>    <label class="features radio-check">
-                                <input name="features[]" value="Waiter Service  --> Yes" type="checkbox" {{in_array('Waiter Service  --> Yes', $features) ? 'checked' : ''}}>
+                                <input name="features[]" value="Waiter Service  -- Yes" type="checkbox" {{in_array('Waiter Service  -- Yes', $features) ? 'checked' : ''}}>
                                 <span>Has Waiter Service</span>
                             </label>
                         </li>
                         <li>    <label class="features radio-check">
-                                <input name="features[]" value="Good for Kids  --> Yes" type="checkbox" {{in_array('Good for Kids  --> Yes', $features) ? 'checked' : ''}}>
+                                <input name="features[]" value="Good for Kids  -- Yes" type="checkbox" {{in_array('Good for Kids  -- Yes', $features) ? 'checked' : ''}}>
                                 <span>Good For Kids</span>
                             </label>
                         </li>
                         <li>    <label class="features radio-check">
-                                <input name="features[]" value="Good for Groups  --> Yes" type="checkbox" {{in_array('Good for Groups  --> Yes', $features) ? 'checked' : ''}}>
+                                <input name="features[]" value="Good for Groups  -- Yes" type="checkbox" {{in_array('Good for Groups  -- Yes', $features) ? 'checked' : ''}}>
                                 <span>Good For Groups</span>
                             </label>
                         </li>
                     </ul>
-                </div>
+                </div>-->
                 <div class="filter-set-btn">
 
                     <button class="filter_options_btn">Search Now</button>
@@ -289,9 +382,9 @@
                                 <img src="{{ asset('assets/images/restaurants/rest_1.png') }}" alt="Restaurant Name" />
                             </div>-->
                             <div class="results-item-info">
-                                <h3><a href="../public/restaurants/{{ $r->permalink }}" style="color:">{{ str_replace('???', '\'', $r->name) }}</a></h3>
+                                <h3><a href="{{url('restaurants/'.$r->permalink)}}" style="color:">{{ str_replace('???', '\'', $r->name) }}</a></h3>
                                 <address>
-                                    <span class="address-icon"></span><span class="item-address">{{ $r->address_1.' '.$r->address_2}} <br/>{{$r->city.', '.$r->short.' '.$r->zip }}</span>
+                                    <span class="address-icon"></span><span class="item-address">{{ $r->address_1.' '.$r->address_2.'-'.$r->id.'-'.$r->restaurants_id }} <br/>{{ $r->city.', '.$r->short.' '.$r->zip }}</span>
                                 </address>
                                 <span class="phone-number"><span class="phone-icon"></span><span class="item-phone">{{ $r->phone }}</span></span>
                             </div>
@@ -309,7 +402,7 @@
                             </div>
                         </div>
                         <div class="result-item-reviews">
-                            <p style="color:#2ECC71"><em>Be the first to review this restaurants</em></p>
+
                         </div>
                     </div>
                     <?php
@@ -322,9 +415,9 @@
                                     <img src="{{ asset('assets/images/restaurants/rest_1.png') }}" alt="Restaurant Name" />
                                 </div>-->
                                 <div class="results-item-info">
-                                    <h3><a href="../public/restaurants/{{ $r->permalink }}" style="color:">{{ str_replace('???', '\'', $r->name) }}</a></h3>
+                                    <h3><a href="{{url('restaurants/'.$r->permalink)}}" style="color:">{{ str_replace('???', '\'', $r->name) }}</a></h3>
                                     <address>
-                                        <span class="address-icon"></span><span class="item-address">{{ $r->address_1.' '.$r->address_2}} <br/>{{$r->city.', '.$r->short.' '.$r->zip }}</span>
+                                        <span class="address-icon"></span><span class="item-address">{{ $r->address_1.' '.$r->address_2 }} <br/>{{$r->city.', '.$r->short.' '.$r->zip }}</span>
                                     </address>
                                     <span class="phone-number"><span class="phone-icon"></span><span class="item-phone">{{ $r->phone }}</span></span>
                                 </div>
@@ -342,7 +435,7 @@
                                 </div>
                             </div>
                             <div class="result-item-reviews">
-                                <p style="color:#2ECC71"><em>Be the first to review this restaurants</em></p>
+
                             </div>
                         </div>
                 <?php
@@ -376,7 +469,7 @@
                         $d++;
 
                         echo "var map = new google.maps.Map(document.getElementById('map'), {"
-                                ."zoom: 3,"
+                                ."zoom: 10,"
                                 ."center: {lat: ".$r->latitude.", lng: ".$r->longitude."}"
                                 ."});";
                                 }
@@ -388,7 +481,11 @@
                     echo "var marker = new google.maps.Marker({";
                     echo "position: {lat: ".$r->latitude.", lng: ".$r->longitude." },";
                     echo "    map: map,";
-                    echo "   title: '".$r->name."'";
+                    echo "   title: '".$r->name."',";
+                    echo "   label: '".substr($r->name, 0, 1)."'";
+                    echo "});";
+                    echo "marker.addListener('click', function() {";
+                    echo 'window.location="restaurants/'.$r->permalink.'"';
                     echo "});";
                     }
                         ?>
@@ -606,6 +703,47 @@ function shorter($text, $chars_limit)
         }
         document.forms["home_search"].submit();
     }
+    var substringMatcher = function(strs) {
+        return function findMatches(q, cb) {
+            var matches, substringRegex;
+
+            // an array that will be populated with substring matches
+            matches = [];
+
+            // regex used to determine if a string contains the substring `q`
+            substrRegex = new RegExp(q, 'i');
+
+            // iterate through the pool of strings and for any string that
+            // contains the substring `q`, add it to the `matches` array
+            $.each(strs, function(i, str) {
+                if (substrRegex.test(str)) {
+                    matches.push(str);
+                }
+            });
+
+            cb(matches);
+        };
+    };
+    <?php
+    $cuisine_head = "";
+   foreach($cuisine as $c)
+   {
+       $cuisine_head.= "'".$c->name."', ";
+   }
+    ?>
+    var states = [
+        <?php echo $cuisine_head; ?>
+    ];
+
+    $('#the-basics .typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },
+        {
+            name: 'states',
+            source: substringMatcher(states)
+        });
 
 </script>
 @endsection
