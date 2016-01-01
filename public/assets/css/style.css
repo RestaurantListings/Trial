@@ -16,6 +16,7 @@ address{margin-bottom:5px;}
 .align-left{text-align:left;}
 .align-right{text-align:right;}
 .floatLeft{float:left !important;}
+.alert-red{color:red;}
 .btn-compass{width: 32px;margin: 0px;padding:5px;border: medium none;line-height: 32px;background: transparent none repeat scroll 0%;}
 .location-arrow{background-image:url("../images/icons/location-arrow.png");width: 26px;height: 32px;display: block;background-size: 30px;}
 .location-arrow-search{background-image:url("../images/icons/location-arrow.png");width: 20px;height: 22px;display: block;background-size: 23px;}
@@ -30,6 +31,7 @@ address{margin-bottom:5px;}
 .emothree{background-image:url("../images/icons/emothree.png");}
 .emofour{background-image:url("../images/icons/emofour.png");}
 .emofive{background-image:url("../images/icons/emofive.png");}
+.favorite-icon{background-image:url("../images/icons/favorite-icon.png");width: 24px;height: 24px;display: inline-block;background-size: 24px 24px;background-repeat: no-repeat;vertical-align: baseline;float: right;cursor:pointer;}
 
 .maneuver{background-image:url('http://maps.gstatic.com/mapfiles/api-3/images/maneuvers.png');background-repeat:no-repeat;width: 20px;height: 16px;display: flex;float: left;margin-top: 2px;}
 .maneuver-turn-right{background-position: 0px -484px;}
@@ -39,6 +41,10 @@ address{margin-bottom:5px;}
 .maneuver-turn-slight-left{background-position: 0px -377px;}
 .maneuver-roundabout-left{background-position: 0px -196px;}
 #error{color:#ff0000;}
+span.input-group-addon{font-weight:bold;}
+.inputbox-size-one, .selectbox-size-one{width:70px;margin-right:10px;}
+.inputbox-size-two, .selectbox-size-two{width:100px;margin-right:10px;}
+.inputbox-size-three, .selectbox-size-three{width:200px;margin-right:10px;}
 
 .item-cuisine-type{background-color:#f0e5e4;padding:3px 9px;border-radius:12px;margin-top:5px;}
 .address-icon{background:url("../images/icons/address.png") no-repeat scroll 0% 0%;width:13px;height:18px;display:block;}
@@ -203,7 +209,7 @@ footer h4{text-transform:uppercase;padding-bottom:18px;}
 .reviews-item .review-details{font-family:lato-regular;height:60px;font-weight:bold;font-style:italic;color:#333333;font-size:12px;text-align:left;margin-top:15px;}
 .reviews-item .emotions{width: 90px !important;height: 50px !important;background-size: auto 55px !important;}
 .reviews-item .review-details .address{font-style:normal;font-size:14px;}
-
+.reviews-item .review-details .address a{color:#000;}
 .directions-form-container{position: absolute;
     top: 13px;
     left: 17px;
@@ -296,7 +302,23 @@ footer h4{text-transform:uppercase;padding-bottom:18px;}
 .review_quicklinks p{font-size: 9pt;font-style: italic;font-weight: bold;color: rgb(203, 24, 24);}
 .review_quicklinks ul li{float:left;}
 .review_quicklinks ul li a{padding:8px 20px;border-radius:3px; margin:5px 10px;background-color:#3F7E00;color:#ffffff;}
-
+.healthy-icons{margin: 10px 0px;display: inline-block;}
+.healthy-icons ul li a span{cursor:pointer;}
+.calculation-result{width:100%;height:auto;padding:10px;background:#80C8FF;margin-bottom:10px;}
+.healthy-menu-wrapper{margin-left:15px;display:inline-block;}
+.panel-healthy-menu{width:48%;float:left;margin-right:2%;}
+.panel-healthy-menu .panel-heading{font-weight:bold;background-color:#b50a03;color:#fff;}
+.panel-healthy-menu .panel-body{padding-bottom:0px;border-bottom:1px solid #dfdfdf;}
+.panel-healthy-menu .panel-body h5{font-weight:bold;}
+.panel-healthy-menu .panel-body table th{color:gray;}
+.panel-healthy-menu .panel-body table td{font-size:12px;}
+.panel-updated-menu{width:98%;float:left;margin-right:2%;}
+.panel-updated-menu .panel-heading{font-weight:bold;background-color:#b50a03;color:#fff;}
+.panel-updated-menu .panel-body{padding-bottom:0px;border-bottom:1px solid #dfdfdf;}
+.panel-updated-menu .panel-body h5{font-weight:bold;}
+.panel-updated-menu .panel-body table th{color:gray;}
+.panel-updated-menu .panel-body table td{font-size:12px;}
+.green-hover .btn-primary.active, .green-hover .btn-primary.focus, .green-hover .btn-primary:active, .green-hover .btn-primary:focus, .green-hover .btn-primary:hover{background-color:#00ff00;color:#000000;}
 .open_close_box, .specialities_box, .other_info_box, .also_viewed_box{margin-bottom:20px;padding-bottom:15px;border-bottom:3px solid #ededed;}
 .also_visited_rest{width:100%;height:100%;display:inline-block;}
 .also_visited_rest_image{width:30%;}

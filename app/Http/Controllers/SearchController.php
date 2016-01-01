@@ -352,6 +352,9 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
+                 /*foreach($data['restaurants'] as $rest){
+                     $rest['reviews'] = $this->getReviewsThree($rest->permalink);
+                 }*/
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -382,6 +385,7 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
+
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -410,6 +414,7 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
+
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -486,14 +491,14 @@
      */
 
      /*
-     * Search the restaurants based on the request.
-     *F
+     * Get Reviews for each restaurant.
+     *
      * @return Response
      */
-     public function search()
+     public function getReviewsThree($id)
      {
-         $data = \Input::all();
-         return $data;
+         $reviews = DB::table('restaurants_reviews')->where("restaurants_id", "=", $id)->take(3)->get();
+         return $reviews;
      }
 
  }

@@ -63,6 +63,62 @@ class Restaurants extends Model {
         return $this->hasMany('App\Restaurants_Reviews')->where('spin_status', '=', '1')->orderBy('id', 'desc');
     }
 
+    /*
+     * One to Many Relationship
+     * A Restaurant has many menu items
+     */
+    public function restaurant_menus()
+    {
+        return $this->hasMany('App\Restaurants_Menu')
+            ->where('product_status', '=', '1')
+            ->where(function($query){
+                $query->where('cholesterol', '=', '1')
+                    ->orWhere('blood_pressure', '=', '1')
+                    ->orWhere('diabetic', '=', '1')
+                    ->orWhere('weight_loss', '=', '1');
+            })
+            ->orderBy('id', 'desc');
+    }
+
+    /* Get three Cholesterol Menu from the restaurant */
+    public function restaurant_cholesterol_menus()
+    {
+        return $this->hasMany('App\Restaurants_Menu')
+            ->where('product_status', '=', '1')
+            ->where('cholesterol', '=', '1')
+            ->orderBy('id', 'desc')
+            ->take(3);
+    }
+
+    /* Get three Bllod Pressure Menu from the restaurant */
+    public function restaurant_blood_pressure_menus()
+    {
+        return $this->hasMany('App\Restaurants_Menu')
+            ->where('product_status', '=', '1')
+            ->where('blood_pressure', '=', '1')
+            ->orderBy('id', 'desc')
+            ->take(3);
+    }
+
+    /* Get three Weight Loss Menu from the restaurant */
+    public function restaurant_weight_loss_menus()
+    {
+        return $this->hasMany('App\Restaurants_Menu')
+            ->where('product_status', '=', '1')
+            ->where('weight_loss', '=', '1')
+            ->orderBy('id', 'desc')
+            ->take(3);
+    }
+
+    /* Get three Diabetic Menu from the restaurant */
+    public function restaurant_diabetic_menus()
+    {
+        return $this->hasMany('App\Restaurants_Menu')
+            ->where('product_status', '=', '1')
+            ->where('diabetic', '=', '1')
+            ->orderBy('id', 'desc')
+            ->take(3);
+    }
 
    public static function normalSearch($user_config){
        $recent = \App\Restaurants::where('name', 'like', '%'.$user_config['keywords'].'%')->take(10)->get();

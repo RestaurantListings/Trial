@@ -194,7 +194,7 @@
                 <li class="list-item">
                     <div class="reviews-item">
                         <div class="review-details">
-                            <p class="address">{{ $rr->name }}</p>
+                            <p class="address"><a href="{{url('restaurants/'.$r->permalink)}}">{{ $rr->name }}</a></p>
 
                             <p>{{ str_replace(', , ', ', ', $address) }}</p>
                         </div>

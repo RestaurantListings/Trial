@@ -12,6 +12,7 @@
 */
 use Jenssegers\Agent\Agent;
 use Session as S;
+use Auth as A;
 
 
 
@@ -634,6 +635,19 @@ Route::get('restaurants/{permalink}', function($permalink)
     $data['restaurant'] = \App\Restaurants::where('permalink', '=', $permalink)->take(1)->get();
     $data['bmr'] = 0;
     $agent = new Agent();
+    $user = Auth::user();
+    if(Auth::check()){
+        $data['logged_in'] = '1';
+        $healthy = DB::table('user_health')->where('user_id', $user->id)->get();
+        if(count($healthy) != 0){
+            $data['do_you_have'] = 1;
+        }else{
+            $data['do_you_have'] = 0;
+        }
+    }else{
+        $data['do_you_have'] = 0;
+        $data['logged_in'] = '0';
+    }
     if($agent->isMobile()){
         return View::make('mobile_restaurant')->with('data', $data);
     }else{
@@ -641,6 +655,7 @@ Route::get('restaurants/{permalink}', function($permalink)
     }
 
 });
+
 Route::post('restaurants/{permalink}', function($permalink)
 {
     $data['bmr']= 1;
@@ -666,6 +681,22 @@ Route::get('get-directions/{permalink}', function($permalink)
     }
 
 });
+
+Route::get('account/doyouhaveregister', 'AccountController@doYouHaveRegister');
+Route::post('account/doyouhaveregister', 'AccountController@doYouHaveRegister');
+
+Route::get('suggestions/cholesterol_meals', 'SuggestionsController@cholesterolMeals');
+Route::post('suggestions/cholesterol_meals', 'SuggestionsController@cholesterolMeals');
+
+Route::get('suggestions/highbp_meals', 'SuggestionsController@highBPMeals');
+Route::post('suggestions/highbp_meals', 'SuggestionsController@highBPMeals');
+
+Route::get('suggestions/diabetic_meals', 'SuggestionsController@diabeticMeals');
+Route::post('suggestions/diabetic_meals', 'SuggestionsController@diabeticMeals');
+
+Route::get('suggestions/weight_loss_meals', 'SuggestionsController@weightLossMeals');
+Route::post('suggestions/weight_loss_meals', 'SuggestionsController@weightLossMeals');
+
 
 Route::post('write-a-review',  array('as'=>'write-a-review/submit', 'uses'=>'WriteReviewController@submit'));
 Route::get('write-a-review', function(){

@@ -195,11 +195,82 @@
 
 </script>
 <script>
+    //Do-you-have modal on page load function
+    $(window).load(function(){
+        $('#doYouHaveModal').modal('show');
+    });
+
     $(document).ready(function(){
         $('.all_store_hours').hide();
         $('#all_store_hours').on('click', function() {
             $(this).parent().parent().parent().next().slideToggle(900);
             $(this).children('div.viewBtnImg').toggleClass("changePosition");
+        });
+        $('.do-you-have-login-btn').click(function(){
+            $.ajax({
+                url: '<?php echo url("account/doyouhaveregister"); ?>',
+                type: "post",
+                data: $("#do-you-have-form").serialize(),
+                success: function(data){
+                    $('#doYouHaveModal').modal('hide');
+                }
+            });
+        });
+        $('.cholesterol-suggestions-btn').click(function(){
+            $.ajax({
+                url: '<?php echo url("suggestions/cholesterol_meals"); ?>',
+                type: "post",
+                data: $("#cholesterol_suggestions_form").serialize(),
+                success: function(data){
+                    $('#cholesterolModal').modal('hide');
+                    $('.healthy-menu-wrapper').hide();
+
+                        $("#updated_menu").html(data);
+
+                }
+            });
+        });
+        $('.highbp-suggestions-btn').click(function(){
+            $.ajax({
+                url: '<?php echo url("suggestions/highbp_meals"); ?>',
+                type: "post",
+                data: $("#highbp_suggestions_form").serialize(),
+                success: function(data){
+                    $('#highBPModal').modal('hide');
+                    $('.healthy-menu-wrapper').hide();
+
+                    $("#updated_menu").html(data);
+
+                }
+            });
+        });
+        $('.diabetic-suggestions-btn').click(function(){
+            $.ajax({
+                url: '<?php echo url("suggestions/diabetic_meals"); ?>',
+                type: "post",
+                data: $("#diabetic_suggestions_form").serialize(),
+                success: function(data){
+                    $('#diabeticModal').modal('hide');
+                    $('.healthy-menu-wrapper').hide();
+
+                    $("#updated_menu").html(data);
+
+                }
+            });
+        });
+        $('.weight-loss-suggestions-btn').click(function(){
+            $.ajax({
+                url: '<?php echo url("suggestions/weight_loss_meals"); ?>',
+                type: "post",
+                data: $("#weight_loss_suggestions_form").serialize(),
+                success: function(data){
+                    $('#weightLossModal').modal('hide');
+                    $('.healthy-menu-wrapper').hide();
+
+                    $("#updated_menu").html(data);
+
+                }
+            });
         });
     });
     function show_hours(){

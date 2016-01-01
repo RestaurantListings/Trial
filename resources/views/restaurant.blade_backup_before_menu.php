@@ -146,9 +146,9 @@
                             <label for="email-address">Email</label>
                             <input type="email" name="email-address" id="email-address" class="form-control" required />
                             <label for="do-you-have">Do you have the following?</label>
-                            <div class="btn-group green-hover" data-toggle="buttons">
+                            <div class="btn-group" data-toggle="buttons">
                                 <label class="btn btn-primary">
-                                    <input type="checkbox" name="diabetic" autocomplete="off"> Diabetic
+                                    <input type="checkbox" name="diabetic" autocomplete="off"> Diabetes
                                 </label>
                                 <label class="btn btn-primary">
                                     <input type="checkbox" name="cholesterol" autocomplete="off"> Cholesterol
@@ -157,7 +157,7 @@
                                     <input type="checkbox" name="hbp" autocomplete="off"> High Blood Pressure
                                 </label>
                                 <label class="btn btn-primary">
-                                    <input type="checkbox" name="weightloss" autocomplete="off"> Weight Loss
+                                    <input type="checkbox" name="weightloss" autocomplete="off"> Need to loss weight
                                 </label>
                             </div>
                             </form>
@@ -177,29 +177,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Fill this form to get healthy meal suggestions.</h4>
+                <h4 class="modal-title" id="myModalLabel">thank youFill this form to get healthy meal suggestions.</h4>
             </div>
             <div class="modal-body">
                 {!! Form::open(array('url'=>'account/doyouhaveregister','name'=>'do_you_have_form','method'=>'post', 'id'=>'do-you-have-form')) !!}
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="first-name">First Name</label>
-                        <input type="text" name="first-name" id="first-name" class="form-control" required />
-                    </div>
-                    <div class="col-md-6">
-                        <label for="last-name">Last Name</label>
-                        <input type="text" name="last-name" id="lastname" class="form-control" required />
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" class="form-control" required />
                     </div>
                </div>
 
                 <label for="email-address">Email</label>
                 <input type="email" name="email-address" id="email-address" class="form-control" required />
-                <label for="phone-no">Phone No</label>
-                <input type="text" name="phone-no" id="phone-no" class="form-control" required />
                 <label for="do-you-have">Do you have the following?</label>
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-primary">
-                        <input type="checkbox" name="diabetic" autocomplete="off"> Diabetic
+                        <input type="checkbox" name="diabetic" autocomplete="off"> Diabetes
                     </label>
                     <label class="btn btn-primary">
                         <input type="checkbox" name="cholesterol" autocomplete="off"> Cholesterol
@@ -208,7 +202,7 @@
                         <input type="checkbox" name="hbp" autocomplete="off"> High Blood Pressure
                     </label>
                     <label class="btn btn-primary">
-                        <input type="checkbox" name="weightloss" autocomplete="off"> Weight Loss
+                        <input type="checkbox" name="weightloss" autocomplete="off"> Need to loss weight
                     </label>
                 </div>
                 </form>
@@ -229,130 +223,126 @@
 @section('recent_review_section')
 <!-- Calculate Modal Begins-->
 <!-- Cholesterol Modal Begins-->
-<div class="modal fade" id="cholesterolModal" tabindex="-1" role="dialog" aria-labelledby="cholesterolModalLabel">
+<div class="modal fade" id="weightLossModal" tabindex="-1" role="dialog" aria-labelledby="weightLossModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Fill this to get healthy meals of cholesterol free </h4>
+                <h4 class="modal-title" id="myModalLabel">Calculate your BMR for Weight Loss Meals </h4>
             </div>
             <div class="modal-body">
-                {!! Form::open(array('url'=>'suggestions/cholesterol_meals','name'=>'cholesterol_suggestions_form','method'=>'post', 'id'=>'cholesterol_suggestions_form')) !!}
-                <div class="form-group">
-                    <label for="cholesterol-level">Your Cholesterol Level</label>
-                    <input type="text" name="cholesterol-level" id="cholesterol-level" class="form-control" required />
+                <?php
+                $calc_mode=1;
+                if(!empty($_POST['calculator_ok']))
+                {
+                    // session storage
+                    foreach($_POST as $key=>$var) $_SESSION["calc_bmr_".$key]=$var;
+
+                    $inch=$_POST["feet"]*12+$_POST["inch"];
+
+                    if($_POST["gender"]=='male')
+                    {
+                        $BMR=66 + (6.3 * $_POST["lbs"]) + (12.9 * $inch) - (6.8 * $_POST["age"]);
+                    }
+                    else
+                    {
+                        $BMR=655 + (4.3 * $_POST["lbs"]) + (4.7 * $inch) - (4.7 * $_POST["age"]);
+                    }
+
+                    // activity?
+                    if($calc_mode)
+                    {
+                        $extra_energy=$BMR*$_POST["activity"];
+                        $energy_needs=round($BMR+$extra_energy);
+                    }
+                }
+                ?>
+
+                <div class="calculator_div">
+                    <form method="post" name="form1" onsubmit="return validateForm(this);">
+                        {!! Form::open(array('name'=>'bmr_form','class'=>'request','onsubmit', 'return validateForm(this);','method'=>'post','novalidate'=>'')) !!}
+                        <p><label>Your age:</label>
+                            <input type="text" size="7"  name="age" id="age" onkeyup="IsNumber(this.id)" value="<?php echo session('calc_bmr_age');?>" >
+                        </p>
+                        <p><label>Gender:</label>
+                            <input id="gender"  name="gender" type="radio" value="male" <?php if(session('calc_bmr_gender')=="male") echo "checked"; else { if(!Session::has('calc_bmr_gender')) echo "checked";}?> /> <label style="width:75px;display:inline;float:none;">Male</label>
+                            <input id="gender"  name="gender" type="radio" value="female" <?php if(session('calc_bmr_gender')=="female") echo "checked"; ?>/> <label style="width:75px;display:inline;float:none;">Female</label>
+
+                        </p>
+                        <p><label>Your weight:</label>
+                            <input id="weight" name="weight" type="radio" value="lbs" onclick="showHide('lbs','kg','Lbs','labelw');" <?php if(session('calc_bmr_weight')=="lbs") echo "checked"; else { if(!Session::has('calc_bmr_weight')) echo "checked";}?> />
+                            <label style="width:75px;display:inline;float:none;">lbs</label>
+                            <input id="weight"  name="weight" type="radio" value="kg" onclick="showHide('kg','lbs','kg','labelw');" <?php if(session('calc_bmr_weight')=="kg") echo "checked"; ?> />
+                            <label style="width:75px;display:inline;float:none;">kg</label>
+
+                        </p>
+                        <p><label >&nbsp;</label>
+                            <input type="text" name="lbs" id="lbs" size="4" onkeyup="LbsToKg(this.value,'kg');" value="<?php echo session('calc_bmr_lbs');?>">
+                            <input type="text" name="kg" id="kg" size="4" onkeyup="KgToLbs(this.value,'lbs');" style="display:none;" value="<?php echo session('calc_bmr_kg'); ?>">
+
+					<span id="labelw">
+					<?php if(session("calc_bmr_weight")=="kg"):?>
+                        kg
+                        <SCRIPT LANGUAGE="javascript">
+                            showHide('kg','lbs','kg','labelw');
+                        </SCRIPT>
+                    <?php else:?>lbs<?php endif;?>
+					</span>
+                        </p>
+
+
+                        <p><label>Your height:</label>
+                            <input id="height"  name="height" type="radio" value="cm" onclick="showHide('cm','feet','CM','labelh');showHide('cm','inch','CM','labelh');" <?php if(session("calc_bmr_height")=="cm") echo "checked"; else { if(!Session::get('calc_bmr_heigth')) echo "checked";}?> />
+                            <label style="width:75px;display:inline;float:none;">cm</label>
+                            <input id="height" name="height" type="radio" value="feet" onclick="showHide('feet','cm','feet/inch','labelh');showHide('inch','cm','feet/inch','labelh');" <?php if(session("calc_bmr_height")=="feet") echo "checked"; ?> />
+                            <label style="width:75px;display:inline;float:none;">feet/inch</label>
+
+                        </p>
+                        <p><label >&nbsp;</label>
+                            <input type="text" name="cm" id="cm" size="4" onkeyup="IsNumber(this.id);CmToFt(this.value,'feet','inch');" value="<?php echo session("calc_bmr_cm");?>">
+                            <input type="text" name="feet" id="feet" size="4" onkeyup="IsNumber(this.id);FtToCm('feet','inch','cm');" style="display:none;" value="<?php echo session("calc_bmr_feet"); ?>">
+                            <input type="text" name="inch" id="inch" size="4" onkeyup="IsNumber(this.id);FtToCm('feet','inch','cm');" style="display:none;" value="<?php echo session("calc_bmr_inch"); ?>">
+					<span id=labelh >
+					<?php if(session("calc_bmr_height")=="feet"):?>
+                        feet/inch
+                        <SCRIPT LANGUAGE="javascript">
+                            showHide('feet','cm','feet/inch','labelh');
+                            showHide('inch','cm','feet/inch','labelh');
+                        </SCRIPT>
+                    <?php else:?>cm<?php endif;?>
+                   </span>
+                        </p>
+
+                        <?php if($calc_mode==1):?>
+                            <p><label>Daily Activity:</label> <select name="activity">
+                                    <option value="0.2" <?php if(session("calc_bmr_activity")=="0.2") echo "selected"?>>No sport/exercise</option>
+                                    <option value="0.375" <?php if(session("calc_bmr_activity")=="0.375") echo "selected"?>>Light activity (sport 1-3 times per week)</option>
+                                    <option value="0.55" <?php if(session("calc_bmr_activity")=="0.55") echo "selected"?>>Moderate activity (sport 3-5 times per week)</option>
+                                    <option value="0.725" <?php if(session("calc_bmr_activity")=="0.725") echo "selected"?>>High activity (everyday exercise)</option>
+                                    <option value="0.9" <?php if(session("calc_bmr_activity")=="0.9") echo "selected"?>>Extreme activity (professional athlete)</option>
+                                </select></p>
+                        <?php endif;?>
+
+                        <div style="text-align:center;clear:both;"><input type="submit" value="Calculate!"></div>
+                        <input type="hidden" name="calculator_ok" value="1">
+                    </form>
+
+
+
+
                 </div>
-                <div class="form-group">
-                    <label for="body-weight">Body Weight</label>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                    <div class="col-md-6">
-                        <input type="text" name="body-weight" id="body-weight" class="form-control" required />
-                    </div>
-                    <div class="col-md-6">
-                        <select name="weight-type" class="form-control">
-                            <option value="lbs">lbs</option>
-                            <option value="kg">kg</option>
-                        </select>
-                    </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="body-height">Body Height</label>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                    <div class="col-md-6">
-                        <input type="text" name="body-height" id="body-height" class="form-control" required />
-                    </div>
-                    <div class="col-md-6">
-                        <select name="height-type" class="form-control">
-                            <option value="ft">ft</option>
-                            <option value="cms">cms</option>
-                        </select>
-                    </div>
-                    </div>
-                </div>
-                @foreach($data['restaurant'] as $r)
-                    <input type="hidden" name="rid" id="rid" value="{{ $r->id }}" />
-                @endforeach
-                </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary cholesterol-suggestions-btn">Get Suggestions</button>
+
             </div>
 
         </div>
     </div>
 </div>
 <!-- Cholesterol Modal Ends-->
-<!-- High Blood Pressure Modal Begins-->
-<div class="modal fade" id="highBPModal" tabindex="-1" role="dialog" aria-labelledby="highBPModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Fill in to get the best meals for High Blood Pressure</h4>
-            </div>
-            <div class="modal-body">
-                {!! Form::open(array('url'=>'suggestions/highbp_meals','name'=>'highbp_suggestions_form','method'=>'post', 'id'=>'highbp_suggestions_form')) !!}
-                <div class="form-group">
-                    <label for="highbp-level">Your Current Blood Pressure Level</label>
-                    <input type="text" name="highbp-level" id="highbp-level" class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="age">Age</label>
-                    <input type="text" name="age" id="age" class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="body-weight">Body Weight</label>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" name="body-weight" id="body-weight" class="form-control" required />
-                        </div>
-                        <div class="col-md-6">
-                            <select name="weight-type" class="form-control">
-                                <option value="lbs">lbs</option>
-                                <option value="kg">kg</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="body-height">Body Height</label>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" name="body-height" id="body-height" class="form-control" required />
-                        </div>
-                        <div class="col-md-6">
-                            <select name="height-type" class="form-control">
-                                <option value="ft">ft</option>
-                                <option value="cms">cms</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                @foreach($data['restaurant'] as $r)
-                <input type="hidden" name="rid" id="rid" value="{{ $r->id }}" />
-                @endforeach
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary highbp-suggestions-btn">Get Suggestions</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- High Blood Modal Ends-->
 <!-- Diabetic Modal Begins-->
 <div class="modal fade" id="diabeticModal" tabindex="-1" role="dialog" aria-labelledby="diabeticModalLabel">
     <div class="modal-dialog" role="document">
@@ -360,300 +350,256 @@
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Fill in to get the best meals for Diabetics</h4>
+                <h4 class="modal-title" id="myModalLabel">Calculate your IDW for best diabetic Meals </h4>
             </div>
             <div class="modal-body">
-                {!! Form::open(array('url'=>'suggestions/diabetic_meals','name'=>'diabetic_suggestions_form','method'=>'post', 'id'=>'diabetic_suggestions_form')) !!}
-                <div class="form-group">
-                    <label for="do-you-have">Do you have diabetic with High Blood Pressure?</label>
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-primary">
-                            <input type="radio" name="diabetic-high-bp" value="1" autocomplete="off"> Yes
-                        </label>
-                        <label class="btn btn-primary">
-                            <input type="radio" name="diabetic-high-bp" value="0" autocomplete="off"> No
-                        </label>
-                    </div>
+                <?php
+                $calc_mode=1;
+                if(!empty($_POST['calculator_ok']))
+                {
+                    // session storage
+                    foreach($_POST as $key=>$var) $_SESSION["calc_bmr_".$key]=$var;
+
+                    $inch=$_POST["feet"]*12+$_POST["inch"];
+
+                    if($_POST["gender"]=='male')
+                    {
+                        $BMR=66 + (6.3 * $_POST["lbs"]) + (12.9 * $inch) - (6.8 * $_POST["age"]);
+                    }
+                    else
+                    {
+                        $BMR=655 + (4.3 * $_POST["lbs"]) + (4.7 * $inch) - (4.7 * $_POST["age"]);
+                    }
+
+                    // activity?
+                    if($calc_mode)
+                    {
+                        $extra_energy=$BMR*$_POST["activity"];
+                        $energy_needs=round($BMR+$extra_energy);
+                    }
+                }
+                ?>
+
+                <div class="calculator_div">
+                    <form method="post" name="form1" onsubmit="return validateForm(this);">
+                        {!! Form::open(array('name'=>'bmr_form','class'=>'request','onsubmit', 'return validateForm(this);','method'=>'post','novalidate'=>'')) !!}
+                        <div class="form-group">
+                            <label for="diabetic-height">Your Height</label>
+                            <input id="height"  name="height" class="form-control" type="radio" value="cm" onclick="showHide('cm','feet','CM','labelh');showHide('cm','inch','CM','labelh');" <?php if(session("calc_bmr_height")=="cm") echo "checked"; else { if(!Session::get('calc_bmr_heigth')) echo "checked";}?> />
+                            <label style="width:75px;display:inline;float:none;">cm</label>
+                            <input id="height" class="form-control" name="height" type="radio" value="feet" onclick="showHide('feet','cm','feet/inch','labelh');showHide('inch','cm','feet/inch','labelh');" <?php if(session("calc_bmr_height")=="feet") echo "checked"; ?> />
+                            <label style="width:75px;display:inline;float:none;">feet/inch</label>
+                        </div>
+                        <div class="form-group">
+                            <label >&nbsp;</label>
+                            <input type="text" name="cm" id="cm" size="4" onkeyup="IsNumber(this.id);CmToFt(this.value,'feet','inch');" value="<?php echo session("calc_bmr_cm");?>">
+                            <input type="text" name="feet" id="feet" size="4" onkeyup="IsNumber(this.id);FtToCm('feet','inch','cm');" style="display:none;" value="<?php echo session("calc_bmr_feet"); ?>">
+                            <input type="text" name="inch" id="inch" size="4" onkeyup="IsNumber(this.id);FtToCm('feet','inch','cm');" style="display:none;" value="<?php echo session("calc_bmr_inch"); ?>">
+                            <span id=labelh >
+                            <?php if(session("calc_bmr_height")=="feet"):?>
+                                feet/inch
+                                <SCRIPT LANGUAGE="javascript">
+                                    showHide('feet','cm','feet/inch','labelh');
+                                    showHide('inch','cm','feet/inch','labelh');
+                                </SCRIPT>
+                            <?php else:?>cm<?php endif;?>
+                           </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Your weight:</label>
+                            <input id="weight" class="form-control" name="weight" type="radio" value="lbs" onclick="showHide('lbs','kg','Lbs','labelw');" <?php if(session('calc_bmr_weight')=="lbs") echo "checked"; else { if(!Session::has('calc_bmr_weight')) echo "checked";}?> />
+                            <label style="width:75px;display:inline;float:none;">lbs</label>
+                            <input id="weight" class="form-control" name="weight" type="radio" value="kg" onclick="showHide('kg','lbs','kg','labelw');" <?php if(session('calc_bmr_weight')=="kg") echo "checked"; ?> />
+                            <label style="width:75px;display:inline;float:none;">kg</label>
+                        </div>
+                        <div class="form-group">
+                            <label >&nbsp;</label>
+                            <input type="text" class="form-control" name="lbs" id="lbs" size="4" onkeyup="LbsToKg(this.value,'kg');" value="<?php echo session('calc_bmr_lbs');?>">
+                            <input type="text" class="form-control" name="kg" id="kg" size="4" onkeyup="KgToLbs(this.value,'lbs');" style="display:none;" value="<?php echo session('calc_bmr_kg'); ?>">
+                            <span id="labelw">
+                            <?php if(session("calc_bmr_weight")=="kg"):?>
+                                kg
+                                <SCRIPT LANGUAGE="javascript">
+                                    showHide('kg','lbs','kg','labelw');
+                                </SCRIPT>
+                            <?php else:?>lbs<?php endif;?>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Your age:</label>
+                            <input type="text" size="7" class="form-control" name="age" id="age" onkeyup="IsNumber(this.id)" value="<?php echo session('calc_bmr_age');?>" >
+                        </div>
+                        <div class="form-group">
+                            <label>Gender:</label>
+                            <input id="gender" class="form-control" name="gender" type="radio" value="male" <?php if(session('calc_bmr_gender')=="male") echo "checked"; else { if(!Session::has('calc_bmr_gender')) echo "checked";}?> /> <label style="width:75px;display:inline;float:none;">Male</label>
+                            <input id="gender" class="form-control" name="gender" type="radio" value="female" <?php if(session('calc_bmr_gender')=="female") echo "checked"; ?>/> <label style="width:75px;display:inline;float:none;">Female</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input type="text" id="first_name" placeholder="Firstname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" id="last_name" placeholder="Lastname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="john@host.com" />
+                        </div>
+                        <?php if($calc_mode==1):?>
+                            <p><label>Daily Activity:</label> <select name="activity">
+                                    <option value="0.2" <?php if(session("calc_bmr_activity")=="0.2") echo "selected"?>>No sport/exercise</option>
+                                    <option value="0.375" <?php if(session("calc_bmr_activity")=="0.375") echo "selected"?>>Light activity (sport 1-3 times per week)</option>
+                                    <option value="0.55" <?php if(session("calc_bmr_activity")=="0.55") echo "selected"?>>Moderate activity (sport 3-5 times per week)</option>
+                                    <option value="0.725" <?php if(session("calc_bmr_activity")=="0.725") echo "selected"?>>High activity (everyday exercise)</option>
+                                    <option value="0.9" <?php if(session("calc_bmr_activity")=="0.9") echo "selected"?>>Extreme activity (professional athlete)</option>
+                                </select></p>
+                        <?php endif;?>
+
+                        <div style="text-align:center;clear:both;"><input type="submit" value="Calculate!"></div>
+                        <input type="hidden" name="calculator_ok" value="1">
+                    </form>
+
+
+
+
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="age">Age</label>
-                            <select name="age" id="age" class="form-control selectbox-size-one">
-                                <?php
-                                for($i=18; $i <= 100; $i++)
-                                {
-                                    echo '<option value="'.$i.'">'.$i.'</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <select name="gender" id="gender" class="form-control selectbox-size-one">
-                                <option value="m">M</option>
-                                <option value="f">F</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="blood-sugar-reading">Blood Sugar Reading</label>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">mmol/L</span>
-                                        <input type="text" name="blood-sugar-reading" id="blood-sugar-reading" class="form-control inputbox-size-one" value="" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="body-weight">Body Weight</label>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">lbs</span>
-                                        <input type="text" name="body-weight-lbs" id="body-weight-lbs" class="form-control inputbox-size-one" value="" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="body-height">Body Height</label>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">ft</span>
-                                        <input type="text" name="body-height-ft" id="body-height-ft" class="form-control inputbox-size-one floatLeft" required />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">in</span>
-                                        <input type="text" name="body-height-in" id="body-height-in" class="form-control inputbox-size-one floatLeft" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="diabetes-type">Type of Diabetes</label>
-                            <select name="diabetes-type" id="diabetes-type" class="form-control selectbox-size-three">
-                                <option value="1">Type 1</option>
-                                <option value="2">Type 2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="eaten">Eaten in last 2 hours</label>
-                            <select name="eaten" id="eaten" class="form-control selectbox-size-three">
-                                <option value="yes">YES</option>
-                                <option value="no">NO</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                @foreach($data['restaurant'] as $r)
-                <input type="hidden" name="rid" id="rid" value="{{ $r->id }}" />
-                @endforeach
-                </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary diabetic-suggestions-btn">Get Suggestions</button>
+
             </div>
 
         </div>
     </div>
 </div>
-<!-- Diabetic Modal Ends-->
-<!-- Weight Los Modal Begins-->
+<!-- Cholesterol Modal Ends-->
+
+<!-- Weight Loss Modal Begins-->
 <div class="modal fade" id="weightLossModal" tabindex="-1" role="dialog" aria-labelledby="weightLossModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Fill in to get the best meals for Weight Loss</h4>
+                <h4 class="modal-title" id="myModalLabel">Calculate your BMR for Weight Loss Meals </h4>
             </div>
             <div class="modal-body">
-                {!! Form::open(array('url'=>'suggestions/weight_loss_meals','name'=>'weight_loss_suggestions_form','method'=>'post', 'id'=>'weight_loss_suggestions_form')) !!}
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="age">Age</label>
-                            <select name="age" id="age" class="form-control selectbox-size-one">
-                                <?php
-                                for($i=18; $i <= 100; $i++)
-                                {
-                                    echo '<option value="'.$i.'">'.$i.'</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <select name="gender" id="gender" class="form-control selectbox-size-one">
-                                <option value="m">M</option>
-                                <option value="f">F</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="body-weight">Body Weight</label>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">lbs</span>
-                                        <input type="text" name="body-weight-lbs" id="body-weight-lbs" class="form-control inputbox-size-one" value="" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="body-height">Body Height</label>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">ft</span>
-                                        <input type="text" name="body-height-ft" id="body-height-ft" class="form-control inputbox-size-one floatLeft" required />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">in</span>
-                                        <input type="text" name="body-height-in" id="body-height-in" class="form-control inputbox-size-one floatLeft" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                $calc_mode=1;
+                if(!empty($_POST['calculator_ok']))
+                {
+                    // session storage
+                    foreach($_POST as $key=>$var) $_SESSION["calc_bmr_".$key]=$var;
 
-                <div class="form-group">
-                        <label for="activity">Daily Activity</label>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <select id="activity" name="activity" class="form-control">
-                                    <option value="0.2" >No sport/exercise</option>
-                                    <option value="0.375" >Light activity (sport 1-3 times per week)</option>
-                                    <option value="0.55" >Moderate activity (sport 3-5 times per week)</option>
-                                    <option value="0.725" >High activity (everyday exercise)</option>
-                                    <option value="0.9" >Extreme activity (professional athlete)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="weight-to-achieve">Weight to achieve</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">lbs</span>
-                                <input type="text" name="weight-to-achieve" id="weight-to-achieve" class="form-control inputbox-size-one" required />
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <label for="date-to-achieve">Date to achieve</label>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <select name="month-to-achieve" class="form-control">
-                                        <option value="01">Jan</option>
-                                        <option value="02">Feb</option>
-                                        <option value="03">Mar</option>
-                                        <option value="04">Apr</option>
-                                        <option value="05">May</option>
-                                        <option value="06">Jun</option>
-                                        <option value="07">Jul</option>
-                                        <option value="08">Aug</option>
-                                        <option value="09">Sep</option>
-                                        <option value="10">Oct</option>
-                                        <option value="11">Nov</option>
-                                        <option value="12">Dec</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <select name="date-to-achieve" class="form-control">
-                                        <?php
-                                        $tomorrow = date('d')+1;
+                    $inch=$_POST["feet"]*12+$_POST["inch"];
 
-                                        for($i=1;$i<32;$i++){
-                                            if($i == $tomorrow){
-                                                $selected = ' selected="selected"';
-                                            }else{
-                                                $selected ='';
-                                            }
-                                            echo '<option value="'.$i.'"'.$selected.'>'.$i.'</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <select name="year-to-achieve" class="form-control">
-                                        <?php
-                                        for($i=2016;$i<2027;$i++){
-                                            echo '<option value="'.$i.'">'.$i.'</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
+                    if($_POST["gender"]=='male')
+                    {
+                        $BMR=66 + (6.3 * $_POST["lbs"]) + (12.9 * $inch) - (6.8 * $_POST["age"]);
+                    }
+                    else
+                    {
+                        $BMR=655 + (4.3 * $_POST["lbs"]) + (4.7 * $inch) - (4.7 * $_POST["age"]);
+                    }
 
-                        </div>
-                    </div>
+                    // activity?
+                    if($calc_mode)
+                    {
+                        $extra_energy=$BMR*$_POST["activity"];
+                        $energy_needs=round($BMR+$extra_energy);
+                    }
+                }
+                ?>
+
+                <div class="calculator_div">
+                    <form method="post" name="form1" onsubmit="return validateForm(this);">
+                        {!! Form::open(array('name'=>'bmr_form','class'=>'request','onsubmit', 'return validateForm(this);','method'=>'post','novalidate'=>'')) !!}
+                        <p><label>Your age:</label>
+                            <input type="text" size="7"  name="age" id="age" onkeyup="IsNumber(this.id)" value="<?php echo session('calc_bmr_age');?>" >
+                        </p>
+                        <p><label>Gender:</label>
+                            <input id="gender"  name="gender" type="radio" value="male" <?php if(session('calc_bmr_gender')=="male") echo "checked"; else { if(!Session::has('calc_bmr_gender')) echo "checked";}?> /> <label style="width:75px;display:inline;float:none;">Male</label>
+                            <input id="gender"  name="gender" type="radio" value="female" <?php if(session('calc_bmr_gender')=="female") echo "checked"; ?>/> <label style="width:75px;display:inline;float:none;">Female</label>
+
+                        </p>
+                        <p><label>Your weight:</label>
+                            <input id="weight" name="weight" type="radio" value="lbs" onclick="showHide('lbs','kg','Lbs','labelw');" <?php if(session('calc_bmr_weight')=="lbs") echo "checked"; else { if(!Session::has('calc_bmr_weight')) echo "checked";}?> />
+                            <label style="width:75px;display:inline;float:none;">lbs</label>
+                            <input id="weight"  name="weight" type="radio" value="kg" onclick="showHide('kg','lbs','kg','labelw');" <?php if(session('calc_bmr_weight')=="kg") echo "checked"; ?> />
+                            <label style="width:75px;display:inline;float:none;">kg</label>
+
+                        </p>
+                        <p><label >&nbsp;</label>
+                            <input type="text" name="lbs" id="lbs" size="4" onkeyup="LbsToKg(this.value,'kg');" value="<?php echo session('calc_bmr_lbs');?>">
+                            <input type="text" name="kg" id="kg" size="4" onkeyup="KgToLbs(this.value,'lbs');" style="display:none;" value="<?php echo session('calc_bmr_kg'); ?>">
+
+					<span id="labelw">
+					<?php if(session("calc_bmr_weight")=="kg"):?>
+                        kg
+                        <SCRIPT LANGUAGE="javascript">
+                            showHide('kg','lbs','kg','labelw');
+                        </SCRIPT>
+                    <?php else:?>lbs<?php endif;?>
+					</span>
+                        </p>
+
+
+                        <p><label>Your height:</label>
+                            <input id="height"  name="height" type="radio" value="cm" onclick="showHide('cm','feet','CM','labelh');showHide('cm','inch','CM','labelh');" <?php if(session("calc_bmr_height")=="cm") echo "checked"; else { if(!Session::get('calc_bmr_heigth')) echo "checked";}?> />
+                            <label style="width:75px;display:inline;float:none;">cm</label>
+                            <input id="height" name="height" type="radio" value="feet" onclick="showHide('feet','cm','feet/inch','labelh');showHide('inch','cm','feet/inch','labelh');" <?php if(session("calc_bmr_height")=="feet") echo "checked"; ?> />
+                            <label style="width:75px;display:inline;float:none;">feet/inch</label>
+
+                        </p>
+                        <p><label >&nbsp;</label>
+                            <input type="text" name="cm" id="cm" size="4" onkeyup="IsNumber(this.id);CmToFt(this.value,'feet','inch');" value="<?php echo session("calc_bmr_cm");?>">
+                            <input type="text" name="feet" id="feet" size="4" onkeyup="IsNumber(this.id);FtToCm('feet','inch','cm');" style="display:none;" value="<?php echo session("calc_bmr_feet"); ?>">
+                            <input type="text" name="inch" id="inch" size="4" onkeyup="IsNumber(this.id);FtToCm('feet','inch','cm');" style="display:none;" value="<?php echo session("calc_bmr_inch"); ?>">
+					<span id=labelh >
+					<?php if(session("calc_bmr_height")=="feet"):?>
+                        feet/inch
+                        <SCRIPT LANGUAGE="javascript">
+                            showHide('feet','cm','feet/inch','labelh');
+                            showHide('inch','cm','feet/inch','labelh');
+                        </SCRIPT>
+                    <?php else:?>cm<?php endif;?>
+                   </span>
+                        </p>
+
+                        <?php if($calc_mode==1):?>
+                            <p><label>Daily Activity:</label> <select name="activity">
+                                    <option value="0.2" <?php if(session("calc_bmr_activity")=="0.2") echo "selected"?>>No sport/exercise</option>
+                                    <option value="0.375" <?php if(session("calc_bmr_activity")=="0.375") echo "selected"?>>Light activity (sport 1-3 times per week)</option>
+                                    <option value="0.55" <?php if(session("calc_bmr_activity")=="0.55") echo "selected"?>>Moderate activity (sport 3-5 times per week)</option>
+                                    <option value="0.725" <?php if(session("calc_bmr_activity")=="0.725") echo "selected"?>>High activity (everyday exercise)</option>
+                                    <option value="0.9" <?php if(session("calc_bmr_activity")=="0.9") echo "selected"?>>Extreme activity (professional athlete)</option>
+                                </select></p>
+                        <?php endif;?>
+
+                        <div style="text-align:center;clear:both;"><input type="submit" value="Calculate!"></div>
+                        <input type="hidden" name="calculator_ok" value="1">
+                    </form>
+
+
+
+
                 </div>
 
-
-
-                @foreach($data['restaurant'] as $r)
-                <input type="hidden" name="rid" id="rid" value="{{ $r->id }}" />
-                @endforeach
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary weight-loss-suggestions-btn">Get Suggestions</button>
+
             </div>
 
         </div>
     </div>
 </div>
-<!-- Weight Loss Modal Ends-->
-
+<!-- BMR Modal Ends-->
 <div class="rest_review_section col-md-8" style="background-color:#ffffff;">
     <br>
     <h2>Healthy Meal suggestions</h2>
-    <div class="col-md-12">
-        <div class="healthy-icons">
-            <ul>
-                <li class="healthy-icon"><a data-toggle="modal" data-target="#cholesterolModal" alt="Cholesterol"><span class="cholesterol"></span></a></li>
-                <li class="healthy-icon"><a data-toggle="modal" data-target="#highBPModal" alt="High Blood Pressure"><span class="blood-pressure"></span></a></li>
-                <li class="healthy-icon"><a data-toggle="modal" data-target="#diabeticModal" alt="Diabetic"><span class="diabetic"></span></a></li>
-                <li class="healthy-icon"><a data-toggle="modal" data-target="#weightLossModal"  alt="Weight Loss"><span class="weight-loss"></span></a></li>
-            </ul>
-        </div>
-    </div>
-    <div id="updated_menu" style="inline-block;width:100%;">
-    </div>
     <div class="healthy-menu-wrapper">
         @foreach($data['restaurant'] as $r)
             @if($r->restaurant_menus->isEmpty())
@@ -668,7 +614,7 @@
                         <div class="panel-heading">Cholesterol</div>
                         @foreach($r->restaurant_cholesterol_menus as $rhm)
                             <div class="panel-body">
-                                <h5>{{ $rhm->product_name }} <span class="favorite-icon" data-toggle="tooltip" data-placement="top" title="Add to Favorites"></span></h5>
+                                <h5>{{ $rhm->product_name }}</h5>
                                 <table class="table table-stripped">
                                     <tr>
                                         <th>Calories</th>
@@ -692,7 +638,7 @@
                     <div class="panel-heading">Weight Loss</div>
                     @foreach($r->restaurant_weight_loss_menus as $rhm)
                     <div class="panel-body">
-                        <h5>{{ $rhm->product_name }} <span class="favorite-icon" data-toggle="tooltip" data-placement="top" title="Add to Favorites"></span></h5>
+                        <h5>{{ $rhm->product_name }}</h5>
                         <table class="table table-stripped">
                             <tr>
                                 <th>Calories</th>
@@ -716,7 +662,7 @@
                     <div class="panel-heading">High Blood Pressure</div>
                     @foreach($r->restaurant_blood_pressure_menus as $rhm)
                     <div class="panel-body">
-                        <h5>{{ $rhm->product_name }} <span class="favorite-icon" data-toggle="tooltip" data-placement="top" title="Add to Favorites"></span></h5>
+                        <h5>{{ $rhm->product_name }}</h5>
                         <table class="table table-stripped">
                             <tr>
                                 <th>Calories</th>
@@ -737,10 +683,10 @@
                 @endif
                 @if(!$r->restaurant_diabetic_menus->isEmpty())
                 <div class="panel panel-default panel-healthy-menu">
-                    <div class="panel-heading">Diabetes</div>
+                    <div class="panel-heading">Diabetic</div>
                     @foreach($r->restaurant_diabetic_menus as $rhm)
                     <div class="panel-body">
-                        <h5>{{ $rhm->product_name }} <span class="favorite-icon" data-toggle="tooltip" data-placement="top" title="Add to Favorites"></span></h5>
+                        <h5>{{ $rhm->product_name }}</h5>
                         <table class="table table-stripped">
                             <tr>
                                 <th>Calories</th>
@@ -765,6 +711,15 @@
     <br>
 
     <div class="col-md-12">
+        <div class="healthy-icons">
+            <ul>
+                <li class="healthy-icon"><a data-toggle="modal" data-target="#bmrModal" alt="Cholesterol"><span class="cholesterol"></span></a></li>
+                <li class="healthy-icon"><a href="{{ url('/') }}" alt="High Blood Pressure"><span class="blood-pressure"></span></a></li>
+                <li class="healthy-icon"><a data-toggle="modal" data-target="#diabeticModal" alt="Diabetic"><span class="diabetic"></span></a></li>
+                <li class="healthy-icon"><a data-toggle="modal" data-target="#weightLossModal"  alt="Weight Loss"><span class="weight-loss"></span></a></li>
+            </ul>
+        </div>
+
         <a data-toggle="modal" data-target="#bmrModal" class="btn btn-sm btn-rl-default" style="display:none;">Calculate your BMR</a>
         <?php if(!empty($_POST['calculator_ok'])):?>
             <br>
