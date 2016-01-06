@@ -25,7 +25,7 @@ Route::get('/landing_with_menu', function(){
     return View::make('landing_menu');
 });
 
-Route::get('home', 'HomeController@index');
+//Route::get('home', 'HomeController@index');
 Route::post('search/autocomplete', array('as'=>'search', 'uses'=>'SearchController@autocomplete'));
 Route::post('/search', array('as'=>'search', 'uses'=>'SearchController@homeSearch'));
 Route::get('/search', array('as'=>'search', 'uses'=>'SearchController@bannerSearch'));
