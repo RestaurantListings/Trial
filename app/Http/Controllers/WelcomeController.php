@@ -43,9 +43,19 @@ class WelcomeController extends Controller {
         $l_state = $data['location']['state'];
         $agent = new Agent();
 
-        $data['recent_restaurants'] = \App\Restaurants::take(4)->get();
+        $get_city = \App\City::where('city', '=', $l_city)->take(1)->get();
+        foreach($get_city as $c){
+            $city = $c->id;
+        }
 
-        $data['recent_reviews'] = \App\Restaurant_Reviews::where('source', 'LIKE', '%GOOGLE%')->orderby('restaurants_reviews.id', 'desc')
+        $data['recent_restaurants'] = \App\Restaurants::where('having_menu', '=', '1')
+            ->where('city_id', '=', $city)
+            ->orderBy(DB::raw('RAND()'))
+            ->take(4)
+            ->get();
+
+        $data['recent_reviews'] = \App\Restaurant_Reviews::where('source', 'LIKE', '%GOOGLE%')->orderBy(DB::raw('RAND()'))
+            ->where('restaurants.city_id', '=', $city)
             ->leftJoin('restaurants', 'restaurants_reviews.restaurants_id', '=', 'restaurants.id')
             ->leftJoin('city', 'restaurants.city_id', '=', 'city.id')
             ->leftJoin('state', 'restaurants.state_id', '=', 'state.id')
