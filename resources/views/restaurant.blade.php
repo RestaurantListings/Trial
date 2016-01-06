@@ -238,6 +238,38 @@
             </div>
             <div class="modal-body">
                 {!! Form::open(array('url'=>'suggestions/cholesterol_meals','name'=>'cholesterol_suggestions_form','method'=>'post', 'id'=>'cholesterol_suggestions_form')) !!}
+                @if($data['logged_in'] != 1)
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="first-name">First Name</label>
+                        <input type="text" name="first-name" id="first-name" class="form-control" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" name="last-name" id="lastname" class="form-control" required />
+                    </div>
+                </div>
+
+                <label for="email-address">Email</label>
+                <input type="email" name="email-address" id="email-address" class="form-control" required />
+                <label for="phone-no">Phone No</label>
+                <input type="text" name="phone-no" id="phone-no" class="form-control" required />
+                <label for="do-you-have">Do you have the following?</label>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="diabetic" autocomplete="off"> Diabetic
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="cholesterol" autocomplete="off"> Cholesterol
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="hbp" autocomplete="off"> High Blood Pressure
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="weightloss" autocomplete="off"> Weight Loss
+                    </label>
+                </div>
+                @endif
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -415,6 +447,38 @@
             </div>
             <div class="modal-body">
                 {!! Form::open(array('url'=>'suggestions/highbp_meals','name'=>'highbp_suggestions_form','method'=>'post', 'id'=>'highbp_suggestions_form')) !!}
+                @if($data['logged_in'] != 1)
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="first-name">First Name</label>
+                        <input type="text" name="first-name" id="first-name" class="form-control" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" name="last-name" id="lastname" class="form-control" required />
+                    </div>
+                </div>
+
+                <label for="email-address">Email</label>
+                <input type="email" name="email-address" id="email-address" class="form-control" required />
+                <label for="phone-no">Phone No</label>
+                <input type="text" name="phone-no" id="phone-no" class="form-control" required />
+                <label for="do-you-have">Do you have the following?</label>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="diabetic" autocomplete="off"> Diabetic
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="cholesterol" autocomplete="off"> Cholesterol
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="hbp" autocomplete="off"> High Blood Pressure
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="weightloss" autocomplete="off"> Weight Loss
+                    </label>
+                </div>
+                @endif
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -567,6 +631,38 @@
             </div>
             <div class="modal-body">
                 {!! Form::open(array('url'=>'suggestions/diabetic_meals','name'=>'diabetic_suggestions_form','method'=>'post', 'id'=>'diabetic_suggestions_form')) !!}
+                @if($data['logged_in'] != 1)
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="first-name">First Name</label>
+                        <input type="text" name="first-name" id="first-name" class="form-control" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" name="last-name" id="lastname" class="form-control" required />
+                    </div>
+                </div>
+
+                <label for="email-address">Email</label>
+                <input type="email" name="email-address" id="email-address" class="form-control" required />
+                <label for="phone-no">Phone No</label>
+                <input type="text" name="phone-no" id="phone-no" class="form-control" required />
+                <label for="do-you-have">Do you have the following?</label>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="diabetic" autocomplete="off"> Diabetic
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="cholesterol" autocomplete="off"> Cholesterol
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="hbp" autocomplete="off"> High Blood Pressure
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="weightloss" autocomplete="off"> Weight Loss
+                    </label>
+                </div>
+                @endif
                 <div class="form-group">
                     <label for="do-you-have">Do you have diabetic with High Blood Pressure?</label>
                     <div class="btn-group" data-toggle="buttons">
@@ -693,6 +789,38 @@
             </div>
             <div class="modal-body">
                 {!! Form::open(array('url'=>'suggestions/weight_loss_meals','name'=>'weight_loss_suggestions_form','method'=>'post', 'id'=>'weight_loss_suggestions_form')) !!}
+                @if($data['logged_in'] != 1)
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="first-name">First Name</label>
+                        <input type="text" name="first-name" id="first-name" class="form-control" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" name="last-name" id="lastname" class="form-control" required />
+                    </div>
+                </div>
+
+                <label for="email-address">Email</label>
+                <input type="email" name="email-address" id="email-address" class="form-control" required />
+                <label for="phone-no">Phone No</label>
+                <input type="text" name="phone-no" id="phone-no" class="form-control" required />
+                <label for="do-you-have">Do you have the following?</label>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="diabetic" autocomplete="off"> Diabetic
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="cholesterol" autocomplete="off"> Cholesterol
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="hbp" autocomplete="off"> High Blood Pressure
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="weightloss" autocomplete="off"> Weight Loss
+                    </label>
+                </div>
+                @endif
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -858,6 +986,7 @@
     <div id="updated_menu" style="inline-block;width:100%;">
     </div>
     <div class="healthy-menu-wrapper">
+    @if($data['logged_in'] == 1)
         @foreach($data['restaurant'] as $r)
             @if($r->restaurant_menus->isEmpty())
                 <p style="color:#2ECC71;padding-left:15px;"><em>Sorry, we don't have food suggestions fot this restaurant. &nbsp;&nbsp;&nbsp;&nbsp;<!-- Button trigger Healthy Food Alert Modal -->
@@ -964,6 +1093,7 @@
                 @endif
             @endif
         @endforeach
+    @endif
     </div>
     <br>
 

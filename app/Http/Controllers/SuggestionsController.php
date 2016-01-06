@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php
+namespace App\Http\Controllers;
+
 
 use Input;
 use Request;
@@ -6,6 +8,7 @@ use App\User;
 use DB;
 use Validator;
 use Auth;
+use App\Http\Controllers\AccountController;
 
 class SuggestionsController extends Controller {
 
@@ -19,15 +22,21 @@ class SuggestionsController extends Controller {
     | controller as you wish. It is just here to get your app started!
     |
     */
-
+    //use doyouhavetrait;
     /*
      * Create a new controller instance.
      *
      * @return void
-     */
+
     public function __construct()
     {
         //$this->middleware('auth');
+    }
+*/
+    protected $doyouhaveregister;
+    public function __construct(AccountController $accountController)
+    {
+        $this->accountController = $accountController;
     }
 
     /**
@@ -41,6 +50,12 @@ class SuggestionsController extends Controller {
     }
 
     public function cholesterolMeals(){
+
+        if(!Auth::check()){
+            $this->accountController->doYouHaveRegister();
+            echo '<script>console.log("sdsfds");</script>';
+        }
+
 
         //DB::connection()->enableQueryLog();
         $age = Input::get('age');
