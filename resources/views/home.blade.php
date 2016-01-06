@@ -195,7 +195,6 @@
                     <div class="reviews-item">
                         <div class="review-details">
                             <p class="address"><a href="{{url('restaurants/'.$r->permalink)}}">{{ $rr->name }}</a></p>
-
                             <p>{{ str_replace(', , ', ', ', $address) }}</p>
                         </div>
                         <span class="floatLeft emotions {{$rating}} active-emotion"></span>

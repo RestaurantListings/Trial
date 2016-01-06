@@ -43,10 +43,7 @@ class WelcomeController extends Controller {
         $l_state = $data['location']['state'];
         $agent = new Agent();
 
-
-
         $data['recent_restaurants'] = \App\Restaurants::take(4)->get();
-
 
         $data['recent_reviews'] = \App\Restaurant_Reviews::where('source', 'LIKE', '%GOOGLE%')->orderby('restaurants_reviews.id', 'desc')
             ->leftJoin('restaurants', 'restaurants_reviews.restaurants_id', '=', 'restaurants.id')

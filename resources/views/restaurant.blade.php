@@ -238,40 +238,156 @@
             </div>
             <div class="modal-body">
                 {!! Form::open(array('url'=>'suggestions/cholesterol_meals','name'=>'cholesterol_suggestions_form','method'=>'post', 'id'=>'cholesterol_suggestions_form')) !!}
-                <div class="form-group">
-                    <label for="cholesterol-level">Your Cholesterol Level</label>
-                    <input type="text" name="cholesterol-level" id="cholesterol-level" class="form-control" required />
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <select name="age" id="age" class="form-control selectbox-size-one">
+                                <?php
+                                for($i=18; $i <= 100; $i++)
+                                {
+                                    echo '<option value="'.$i.'">'.$i.'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select name="gender" id="gender" class="form-control selectbox-size-one">
+                                <option value="m">M</option>
+                                <option value="f">F</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="race">Race</label>
+                            <select name="race" id="race" class="form-control">
+                                <option value="AA">African American</option>
+                                <option value="O">Others</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="body-weight">Body Weight</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="total-cholesterol">Total Cholesterol</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">mg/dL</span>
+                                        <input type="text" name="total-cholesterol" id="total-cholesterol" class="form-control inputbox-size-one" value="" placeholder="130-320" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="hdl-cholesterol">HDL cholesterol</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">mg/dL</span>
+                                        <input type="text" name="hdl-cholesterol" id="hdl-cholesterol" class="form-control inputbox-size-one" value="" placeholder="20-100" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <div class="row">
+                <div class="row">
                     <div class="col-md-6">
-                        <input type="text" name="body-weight" id="body-weight" class="form-control" required />
+                        <div class="form-group">
+                            <label for="systolic-blood-pressure">Systolic Blood Pressure</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">mmHg</span>
+                                        <input type="text" name="systolic-blood-pressure" id="systolic-blood-pressure" class="form-control inputbox-size-one" value="" placeholder="90-200" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <select name="weight-type" class="form-control">
-                            <option value="lbs">lbs</option>
-                            <option value="kg">kg</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label for="diastolic-blood-pressure">Diastolic Blood Pressure</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">mmHg</span>
+                                        <input type="text" name="diastolic-blood-pressure" id="diastolic-blood-pressure" class="form-control inputbox-size-one" value="" placeholder="30-140" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="body-height">Body Height</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="treated-hbp">Treated for High Blood Pressure</label>
+                            <select name="treated-hbp" id="treated-hbp" class="form-control selectbox-size-one">
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="diabetes">Diabetes</label>
+                            <select name="diabetes" id="diabetes" class="form-control selectbox-size-one">
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="smoker">Smoker</label>
+                            <select name="smoker" id="smoker" class="form-control selectbox-size-one">
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <div class="row">
+                <div class="row">
                     <div class="col-md-6">
-                        <input type="text" name="body-height" id="body-height" class="form-control" required />
+                        <div class="form-group">
+                            <label for="body-weight">Body Weight</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">lbs</span>
+                                        <input type="text" name="body-weight-lbs" id="body-weight-lbs" class="form-control inputbox-size-one" value="" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <select name="height-type" class="form-control">
-                            <option value="ft">ft</option>
-                            <option value="cms">cms</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label for="body-height">Body Height</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">ft</span>
+                                        <input type="text" name="body-height-ft" id="body-height-ft" class="form-control inputbox-size-one floatLeft" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">in</span>
+                                        <input type="text" name="body-height-in" id="body-height-in" class="form-control inputbox-size-one floatLeft" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @foreach($data['restaurant'] as $r)
@@ -299,44 +415,131 @@
             </div>
             <div class="modal-body">
                 {!! Form::open(array('url'=>'suggestions/highbp_meals','name'=>'highbp_suggestions_form','method'=>'post', 'id'=>'highbp_suggestions_form')) !!}
-                <div class="form-group">
-                    <label for="highbp-level">Your Current Blood Pressure Level</label>
-                    <input type="text" name="highbp-level" id="highbp-level" class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="age">Age</label>
-                    <input type="text" name="age" id="age" class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="body-weight">Body Weight</label>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" name="body-weight" id="body-weight" class="form-control" required />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <select name="age" id="age" class="form-control selectbox-size-one">
+                                <?php
+                                for($i=18; $i <= 100; $i++)
+                                {
+                                    echo '<option value="'.$i.'">'.$i.'</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <select name="weight-type" class="form-control">
-                                <option value="lbs">lbs</option>
-                                <option value="kg">kg</option>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select name="gender" id="gender" class="form-control selectbox-size-one">
+                                <option value="m">M</option>
+                                <option value="f">F</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="body-height">Body Height</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="body-weight">Body Weight</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">lbs</span>
+                                        <input type="text" name="body-weight-lbs" id="body-weight-lbs" class="form-control inputbox-size-one" value="" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="body-height">Body Height</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">ft</span>
+                                        <input type="text" name="body-height-ft" id="body-height-ft" class="form-control inputbox-size-one floatLeft" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">in</span>
+                                        <input type="text" name="body-height-in" id="body-height-in" class="form-control inputbox-size-one floatLeft" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="systolic-blood-pressure">Systolic Blood Pressure</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">mmHg</span>
+                                        <input type="text" name="systolic-blood-pressure" id="systolic-blood-pressure" class="form-control inputbox-size-one" value="" placeholder="90-200" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="diastolic-blood-pressure">Diastolic Blood Pressure</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">mmHg</span>
+                                        <input type="text" name="diastolic-blood-pressure" id="diastolic-blood-pressure" class="form-control inputbox-size-one" value="" placeholder="30-140" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" name="body-height" id="body-height" class="form-control" required />
-                        </div>
-                        <div class="col-md-6">
-                            <select name="height-type" class="form-control">
-                                <option value="ft">ft</option>
-                                <option value="cms">cms</option>
-                            </select>
-                        </div>
+                    <label for="activity">Do you have any of these conditions?</label>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="heart-attack" autocomplete="off"> Heart attack
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="stroke" autocomplete="off"> Stroke
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="heart-failure" autocomplete="off"> Heart Failure
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="kidney-disease" autocomplete="off"> Kidney disease
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="diabetes" autocomplete="off"> Diabetes
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="smoking" autocomplete="off"> Smoking
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="coronary" autocomplete="off"> Coronary artery disease
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="peripheral" autocomplete="off"> Peripheral vascular disease
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="cholesterol" autocomplete="off"> High Cholesterol
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="family" autocomplete="off"> Family history of heart disease
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="None" autocomplete="off"> None
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="dont-know" autocomplete="off"> I don't know
+                        </label>
                     </div>
                 </div>
                 @foreach($data['restaurant'] as $r)
@@ -451,8 +654,8 @@
                         <div class="form-group">
                             <label for="diabetes-type">Type of Diabetes</label>
                             <select name="diabetes-type" id="diabetes-type" class="form-control selectbox-size-three">
-                                <option value="1">Type 1</option>
-                                <option value="2">Type 2</option>
+                                <option value="Type 1">Type 1</option>
+                                <option value="Type 2">Type 2</option>
                             </select>
                         </div>
                     </div>

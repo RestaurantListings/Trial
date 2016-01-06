@@ -217,18 +217,51 @@
             });
         });
         $('.cholesterol-suggestions-btn').click(function(){
-            $.ajax({
-                url: '<?php echo url("suggestions/cholesterol_meals"); ?>',
-                type: "post",
-                data: $("#cholesterol_suggestions_form").serialize(),
-                success: function(data){
-                    $('#cholesterolModal').modal('hide');
-                    $('.healthy-menu-wrapper').hide();
+            var totalCholesterol = document.getElementById('total-cholesterol').value;
+            var hdlCholesterol = document.getElementById('total-cholesterol').value;
+            var systolicBloodPressure = document.getElementById('systolic-blood-pressure').value;
+            var diastolicBloodPressure = document.getElementById('diastolic-blood-pressure').value;
+            var errorVal;
+            var error_message;
+            if(totalCholesterol < 130 && totalCholesterol > 320){
+                errorVal = 1;
+                error_message = "Total Cholesterol value must between 130 and 320";
+            }else{
+                if(hdlCholesterol < 20 && hdlCholesterol > 100){
+                    errorVal = 1;
+                    error_message = "HDL Cholesterol value must between 20 and 100";
 
-                        $("#updated_menu").html(data);
-
+                }else{
+                    if(systolicBloodPressure < 90 && systolicBloodPressure > 200){
+                        errorVal = 1;
+                        error_message = "Systolic Blood Pressure value must between 90 and 200";
+                    }else{
+                        if(diastolicBloodPressure < 30 && diastolicBloodPressure > 140){
+                            errorVal = 1;
+                            error_message = "Diastolic Blood Pressure value must between 30 and 140";
+                        }else{
+                            errorVal = 0;
+                        }
+                    }
                 }
-            });
+            }
+            if(errorVal == 0){
+
+                $.ajax({
+                    url: '<?php echo url("suggestions/cholesterol_meals"); ?>',
+                    type: "post",
+                    data: $("#cholesterol_suggestions_form").serialize(),
+                    success: function(data){
+                        $('#cholesterolModal').modal('hide');
+                        $('.healthy-menu-wrapper').hide();
+
+                            $("#updated_menu").html(data);
+
+                    }
+                });
+            }else{
+                alert(error_message);
+            }
         });
         $('.highbp-suggestions-btn').click(function(){
             $.ajax({

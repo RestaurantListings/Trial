@@ -43,23 +43,19 @@ class SuggestionsController extends Controller {
     public function cholesterolMeals(){
 
         //DB::connection()->enableQueryLog();
-        $cholesterol = Input::get('cholesterol-level');
-        $weight = Input::get('body-weight');
-        $weight_type = Input::get('weight-type');
-        $height = Input::get('body-height');
-        $height_type = Input::get('height-type');
+        $age = Input::get('age');
+        $gender = Input::get('gender');
 
-        if($height_type == 'cms'){
-            /*Convert cms to ft*/
-            $height = $height * 0.032808;
-            $height = explode('.', $height);
-            $height = "0.".$height[1];
-            $inch = (float)$height * 12;
-        }else{
-            $height = explode('.', $height);
-            $height = "0.".$height[1];
-            $inch = (float)$height * 12;
-        }
+        $cholesterol = Input::get('total-cholesterol');
+        $hdl_cholesterol = Input::get('hdl-cholesterol');
+        $systolic_blood_pressure = Input::get('systolic-blood-pressure');
+        $diastolic_blood_pressure = Input::get('diastolic-blood-pressure');
+        $weight = Input::get('body-weight-lbs');
+        $body_height_ft = Input::get('body-height-ft');
+        $body_height_in = Input::get('body-height-in');
+
+        $inch = $body_height_in;
+
         $ibw = 52 + ((float)$inch * (float)1.9);
         $daily_calorie = $ibw * 25;
         $twenty_percent_calorie_per_meal = ($daily_calorie/3)*0.2;
@@ -85,7 +81,7 @@ class SuggestionsController extends Controller {
         }else{
         foreach($data['menu'] as $m){
             $content .='<div class="panel-body">'
-                            .'<h5>'.$m->product_name.'</h5>'
+                            .'<h5>'.$m->product_name.'<span class="favorite-icon" data-toggle="tooltip" data-placement="top" title="Add to Favorites"></span></h5>'
                                 .'<table class="table table-stripped">'
                                     .'<tbody>'
                                         .'<tr>'
@@ -112,23 +108,65 @@ class SuggestionsController extends Controller {
     }
     public function highBPMeals(){
 
-        $highbp = Input::get('highbp-level');
-        $weight = Input::get('body-weight');
-        $weight_type = Input::get('weight-type');
-        $height = Input::get('body-height');
-        $height_type = Input::get('height-type');
+        $age = Input::get('age');
+        $gender = Input::get('gender');
 
-        if($height_type == 'cms'){
-            /*Convert cms to ft*/
-            $height = $height * 0.032808;
-            $height = explode('.', $height);
-            $height = "0.".$height[1];
-            $inch = (float)$height * 12;
+        $systolic_blood_pressure = Input::get('systolic-blood-pressure');
+        $diastolic_blood_pressure = Input::get('diastolic-blood-pressure');
+        $weight = Input::get('body-weight-lbs');
+        $height_ft = Input::get('body-height-ft');
+        $height_in = Input::get('body-height-in');
+
+        if($systolic_blood_pressure < 120){
+            $sys_case = 1;
+        }elseif(($systolic_blood_pressure > 120) && ($systolic_blood_pressure < 140)){
+            $sys_case = 2;
+        }elseif(($systolic_blood_pressure > 140) && ($systolic_blood_pressure < 160)){
+            $sys_case = 3;
         }else{
-            $height = explode('.', $height);
-            $height = "0.".$height[1];
-            $inch = (float)$height * 12;
+            $sys_case = 4;
         }
+
+        if($diastolic_blood_pressure < 120){
+            $dia_case = 1;
+        }elseif(($diastolic_blood_pressure > 120) && ($diastolic_blood_pressure < 140)){
+            $dia_case = 2;
+        }elseif(($diastolic_blood_pressure > 140) && ($diastolic_blood_pressure < 160)){
+            $dia_case = 3;
+        }else{
+            $dia_case = 4;
+        }
+
+        if($sys_case > $dia_case){
+            $case = $sys_case;
+        }else{
+            $case = $dia_case;
+        }
+
+        switch($case){
+            case '1':
+                $result = '<p><strong>NORMAL</strong></p>
+                            <p>Consider lifestyle changes</p>';
+                break;
+            case '2':
+                $result = '<p><strong>PREHYPERTENSION</strong></p>
+                            <p>Make lifestyle changes</p>';
+                break;
+            case '3':
+                $result = '<p><strong>HYPERTENSTION</strong></p>
+                            <p>Make lifestyle changes</p>';
+                break;
+            case '4':
+                $result = '<p><strong> STAGE 2 HYPERTENSTION</strong></p>
+                            <p>Make lifestyle changes</p>
+                            <p>Talk to your healthcare professionals</p>';
+
+                break;
+        }
+
+        $highbp = $systolic_blood_pressure;
+        $inch = $height_in;
+
         $ibw = 52 + ((float)$inch * (float)1.9);
         $daily_calorie = $ibw * 25;
         $twenty_percent_calorie_per_meal = ($daily_calorie/3)*0.2;
@@ -153,7 +191,13 @@ class SuggestionsController extends Controller {
             ->get();
 
         $content = '<div class="panel panel-default panel-updated-menu">'
-            .'<div class="panel-heading">Suggestive Meals for High Blood Pressure</div>';
+            .'<div class="panel-heading">Suggestive Meals for High Blood Pressure</div>
+            <div class="panel-body">
+                <div class="calculation-result">
+                    '.$result.'
+                </div>
+            </div>
+            ';
         if(count($data['menu']) == 0){
             $content .='<div class="panel-body"><p style="color:#2ECC71;padding-left:15px;"><em>Sorry, we don&apos;t have food suggestions fot this restaurant. '
                 .'<button type="button" class="btn btn-sm btn-rl-default" data-toggle="modal" data-target="#healthyFoodAlertModal" style="float:right;">
@@ -163,7 +207,7 @@ class SuggestionsController extends Controller {
         }else{
         foreach($data['menu'] as $m){
             $content .='<div class="panel-body">'
-                .'<h5>'.$m->product_name.'</h5>'
+                .'<h5>'.$m->product_name.'<span class="favorite-icon" data-toggle="tooltip" data-placement="top" title="Add to Favorites"></span></h5>'
                 .'<table class="table table-stripped">'
                 .'<tbody>'
                 .'<tr>'
@@ -191,23 +235,27 @@ class SuggestionsController extends Controller {
 
     public function diabeticMeals(){
 
+        $age = Input::get('age');
+        $gender = Input::get('gender');
+        $blood_sugar_reading = Input::get('blood-sugar-reading');
+        $body_weight_lbs = Input::get('body-weight-lbs');
+        $body_height_ft = Input::get('body-height-ft');
+        $body_height_in = Input::get('body-height-in');
+        $diabetes_type = Input::get('diabetes-type');
+        $eaten = Input::get('eaten');
         $diabetic_high_bp = Input::get('diabetic_high_bp');
-        $weight = Input::get('body-weight');
-        $weight_type = Input::get('weight-type');
-        $height = Input::get('body-height');
-        $height_type = Input::get('height-type');
 
-        if($height_type == 'cms'){
-            /*Convert cms to ft*/
-            $height = $height * 0.032808;
-            $height = explode('.', $height);
-            $height = "0.".$height[1];
-            $inch = (float)$height * 12;
+        if($blood_sugar_reading < 4){
+            $diabetic_value = 'low';
+            $result = 'Your blood sugar is low. This is <span style="color:red;font-weight:bold;">Hypoglycemia</span>';
+        }elseif($blood_sugar_reading > 3 && $blood_sugar_reading < 8){
+            $diabetic_value = 'normal';
+            $result = 'Your blood sugar is normal';
         }else{
-            $height = explode('.', $height);
-            $height = "0.".$height[1];
-            $inch = (float)$height * 12;
+            $diabetic_value = 'high';
+            $result = 'Your blood sugar is high. This is <span style="color:red;font-weight:bold;">Hyperglycemia</span>';
         }
+        $inch = $body_height_in;
         $ibw = 52 + ((float)$inch * (float)1.9);
         $daily_calorie = $ibw * 25;
         $twenty_percent_calorie_per_meal = ($daily_calorie/3)*0.2;
@@ -238,7 +286,12 @@ class SuggestionsController extends Controller {
             ->get();
 
         $content = '<div class="panel panel-default panel-updated-menu">'
-            .'<div class="panel-heading">Suggestive Meals for Diabetic</div>';
+            .'<div class="panel-heading">Suggestive Meals for Diabetic</div>
+            <div class="panel-body">
+                <div class="calculation-result">
+                    <p>'.$result.'</p>
+                </div>
+            </div>';
         if(count($data['menu']) == 0){
             $content .='<div class="panel-body"><p style="color:#2ECC71;padding-left:15px;"><em>Sorry, we don&apos;t have food suggestions fot this restaurant. '
                 .'<button type="button" class="btn btn-sm btn-rl-default" data-toggle="modal" data-target="#healthyFoodAlertModal" style="float:right;">
@@ -248,7 +301,7 @@ class SuggestionsController extends Controller {
         }else{
             foreach($data['menu'] as $m){
                 $content .='<div class="panel-body">'
-                    .'<h5>'.$m->product_name.'</h5>'
+                    .'<h5>'.$m->product_name.'<span class="favorite-icon" data-toggle="tooltip" data-placement="top" title="Add to Favorites"></span></h5>'
                     .'<table class="table table-stripped">'
                     .'<tbody>'
                     .'<tr>'
