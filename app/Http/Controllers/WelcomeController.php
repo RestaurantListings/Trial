@@ -44,8 +44,12 @@ class WelcomeController extends Controller {
         $agent = new Agent();
 
         $get_city = \App\City::where('city', '=', $l_city)->take(1)->get();
-        foreach($get_city as $c){
-            $city = $c->id;
+        if(count($get_city) != 0){
+            foreach($get_city as $c){
+                $city = $c->id;
+            }
+        }else{
+            $city = 894;
         }
 
         $data['recent_restaurants'] = \App\Restaurants::where('having_menu', '=', '1')
