@@ -50,6 +50,8 @@ class WelcomeController extends Controller {
             }
         }else{
             $city = 894;
+            $data['location']['city'] = 'Phoenix';
+            $data['location']['state'] = 'AZ';
         }
 
         $data['recent_restaurants'] = \App\Restaurants::where('having_menu', '=', '1')
