@@ -68,13 +68,15 @@ class WelcomeController extends Controller {
             ->get();
         //$data['nearest_zip'] = \App\Zip::where('zip', '>', (int)session('geoip-locations.postal_code')-10)->where('zip', '<', (int)session('geoip-locations.postal_code')+10)
           //  ->take(5)->get();
-        //dd(DB::getQueryLog());
+        dd(DB::getQueryLog());
         //dd($data['recent_reviews']);
 
         if($agent->isMobile()){
-            return view('mobile_home')->with($data);
+            return View::make('mobile_home')->with('data', $data);
+
         }else{
-            return view('home')->with($data);
+            return View::make('home')->with('data', $data);
+            
         }
     }
 }
