@@ -88,6 +88,12 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
+                 foreach($data['restaurants'] as $rest){
+                     $reviews = $this->getReviewsThree($rest->permalink);
+                     //$data['restaurants'][$rest->permalink] = $rest;
+                     $rest->reviews_group = $reviews;
+                     //dd($rest);
+                 }
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$loc[0].', '.$loc[1].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$loc[0].', '.$loc[1].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $loc[0].', '.$loc[1].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -105,6 +111,12 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
+                 foreach($data['restaurants'] as $rest){
+                     $reviews = $this->getReviewsThree($rest->permalink);
+                     //$data['restaurants'][$rest->permalink] = $rest;
+                     $rest->reviews_group = $reviews;
+                     //dd($rest);
+                 }
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -124,6 +136,12 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
+                 foreach($data['restaurants'] as $rest){
+                     $reviews = $this->getReviewsThree($rest->permalink);
+                     //$data['restaurants'][$rest->permalink] = $rest;
+                     $rest->reviews_group = $reviews;
+                     //dd($rest);
+                 }
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$user_config['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$user_config['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $user_config['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -185,6 +203,12 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
+                 foreach($data['restaurants'] as $rest){
+                     $reviews = $this->getReviewsThree($rest->permalink);
+                     //$data['restaurants'][$rest->permalink] = $rest;
+                     $rest->reviews_group = $reviews;
+                     //dd($rest);
+                 }
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$loc[0].', '.$loc[1].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$loc[0].', '.$loc[1].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $loc[0].', '.$loc[1].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -228,6 +252,12 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
+                 foreach($data['restaurants'] as $rest){
+                     $reviews = $this->getReviewsThree($rest->permalink);
+                     //$data['restaurants'][$rest->permalink] = $rest;
+                     $rest->reviews_group = $reviews;
+                     //dd($rest);
+                 }
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -274,6 +304,12 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
+                 foreach($data['restaurants'] as $rest){
+                     $reviews = $this->getReviewsThree($rest->permalink);
+                     //$data['restaurants'][$rest->permalink] = $rest;
+                     $rest->reviews_group = $reviews;
+                     //dd($rest);
+                 }
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$user_config['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$user_config['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $user_config['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -352,9 +388,12 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
-                 /*foreach($data['restaurants'] as $rest){
-                     $rest['reviews'] = $this->getReviewsThree($rest->permalink);
-                 }*/
+                 foreach($data['restaurants'] as $rest){
+                     $reviews = $this->getReviewsThree($rest->permalink);
+                     //$data['restaurants'][$rest->permalink] = $rest;
+                     $rest->reviews_group = $reviews;
+                     //dd($rest);
+                 }
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -386,6 +425,13 @@
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
 
+                 foreach($data['restaurants'] as $rest){
+                     $reviews = $this->getReviewsThree($rest->permalink);
+                     //$data['restaurants'][$rest->permalink] = $rest;
+                     $rest->reviews_group = $reviews;
+                     //dd($rest);
+                 }
+                 //dd($data['restaurants']);
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -414,7 +460,12 @@
                      ->orderBy('restaurants.rank', 'desc')
                      ->orderBy('restaurants.categories', 'asc')
                      ->paginate(10);
-
+             foreach($data['restaurants'] as $rest){
+                 $reviews = $this->getReviewsThree($rest->permalink);
+                 //$data['restaurants'][$rest->permalink] = $rest;
+                 $rest->reviews_group = $reviews;
+                 //dd($rest);
+             }
                  $data['meta_title'] = 'Find the Best '.$user_config['keywords'].' Restaurants in '.$data['location'].' | Restaurant Listings|';
                  $data['meta_description'] = $user_config['keywords'].' in '.$data['location'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
                  $data['meta_keywords'] = $data['location'].', '.$user_config['keywords'].' Online food Order, Get Menu, Reviews, Contact, Location Maps, Directions';
@@ -461,9 +512,9 @@
              }else{
                  $r->opened = 'no';
              }*/
-             $r->opened = 'yes';
+             $r->opened= 'yes';
          }
-
+        //dd($data);
          $agent = new Agent();
          $agent = $agent->isMobile();
           //dd(DB::getQueryLog());

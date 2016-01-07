@@ -402,7 +402,8 @@
                             </div>
                         </div>
                         <div class="result-item-reviews">
-
+                            <?php var_dump($r->restaurants_reviews); ?>
+                            {{ $r->restaurants_reviews->text }}
                         </div>
                     </div>
                     <?php
@@ -435,7 +436,9 @@
                                 </div>
                             </div>
                             <div class="result-item-reviews">
-
+                                @foreach( $r->reviews_group as $rev)
+                                    <p>{{ $rev->review_text }}</p>
+                                @endforeach
                             </div>
                         </div>
                 <?php

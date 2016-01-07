@@ -258,6 +258,11 @@
                         </address>
                         <span class="phone-number"><span class="phone-icon"></span><span class="item-phone">{{ $r->phone }}</span></span>
                         <p><span class="item-cuisine-type">{{ $r->categories }}</span></p>
+                        <div class="result-item-reviews">
+                            @foreach( $r->reviews_group as $rev)
+                            <p>{{ $rev->review_text }}</p>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             @endforeach
