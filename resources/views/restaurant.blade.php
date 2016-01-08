@@ -63,14 +63,7 @@
         </div>
         <div class="restaurants_info_row_two">
             <div class="restaurant_quicklinks">
-                <!--<ul class="restaurant_quicklinks_main">
-                    <li>
-                        {!! Form::open(array('name'=>'home_search','class'=>'basic-search','novalidate'=>'')) !!}
-                        </form>
-
-                    </li>
-
-                </ul>-->
+                
                 <!-- Online Order Request Modal Begins-->
                 <div class="modal fade" id="onlineOrderRequestModal" tabindex="-1" role="dialog" aria-labelledby="onlineOrderRequestModalLabel">
                     <div class="modal-dialog" role="document">
