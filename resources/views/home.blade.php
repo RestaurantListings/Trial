@@ -133,8 +133,8 @@
         <br>
         <h4>Dieting or following a special diet can be downright hard, especially if your diet includes foods you don't enjoy.  The good news is that there are thousands of diet foods that are healthy, taste great, and can help you stick to your health goals.  That's why we have special suggestions for YOU wether you have high cholesterol, diabetes, high blood pressure or say you just want to look good in swimsuit Resturant Listings will give you options and suggestions for your food goals.</h4>
         <div id="recent-restaurant-list">
-            <!--<ul>
-                /*@foreach($recent_restaurants as $r)*/
+            <ul>
+                @foreach($recent_restaurants as $r)
                 <li class="list-item">
                     <div class="item-details">
                         <div class="restaurant-name">
@@ -157,7 +157,7 @@
                     </div>
                 </li>
                 @endforeach
-             </ul>-->
+             </ul>
         </div>
     </div>
 </div>
@@ -165,9 +165,9 @@
     <div class="container align-center">
         <h1>What Users Have To Say</h1>
         <div id="recent-reviews-list">
-            <!--<ul>
-                /*@foreach($recent_reviews as $rr)*/
-                <?php/*
+            <ul>
+                @foreach($recent_reviews as $rr)
+                <?php
                     $address = $rr->address_1.', '.$rr->address_2.', '.$rr->city.', '.$rr->state.', '.$rr->zip;
                     switch($rr->rating){
                             case 0:
@@ -189,7 +189,7 @@
                                 $rating = 'emofive';
                                 break;
 
-                        }*/
+                        }
                 ?>
                 <li class="list-item">
                     <div class="reviews-item">
@@ -204,7 +204,7 @@
                     </div>
                 </li>
                 @endforeach
-            </ul>-->
+            </ul>
         </div>
     </div>
 </div>
