@@ -60,12 +60,12 @@ class WelcomeController extends Controller {
             ->take(4)
             ->get();
 
-        $data['recent_reviews'] = \App\Restaurant_Reviews::orderBy(DB::raw('RAND()'))
+        /*$data['recent_reviews'] = \App\Restaurant_Reviews::orderBy(DB::raw('RAND()'))
             ->leftJoin('restaurants', 'restaurants_reviews.restaurants_id', '=', 'restaurants.id')
             ->leftJoin('city', 'restaurants.city_id', '=', 'city.id')
             ->leftJoin('state', 'restaurants.state_id', '=', 'state.id')
             ->take(6)
-            ->get();
+            ->get();*/
         //$data['nearest_zip'] = \App\Zip::where('zip', '>', (int)session('geoip-locations.postal_code')-10)->where('zip', '<', (int)session('geoip-locations.postal_code')+10)
           //  ->take(5)->get();
         //dd(DB::getQueryLog());

@@ -165,7 +165,7 @@
     <div class="container align-center">
         <h1>What Users Have To Say</h1>
         <div id="recent-reviews-list">
-            <ul>
+            <!--<ul>
                 @foreach($recent_reviews as $rr)
                 <?php
                     $address = $rr->address_1.', '.$rr->address_2.', '.$rr->city.', '.$rr->state.', '.$rr->zip;
@@ -204,7 +204,7 @@
                     </div>
                 </li>
                 @endforeach
-            </ul>
+            </ul>-->
         </div>
     </div>
 </div>
