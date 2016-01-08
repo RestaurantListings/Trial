@@ -166,8 +166,8 @@
         <h1>What Users Have To Say</h1>
         <div id="recent-reviews-list">
             <!--<ul>
-                @foreach($recent_reviews as $rr)
-                <?php
+                /*@foreach($recent_reviews as $rr)*/
+                <?php/*
                     $address = $rr->address_1.', '.$rr->address_2.', '.$rr->city.', '.$rr->state.', '.$rr->zip;
                     switch($rr->rating){
                             case 0:
@@ -189,7 +189,7 @@
                                 $rating = 'emofive';
                                 break;
 
-                        }
+                        }*/
                 ?>
                 <li class="list-item">
                     <div class="reviews-item">
